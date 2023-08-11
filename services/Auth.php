@@ -9,6 +9,7 @@ class Auth
   {
       if (!isset($_SESSION["user"])) {
       \header("location: $pathToRedirect");
+      exit;
     }
   }
 
@@ -16,6 +17,8 @@ class Auth
   {
     if (isset($_SESSION["user"])) {
       \header("location: $pathToRedirect");
+      exit;
+
     }
   }
 }

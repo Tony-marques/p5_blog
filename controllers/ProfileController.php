@@ -2,6 +2,7 @@
 
 namespace App\controllers;
 
+use App\services\Auth;
 use App\app\FormBuilder;
 use App\models\UserModel;
 
@@ -14,9 +15,14 @@ class ProfileController extends AbstractController
     $id = (int)$id;
     $userModel = new UserModel();
     $user = $userModel->findOne($id);
+    Auth::isLogOut();
 
-    if($user["id"] != $_SESSION["user"]["id"]){
-      echo "différents";
+    // decode data from database string to array
+    $currentUser = $userModel->findOne($_SESSION["user"]["id"]);
+    $userRole = json_decode($currentUser["role"]);
+
+    // current user is not admin and is not his profile
+    if (!\in_array("ROLE_ADMIN", $userRole) && $user["id"] != $_SESSION["user"]["id"]) {
       header("location: /profil/edition/{$_SESSION['user']['id']}");
       exit;
     }
@@ -27,8 +33,8 @@ class ProfileController extends AbstractController
         ->setLastname($_POST["lastname"])
         ->setAvatar($_POST["avatar"]);
 
-        $user->update($user, $id);
-        \header("location: /profil/edition/$id");
+      $user->update($user, $id);
+      \header("location: /profil/edition/$id");
     }
 
     $form = new FormBuilder();

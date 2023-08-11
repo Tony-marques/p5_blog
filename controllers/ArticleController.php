@@ -27,9 +27,12 @@ class ArticleController extends AbstractController
     foreach ($articles as $article) {
       $newDate[] = $dateFormat->format($article["created_at"]);
     }
-    // echo "<pre>";
-    // var_dump($newDate);
-    // echo "</pre>";
+
+
+
+    usort($articles, function ($a, $b) {
+      return strtotime($b['created_at']) - strtotime($a['created_at']);
+    });
 
     return $this->render("articles/index", [
       "articles" => $articles,
@@ -127,17 +130,35 @@ class ArticleController extends AbstractController
     $articleModel = new ArticleModel();
     $article = $articleModel->findOne($id);
 
-    if($article["user_id"] != $_SESSION["user"]["id"]){
+    if ($article["user_id"] != $_SESSION["user"]["id"]) {
       \header("location: /articles");
     }
 
     $form = new FormBuilder();
     $form->startForm()
+      ->startDiv([
+        "class" => "form-container"
+      ])
+      ->startDiv([
+        "class" => "form-group"
+      ])
+      ->setLabel("title", "Titre")
       ->setInput("text", "title", [
         "value" => $article["title"]
       ])
-      ->setTextarea("content", $article["content"])
-      ->setButton("Modifier")
+      ->endDiv()
+      ->startDiv([
+        "class" => "form-group"
+      ])
+      ->setLabel("content", "Contenu")
+      ->setTextarea("content", $article["content"], [
+        "rows" => 15
+      ])
+      ->endDiv()
+      ->endDiv()
+      ->setButton("Modifier", [
+        "class" => "button button-primary"
+      ])
       ->endForm();
 
     if (isset($_POST["submit"])) {
@@ -151,7 +172,7 @@ class ArticleController extends AbstractController
           ->setContent($content);
 
         $article->update($article, $id);
-        \header("location: /article/edition/$id");
+        \header("location: /articles");
       }
     }
 

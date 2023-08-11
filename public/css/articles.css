@@ -49,28 +49,54 @@ label {
    margin-bottom: 1rem;
    padding: 1rem;
    box-shadow: var(--box-shadow);
-   height: 225px;
-   max-height: 100%;
+   max-height: 500px;
+   /* max-height: 100%; */
    border-radius: var(--border-radius);
    transition: box-shadow 0.3s;
+
+   position: relative;
 }
+
+.content {
+   overflow: hidden; /* Masque le contenu excédentaire */
+   position: relative; /* Crée un contexte pour le pseudo-élément */
+   max-height: 12em; /* Hauteur maximale du contenu visible (4em est approximativement 4 lignes de texte) */
+   /* margin-bottom: 1em; Espacement en bas de l'article */
+}
+
+.content::after {
+   content: ""; /* Texte du lien "Lire la suite" */
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   /* background-color: white; Fond blanc pour couvrir le texte coupé */
+   padding: 0 1em; /* Espacement du lien */
+}
+
 .article:hover {
    box-shadow: none;
    /* border: 1px solid red; */
 }
-.article-one{
+.article-one {
    display: flex;
    color: var(--gray-dark);
    flex-direction: column;
    background: var(--color-primary);
    padding: 1rem;
    box-shadow: var(--box-shadow);
-   min-height: 500px;
+   /* min-height: max-content; */
    border-radius: var(--border-radius);
-}
-/* .article-one p{
+   margin-bottom: 1.5rem;
+   overflow: hidden;
    flex: 1;
-} */
+   width: 100%;
+}
+
+.article-one .content {
+   max-width: 850px;
+   word-wrap: break-word;
+
+}
 
 .main-article {
    flex: 1;
@@ -80,9 +106,6 @@ label {
    border-top: 2px solid var(--gray-light);
    margin: 1rem 0;
 }
-
-
-/* .article-one .informations */
 
 .article-author {
    display: flex;
@@ -94,7 +117,7 @@ label {
    height: 35px;
    border-radius: 50%;
 }
-.informations p{
+.informations p {
    display: flex;
    align-items: center;
 }
@@ -106,26 +129,36 @@ label {
    margin-bottom: 0.75rem;
 }
 
-.name-author{
+.name-author {
    color: var(--primary);
    font-weight: 600;
 }
 
-.main-container form{
+.main-container form {
    display: flex;
    flex-direction: column;
    gap: 1rem;
 }
 
-.main-container.edit form {
+/* .main-container.edit form {
    background: white;
    display: flex;
    flex-direction: column;
    padding: 1rem;
    gap: 1rem;
+} */
+
+.article .informations,
+.article-one .informations {
+   display: flex;
+   justify-content: space-between;
 }
 
-.article .informations, .article-one .informations{
+.date {
    display: flex;
-   justify-content: space-between ;
+   flex-direction: column;
+   justify-content: center;
+}
+.date p {
+   font-size: 0.8rem;
 }
