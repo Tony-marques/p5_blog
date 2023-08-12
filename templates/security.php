@@ -11,9 +11,7 @@
 
 <body>
   <?php include_once ROOT . "/templates/_partials/_navbar.php" ?>
-  <?php if (!empty($_SESSION["error"]["login"])) : ?>
-    <p><?= $_SESSION["error"]["login"] ?></p>
-  <?php endif; ?>
+
   <?php unset($_SESSION["error"]) ?>
 
   <div class="container">

@@ -22,7 +22,6 @@ class FormBuilder
   public function endForm()
   {
     $this->html .= "</form>";
-    
   }
 
   public function setInput(?string $type, ?string $name, array $attributs = [])
@@ -58,13 +57,20 @@ class FormBuilder
     return $this;
   }
 
-  public function startDiv(array $attributs = [])
+  public function startDiv(array $attributs = [], string $content = null)
   {
     $this->html .= "<div ";
-    $this->html .= $attributs ? $this->setAttribute($attributs) . ">" : ">";
+    $this->html .= $attributs ? $this->setAttribute($attributs) . ">$content" : ">$content";
 
     return $this;
   }
+  // public function startDiv(array $attributs = [])
+  // {
+  //   $this->html .= "<div ";
+  //   $this->html .= $attributs ? $this->setAttribute($attributs) . ">" : ">";
+
+  //   return $this;
+  // }
 
   public function endDiv()
   {

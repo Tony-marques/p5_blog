@@ -26,6 +26,14 @@ class SecurityController extends AbstractController
 
 
     if (isset($_POST["submit"])) {
+      if (\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) == false) {
+        $_SESSION["error"] = [
+          "email" => "Format d'adresse email incorrect !"
+        ];
+        // echo "email invalide";
+        \header("location: /connexion");
+        exit;
+      }
       if (FormBuilder::validate($_POST, ["email", "password"])) {
         $_POST = \filter_input_array(INPUT_POST, [
           "email" => \FILTER_SANITIZE_EMAIL,
@@ -71,7 +79,8 @@ class SecurityController extends AbstractController
         }
       }
     }
-    // echo $_POST["email"];
+
+    
     $form = new FormBuilder();
     $form->startForm()
       ->startDiv([
@@ -82,14 +91,22 @@ class SecurityController extends AbstractController
       ])
       ->setLabel("email", "Adresse e-mail")
       ->setInput(type: "text", name: "email")
+      ->startDiv(content: isset($_SESSION["error"]["email"]) ? $_SESSION["error"]["email"] : "", attributs: [
+        "class" => isset($_SESSION["error"]["email"]) ? "error mt-10" : ""
+      ])
+      ->endDiv()
       ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
       ->setLabel("password", "Mot de passe")
       ->setInput(type: "password", name: "password")
-
+      ->startDiv(content: isset($_SESSION["error"]["login"]) ? $_SESSION["error"]["login"] : "", attributs: [
+        "class" => isset($_SESSION["error"]["login"]) ? "error mt-10" : ""
+      ])
       ->endDiv()
+      ->endDiv()
+  
       ->endDiv()
       ->setButton("Me connecter", [
         "class" => "button-primary button-login"
