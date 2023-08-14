@@ -1,0 +1,27 @@
+.comment-container {
+   margin-top: 2rem;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+   min-height: 500px;
+}
+
+.comments-container {
+   padding:0 1rem ;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+   flex: 1;
+}
+
+.comment {
+   background: var(--color-primary);
+   padding: 1rem;
+   border-radius: var(--border-radius);
+}
+
+.comment .informations {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}

@@ -1,8 +1,9 @@
 header {
    /* border: 1px solid red; */
-   padding: 1rem 0;
+   padding: 0.25rem 0;
    background: var(--color-primary);
    box-shadow: var(--box-shadow);
+
 }
 
 .nav-container {
@@ -11,6 +12,7 @@ header {
    max-width: 1200px;
    margin: 0 auto;
    justify-content: space-between;
+   align-items: center;
    /* width: 100%; */
 }
 

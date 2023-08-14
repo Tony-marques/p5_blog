@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
 
   public function login()
   {
-    Auth::isLogged();
+    Auth::checkUserLogged();
 
 
     if (isset($_POST["submit"])) {
@@ -65,6 +65,7 @@ class SecurityController extends AbstractController
               "lastname" => isset($user["lastname"]) ? $user["lastname"] : "",
               "age" => isset($user["age"]) ? $user["age"] : "",
               "avatar" => isset($user["avatar"]) ? $user["avatar"] : "",
+              "role" => isset($user["role"]) ? $user["role"] : "",
             ]
           ];
           \header("location: /");
@@ -80,7 +81,7 @@ class SecurityController extends AbstractController
       }
     }
 
-    
+
     $form = new FormBuilder();
     $form->startForm()
       ->startDiv([
@@ -106,7 +107,7 @@ class SecurityController extends AbstractController
       ])
       ->endDiv()
       ->endDiv()
-  
+
       ->endDiv()
       ->setButton("Me connecter", [
         "class" => "button-primary button-login"
@@ -121,7 +122,7 @@ class SecurityController extends AbstractController
 
   public function register()
   {
-    Auth::isLogged();
+    Auth::checkUserLogged();
 
     if (isset($_POST["submit"])) {
       if (FormBuilder::validate($_POST, ["email", "password"])) {
@@ -135,7 +136,7 @@ class SecurityController extends AbstractController
         $userModel = new UserModel();
         $user = $userModel->setEmail($_POST["email"])
           ->setPassword($hashedPassword);
-        $userModel->create($user);
+        $userModel->create();
       }
     }
 

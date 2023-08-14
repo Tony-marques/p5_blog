@@ -9,12 +9,38 @@ class ArticleModel extends AbstractModel
   protected string $title;
   protected string $content;
   protected string $author;
-  private DateTime $created_at;
-  private DateTime $updated_at;
+  protected DateTime $created_at;
+  protected DateTime $updated_at;
+  protected int $user_id;
 
   public function __construct()
   {
     $this->table = "articles";
+  }
+
+  public function findByJoin(array $arr, $targetTable = null, $targetTableId = null)
+  {
+    // Utils::beautifulArray($arr);
+    // 
+    $keys = [];
+    $values = [];
+
+    foreach ($arr as $key => $value) {
+      $keys[] = "$key = ?";
+      $values[] = $value;
+    }
+
+    $list_keys = implode(" AND ", $keys);
+
+    // "SELECT * FROM articles INNER JOIN comments ON articles.id = comments.id WHERE $list_keys"
+
+
+    $sql = "SELECT * FROM $this->table AS a INNER JOIN $targetTable AS $targetTable[0] ON {$this->table[0]}.id = $targetTable[0].$targetTableId  WHERE $list_keys";
+    // echo $sql;
+    // exit();
+
+    $stmt = $this->request($sql, $values);
+    return $stmt->fetchAll();
   }
 
   /**
@@ -99,7 +125,7 @@ class ArticleModel extends AbstractModel
 
   /**
    * Get the value of author
-   */ 
+   */
   public function getAuthor()
   {
     return $this->author;
@@ -109,10 +135,30 @@ class ArticleModel extends AbstractModel
    * Set the value of author
    *
    * @return  self
-   */ 
+   */
   public function setAuthor($author)
   {
     $this->author = $author;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of user_id
+   */
+  public function getUser_id()
+  {
+    return $this->user_id;
+  }
+
+  /**
+   * Set the value of user_id
+   *
+   * @return  self
+   */
+  public function setUser_id($user_id)
+  {
+    $this->user_id = $user_id;
 
     return $this;
   }

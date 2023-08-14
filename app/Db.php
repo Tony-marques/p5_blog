@@ -13,6 +13,7 @@ class Db extends PDO
     $_dsn = "mysql:host=localhost;dbname=p5_blog;charset=utf8";
     try {
       parent::__construct($_dsn, "root", "");
+      parent::setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       die($e->getMessage());
     }

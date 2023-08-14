@@ -37,10 +37,19 @@ $router2->get("/article/nouveau", "App\controllers\ArticleController@new");
 $router2->post("/article/nouveau", "App\controllers\ArticleController@new");
 
 $router2->get("/article/:id", "App\controllers\ArticleController@showOne");
+$router2->post("/article/:id", "App\controllers\ArticleController@showOne");
 
 $router2->get("/article/edition/:id", "App\controllers\ArticleController@edit");
 $router2->post("/article/edition/:id", "App\controllers\ArticleController@edit");
 
 $router2->get("/article/suppression/:id", "App\controllers\ArticleController@delete");
+
+// COMMENTS
+$router2->get("/commentaire/validation/:id", "App\controllers\CommentController@validate");
+
+$router2->get("/commentaire/suppression/:id", "App\controllers\CommentController@delete");
+
+$router2->get("/commentaires", "App\controllers\CommentController@checkAllComments");
+
 
 $router2->run();

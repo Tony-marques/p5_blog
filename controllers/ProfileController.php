@@ -15,14 +15,12 @@ class ProfileController extends AbstractController
     $id = (int)$id;
     $userModel = new UserModel();
     $user = $userModel->findOne($id);
-    Auth::isLogOut();
+    Auth::checkUserLogOut();
 
-    // decode data from database string to array
-    $currentUser = $userModel->findOne($_SESSION["user"]["id"]);
-    $userRole = json_decode($currentUser["role"]);
+    $isAdmin = Auth::isAdmin();
 
     // current user is not admin and is not his profile
-    if (!\in_array("ROLE_ADMIN", $userRole) && $user["id"] != $_SESSION["user"]["id"]) {
+    if (!$isAdmin && $user["id"] != $_SESSION["user"]["id"]) {
       header("location: /profil/edition/{$_SESSION['user']['id']}");
       exit;
     }
@@ -33,7 +31,7 @@ class ProfileController extends AbstractController
         ->setLastname($_POST["lastname"])
         ->setAvatar($_POST["avatar"]);
 
-      $user->update($user, $id);
+      $user->update($id);
       \header("location: /profil/edition/$id");
     }
 
@@ -77,7 +75,7 @@ class ProfileController extends AbstractController
       ->endDiv()
       ->endDiv()
       ->setButton("Modifier mon profil", [
-        "class" => "button-primary button-login"
+        "class" => "button button-primary button-login"
       ])
       ->endForm();
 

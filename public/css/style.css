@@ -5,6 +5,7 @@
 @import "./sidebar.css";
 @import "./articles.css";
 @import "./security.css";
+@import "./comments.css";
 @import "./footer.css";
 
 body {
@@ -13,34 +14,20 @@ body {
    display: flex;
    flex-direction: column;
    background: var(--gray-light);
+   font-size: 0.8rem;
+}
+
+.logo {
+   width: 150px;
+}
+
+.logo-container {
+   width: 250px;
+   display: flex;
+   justify-content: center;
 }
 
 
-.button {
-   border-radius: var(--border-radius);
-   padding: 10px 20px;
-   cursor: pointer;
-   box-shadow: var(--box-shadow);
-   /* width: max-content; */
-   /* width: max-content; */
-}
-.button-primary {
-   color: var(--color-primary);
-   background-color: var(--primary);
-}
-.button-primary-stroke {
-   color: var(--primary);
-   background-color: var(--color-primary);
-}
-.button-primary,
-.button-primary-stroke {
-   font-weight: 600;
-   border: 1px solid var(--primary);
-}
-.button-danger {
-   color: var(--color-primary);
-   background-color: var(--warning);
-}
 
 .container {
    /* border: 1px solid blue; */
@@ -69,7 +56,7 @@ a {
    color: inherit;
 }
 
-.error{
+.error {
    background: var(--warning);
    padding: 1rem;
    color: black;
@@ -78,6 +65,58 @@ a {
    font-size: 0.7rem;
 }
 
-.mt-10{
+.mt-10 {
    margin-top: 10px;
+}
+.mt-30 {
+   margin-top: 30px;
+}
+.ml-10 {
+   margin-left: 10px;
+}
+
+/* BUTTON */
+.button {
+   border-radius: var(--border-radius);
+   padding: 10px 20px;
+   cursor: pointer;
+   box-shadow: var(--box-shadow);
+   /* width: max-content; */
+   /* width: max-content; */
+   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+
+}
+.button-primary {
+   color: var(--color-primary);
+   background-color: var(--primary);
+}
+.button-primary-stroke {
+   color: var(--primary);
+   background-color: var(--color-primary);
+}
+.button-primary,
+.button-primary-stroke {
+   font-weight: 600;
+   border: 1px solid var(--primary);
+}
+.button-danger {
+   font-weight: 600;
+   border: 1px solid var(--warning);
+}
+.button-danger {
+   color: var(--color-primary);
+   background-color: var(--warning);
+}
+
+.border-primary {
+   border: 1px solid var(--primary);
+   /* box-shadow: none; */
+}
+.border-primary:hover {
+   background: var(--primary);
+   color: white;
+}
+
+.button:hover {
+   box-shadow: none;
 }
