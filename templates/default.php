@@ -17,6 +17,7 @@
     <?= $content ?>
   </div>
   <?php include_once ROOT . "/templates/_partials/_footer.php" ?>
+  <?php unset($_SESSION["error"]) ?>
 
 </body>
 

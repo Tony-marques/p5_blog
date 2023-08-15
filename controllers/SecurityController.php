@@ -5,7 +5,8 @@ namespace App\controllers;
 
 use App\app\FormBuilder;
 use App\models\UserModel;
-use App\services\Auth;
+use App\services\AuthService;
+use App\services\UtilService;
 
 class SecurityController extends AbstractController
 {
@@ -22,7 +23,7 @@ class SecurityController extends AbstractController
 
   public function login()
   {
-    Auth::checkUserLogged();
+    AuthService::checkUserLogged();
 
 
     if (isset($_POST["submit"])) {
@@ -122,23 +123,93 @@ class SecurityController extends AbstractController
 
   public function register()
   {
-    Auth::checkUserLogged();
+    AuthService::checkUserLogged();
 
     if (isset($_POST["submit"])) {
-      if (FormBuilder::validate($_POST, ["email", "password"])) {
-        $_POST = \filter_input_array(INPUT_POST, [
-          "email" => \FILTER_SANITIZE_EMAIL,
-          "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS
-        ]);
+      $passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,})$";
 
-        $hashedPassword = \password_hash($_POST["password"], \PASSWORD_ARGON2I);
-
-        $userModel = new UserModel();
-        $user = $userModel->setEmail($_POST["email"])
-          ->setPassword($hashedPassword);
-        $userModel->create();
+      $userModel = new UserModel();
+      $user = $userModel->findByEmail($_POST["email"]);
+      $userExist = null;
+      if ($user) {
+        // User email already exist in db
+        $userExist = true;
+        // $_SESSION["error"] = [
+        //   "register" => [
+        //     "email" => "Cet utilisateur existe déjà",
+        //   ]
+        // ];
+        // \header("location: /inscription");
+        // exit;
       }
+
+      if (
+        \strlen($_POST["firstname"]) < 3
+        || \strlen($_POST["lastname"]) < 3
+        || !\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL)
+        || !\preg_match("#$passwordRegex#", $_POST["password"])
+        || $userExist
+      ) {
+        // if(!\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL)){
+        //   echo "mauvais format";
+        // } else {
+        //   echo "bon format";
+        // };
+        // UtilService::beautifulArray($_POST);
+        // exit;
+
+
+        $_SESSION["temporary_user"] = [
+          "firstname" => $_POST["firstname"],
+          "lastname" => $_POST["lastname"],
+          "email" => $_POST["email"],
+        ];
+
+        $_SESSION["error"] = [
+          "register" => [
+            "firstname" => \strlen($_POST["firstname"]) < 3 ? "Votre prénom doit faire au minimum 3 caractères" : "",
+            "lastname" =>  \strlen($_POST["lastname"]) < 3 ? "Votre nom doit faire au minimum 3 caractères" : "",
+
+            "email" => ($userExist) ? "Cet utilisateur existe déjà" : (!\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) ? "Format incorrect pour votre adresse e-mail" : ""),
+
+            "password" => !\preg_match("#$passwordRegex#", $_POST["password"]) ? "Votre mot de passe doit faire au minimum 8 caractères et contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial" : "",
+          ]
+        ];
+
+
+
+        \header("location: /inscription");
+        exit;
+      }
+
+
+
+
+      // if (FormBuilder::validate($_POST, ["email", "password", "firstname", "lastname"])) {
+      $_POST = \filter_input_array(INPUT_POST, [
+        "email" => \FILTER_SANITIZE_EMAIL,
+        "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        "firstname" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        "lastname" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS
+      ]);
+
+      $hashedPassword = \password_hash($_POST["password"], \PASSWORD_ARGON2I);
+
+      $userModel = new UserModel();
+      $userModel->setEmail($_POST["email"])
+        ->setPassword($hashedPassword)
+        ->setFirstname($_POST["firstname"])
+        ->setLastname($_POST["lastname"]);
+
+      $userModel->create();
+      $_SESSION["success"] = [
+        "message" => "Votre compte a été créé avec succès !"
+      ];
+      \header("location: /connexion");
+      exit;
     }
+
+    // UtilService::beautifulArray($_SESSION);
 
     $form = new FormBuilder();
     $form->startForm()
@@ -149,26 +220,61 @@ class SecurityController extends AbstractController
         "class" => "form-group"
       ])
       ->setLabel("firstname", "Prénom")
-      ->setInput(type: "text", name: "firstname")
+      ->setInput(
+        type: "text",
+        name: "firstname",
+        attributs: [
+          "value" => !empty($_SESSION["temporary_user"]["firstname"]) ? $_SESSION["temporary_user"]["firstname"] : "",
+        ]
+      )
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["register"]["firstname"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["register"]["firstname"]) ? $_SESSION["error"]["register"]["firstname"] : "")
+      ->endDiv()
       ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
       ->setLabel("lastname", "Nom")
-      ->setInput(type: "text", name: "lastname")
+      ->setInput(
+        type: "text",
+        name: "lastname",
+        attributs: [
+          "value" => !empty($_SESSION["temporary_user"]["lastname"]) ? $_SESSION["temporary_user"]["lastname"] : "",
+        ]
+      )
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["register"]["lastname"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["register"]["lastname"]) ? $_SESSION["error"]["register"]["lastname"] : "")
+      ->endDiv()
       ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
       ->setLabel("email", "Adresse e-mail")
-      ->setInput(type: "text", name: "email")
+      ->setInput(
+        type: "text",
+        name: "email",
+        attributs: [
+          "value" => !empty($_SESSION["temporary_user"]["email"]) ? $_SESSION["temporary_user"]["email"] : "",
+        ]
+      )
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["register"]["email"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["register"]["email"]) ? $_SESSION["error"]["register"]["email"] : "")
+      ->endDiv()
       ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
       ->setLabel("password", "Mot de passe")
-      ->setInput(type: "text", name: "password")
-
+      ->setInput(type: "text", name: "password", attributs: [
+        "value" => "Azertyuiop78@",
+      ])
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["register"]["password"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["register"]["password"]) ? $_SESSION["error"]["register"]["password"] : "")
+      ->endDiv()
       ->endDiv()
       ->endDiv()
       ->setButton("Créer mon compte", [

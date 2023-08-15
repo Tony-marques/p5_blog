@@ -1,45 +1,73 @@
-<?php 
+<?php
 
 namespace App\services;
 
 use App\app\FormBuilder;
 use App\models\CommentModel;
 
-class CommentService{
+class CommentService
+{
 
-  public static function findBy(array $arr){
+  public static function findBy(array $arr)
+  {
     $commentModel = new CommentModel();
     $comment = $commentModel->findBy($arr);
 
     return $comment;
   }
 
-  public static function createForm(){
-        // Create form for comments
-        $form = new FormBuilder();
-        $form->startForm(attributs: [
-          "class" => "mt-30",
-          "required" => "true"
-        ])
-          ->startDiv([
-            "class" => "form-container"
-          ])
-          ->startDiv([
-            "class" => "form-group"
-          ])
-          ->setLabel("commentaire", "Commentaire")
-          ->setTextarea(name: "comment", attributs: [
-            "placeholder" => "Ecrit ton commentaire",
-            "rows" => 5
-          ])
-          ->endDiv()
-    
-          ->endDiv()
-          ->setButton("Soumettre mon commentaire", [
-            "class" => "button button-primary"
-          ])
-          ->endForm();
+  public static function createComment(int $id, string $comment)
+  {
+    $isAdmin = AuthService::isAdmin();
+    $content = \htmlspecialchars($comment);
+    $commentModel = new CommentModel();
+    $comment = $commentModel->setContent($content)
+      ->setArticle_id($id)
+      // if is admin, comment is directly published
+      ->setPublished($isAdmin ? 1 : 0)
+      ->setUser_id($_SESSION["user"]["id"]);
 
-          return $form;
+    $comment->create();
+    \header("location: /article/$id");
+    exit;
+  }
+
+  public static function sortCommentAsc(array $comments)
+  {
+    usort($comments, function ($a, $b) {
+      return strtotime($b['created_at']) - strtotime($a['created_at']);
+    });
+
+    return $comments;
+  }
+
+  public static function createForm()
+  {
+    // Create form for comments
+    $form = new FormBuilder();
+    $form->startForm(attributs: [
+      "class" => "mt-30",
+      "required" => "true"
+    ])
+      ->startDiv([
+        "class" => "form-container"
+      ])
+      ->startDiv([
+        "class" => "form-group"
+      ])
+      ->setLabel("commentaire", "Commentaire")
+      ->setTextarea(name: "comment", attributs: [
+        "placeholder" => "Ecrit ton commentaire",
+        "rows" => 5
+      ])
+      ->endDiv()
+
+      ->endDiv()
+      ->setButton("Soumettre mon commentaire", [
+        "class" => "button button-primary"
+      ])
+      ->endForm();
+
+    return $form;
   }
 }

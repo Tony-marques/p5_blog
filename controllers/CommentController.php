@@ -4,7 +4,7 @@ namespace App\controllers;
 
 use App\models\ArticleModel;
 use App\models\CommentModel;
-use App\services\Utils;
+use App\services\UtilService;
 
 class CommentController extends AbstractController
 {
@@ -34,7 +34,7 @@ class CommentController extends AbstractController
     $articlesWithNoValidateComments = $articleModel->findByJoin([
       "published" => false
     ], "comments", "article_id");
-    Utils::beautifulArray($articlesWithNoValidateComments[0]);
+    UtilService::beautifulArray($articlesWithNoValidateComments[0]);
     $commentModel = new CommentModel();
     // $comments = $commentModel->findBy(["published" => false]);
 

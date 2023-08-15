@@ -3,7 +3,7 @@
 namespace App\models;
 
 use App\app\Db;
-use App\services\Utils;
+use App\services\UtilService;
 
 abstract class AbstractModel
 {
@@ -115,9 +115,6 @@ abstract class AbstractModel
   {
     $db = Db::getInstance();
     if ($params != null) {
-      
-      // echo $sql;
-      // exit;
       $stmt = $db->prepare($sql);
       $stmt->execute($params);
       return $stmt;

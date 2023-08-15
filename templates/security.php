@@ -12,13 +12,20 @@
 <body>
   <?php include_once ROOT . "/templates/_partials/_navbar.php" ?>
 
-  <?php unset($_SESSION["error"]) ?>
+  <?php if (isset($_SESSION["success"])) : ?>
+      <div class="success">
+        <?= $_SESSION["success"]["message"] ?>
+      </div>
+    <?php endif; ?>
 
   <div class="container">
+
     <?= $content ?>
   </div>
   <?php include_once ROOT . "/templates/_partials/_footer.php" ?>
-
+  <?php unset($_SESSION["error"]) ?>
+  <?php unset($_SESSION["success"]) ?>
+  <?php unset($_SESSION["temporary_user"]) ?>
 </body>
 
 </html>

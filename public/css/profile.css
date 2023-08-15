@@ -1,0 +1,12 @@
+.profil-picture{
+  width: 100px;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.edit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

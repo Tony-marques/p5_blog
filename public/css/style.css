@@ -6,6 +6,7 @@
 @import "./articles.css";
 @import "./security.css";
 @import "./comments.css";
+@import "./profile.css";
 @import "./footer.css";
 
 body {
@@ -27,10 +28,15 @@ body {
    justify-content: center;
 }
 
-
+form {
+   width: 100%;
+}
 
 .container {
    /* border: 1px solid blue; */
+   /* display: flex;
+   flex-direction: column;
+   align-items: center; */
    max-width: 1200px;
    width: 100%;
    margin: 3rem auto;
@@ -57,9 +63,21 @@ a {
 }
 
 .error {
-   background: var(--warning);
+   /* background: var(--warning); */
+   /* padding: 1rem; */
+   color: var(--warning);
+   border-radius: var(--border-radius);
+   /* color: var(--color-primary); */
+   font-size: 0.7rem;
+}
+
+.success {
+   margin: 0 auto;
+   margin-bottom: 20px;
+   width: 500px;
+   background: var(--success);
    padding: 1rem;
-   color: black;
+   /* color: var(--warning); */
    border-radius: var(--border-radius);
    color: var(--color-primary);
    font-size: 0.7rem;
@@ -84,7 +102,6 @@ a {
    /* width: max-content; */
    /* width: max-content; */
    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-
 }
 .button-primary {
    color: var(--color-primary);

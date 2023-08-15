@@ -49,7 +49,7 @@
           <p><?= $comment["content"] ?></p>
           <div class="separator"></div>
           <div class="informations">
-            <span>Dorine</span>
+            <span><?= $currentUser["firstname"] ?></span>
             <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
           </div>
         </div>
@@ -63,7 +63,8 @@
           <div class="separator"></div>
           <div class="informations">
             <div class="people">
-              <span>Dorine</span>
+              <span><?= $currentUser["firstname"] ?></span>
+              <span><?= substr($currentUser["lastname"], 0, 1) . "." ?></span>
               <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
             </div>
             <div class="buttons">

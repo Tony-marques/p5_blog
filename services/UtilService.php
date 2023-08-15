@@ -5,14 +5,14 @@ namespace App\services;
 
 use App\models\AbstractModel;
 
-class Utils
+class UtilService
 {
 
-  public static function beautifulArray(array|AbstractModel $arr)
+  public static function beautifulArray( $arr)
   {
     echo "<pre>";
     var_dump($arr);
     echo "</pre>";
-    exit();
+    // exit();
   }
 }

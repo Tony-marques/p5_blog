@@ -38,11 +38,11 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
         'App\\models\\CommentModel' => __DIR__ . '/../..' . '/models/CommentModel.php',
         'App\\models\\UserModel' => __DIR__ . '/../..' . '/models/UserModel.php',
         'App\\services\\ArticleService' => __DIR__ . '/../..' . '/services/ArticleService.php',
-        'App\\services\\Auth' => __DIR__ . '/../..' . '/services/Auth.php',
+        'App\\services\\AuthService' => __DIR__ . '/../..' . '/services/AuthService.php',
         'App\\services\\CommentService' => __DIR__ . '/../..' . '/services/CommentService.php',
-        'App\\services\\FormatDate' => __DIR__ . '/../..' . '/services/FormatDate.php',
+        'App\\services\\ImageService' => __DIR__ . '/../..' . '/services/ImageService.php',
         'App\\services\\UserService' => __DIR__ . '/../..' . '/services/UserService.php',
-        'App\\services\\Utils' => __DIR__ . '/../..' . '/services/Utils.php',
+        'App\\services\\UtilService' => __DIR__ . '/../..' . '/services/UtilService.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

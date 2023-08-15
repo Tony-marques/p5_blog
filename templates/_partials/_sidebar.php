@@ -3,7 +3,10 @@
     <?php if (isset($_SESSION["user"])) : ?>
       <div class="profil">
 
-        <img class="pp" src="<?= isset($_SESSION["user"]["avatar"]) ? $_SESSION["user"]["avatar"] : "" ?>" alt="">
+      <?php if(!empty($_SESSION["user"]["avatar"])): ?>
+        <img class="pp" src="<?= !empty($_SESSION["user"]["avatar"]) ? "/uploads/profile/".$_SESSION["user"]["avatar"] : "" ?>" alt="">
+      <?php endif; ?>
+
         <a class="border-primary button" href="/profil/edition/<?= $_SESSION["user"]["id"] ?>">Modifier mon profil</a>
       </div>
 

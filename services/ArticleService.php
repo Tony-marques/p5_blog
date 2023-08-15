@@ -34,8 +34,22 @@ class ArticleService
 
   public static function createArticle(string $title, string $content)
   {
+    // Sanitize fields
     $title = \htmlspecialchars($title);
     $content = \htmlspecialchars($content);
+
+    // Form validation
+    if (\strlen($title) < 5 || \strlen($content) < 20) {
+      $_SESSION["error"] = [
+        "article" => [
+          "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
+          "content" =>  \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
+        ]
+      ];
+
+      \header("location: /article/nouveau");
+      exit;
+    }
 
     $article = new ArticleModel();
     $article->setTitle($title)
@@ -52,6 +66,19 @@ class ArticleService
   {
     $title = \htmlspecialchars($title);
     $content = \htmlspecialchars($content);
+
+    // Form validation
+    if (\strlen($title) < 5 || \strlen($content) < 20) {
+      $_SESSION["error"] = [
+        "article" => [
+          "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
+          "content" =>  \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
+        ]
+      ];
+
+      \header("location: /article/edition/$id");
+      exit;
+    }
 
     $article = new ArticleModel();
     $article->setTitle($title)
@@ -93,49 +120,30 @@ class ArticleService
       ])
       ->setLabel("title", "Titre")
       ->setInput("text", "title", [
-        "value" => isset($subject["title"]) ? $subject["title"] : ""
+        "value" => !empty($subject["title"]) ? $subject["title"] : ""
       ])
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["article"]["title"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["article"]["title"]) ? $_SESSION["error"]["article"]["title"] : "")
+      ->endDiv()
       ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
       ->setLabel("content", "Contenu")
-      ->setTextarea("content", isset($subject["content"]) ? $subject["content"] : "", [
+      ->setTextarea("content", !empty($subject["content"]) ? $subject["content"] : "", [
         "rows" => 15
       ])
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["article"]["content"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["article"]["content"]) ? $_SESSION["error"]["article"]["content"] : "")
+      ->endDiv()
       ->endDiv()
       ->endDiv()
       ->setButton($subject ? "Modifier" : "Créer", [
         "class" => "button button-primary"
       ])
       ->endForm();
-    // $form = new FormBuilder();
-    // $form->startForm(attributs: [
-    //   "class" => "test tessssss",
-    //   "required" => "true"
-    // ])
-    //   ->startDiv([
-    //     "class" => "form-container"
-    //   ])
-    //   ->startDiv([
-    //     "class" => "form-group"
-    //   ])
-    //   ->setLabel("title", "Titre")
-    //   ->setInput(type: "text", name: "title")
-    //   ->endDiv()
-    //   ->startDiv([
-    //     "class" => "form-group"
-    //   ])
-    //   ->setLabel("content", "Contenu")
-    //   ->setTextarea(name: "content", attributs: [
-    //     "rows" => 10
-    //   ])
-    //   ->endDiv()
-    //   ->endDiv()
-    //   ->setButton("Créer l'article", [
-    //     "class" => "button button-primary"
-    //   ])
-    //   ->endForm();
 
     return $form;
   }

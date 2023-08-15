@@ -2,44 +2,67 @@
 
 namespace App\controllers;
 
-use App\services\Auth;
+use App\services\AuthService;
 use App\app\FormBuilder;
 use App\models\UserModel;
+use App\services\ImageService;
+use App\services\UtilService;
 
 class ProfileController extends AbstractController
 {
-
-
   public function edit($id)
   {
     $id = (int)$id;
     $userModel = new UserModel();
     $user = $userModel->findOne($id);
-    Auth::checkUserLogOut();
+    AuthService::checkUserLogOut();
 
-    $isAdmin = Auth::isAdmin();
+    $isAdmin = AuthService::isAdmin();
 
     // current user is not admin and is not his profile
-    if (!$isAdmin && $user["id"] != $_SESSION["user"]["id"]) {
-      header("location: /profil/edition/{$_SESSION['user']['id']}");
+    if ($user["id"] != $_SESSION["user"]["id"]) {
+      echo "dednas";
+      header("location: /profil/edition/{$_SESSION["user"]["id"]}");
       exit;
     }
 
     if (isset($_POST["submit"])) {
+
+
+
+      // If user have already image, delete this from /uploads/profile
+      if (isset($user["avatar"])) {
+        \unlink("uploads/profile/{$user["avatar"]}");
+      }
+
+      $path = ImageService::verifyImage($_FILES["profil_picture"], "/profil/edition/{$_SESSION['user']['id']}");
+      // UtilService::beautifulArray($_FILES["profil_picture"]);
       $user = $userModel->setAge($_POST["age"])
         ->setFirstname($_POST["firstname"])
         ->setLastname($_POST["lastname"])
-        ->setAvatar($_POST["avatar"]);
+        ->setAvatar($path);
+
 
       $user->update($id);
-      \header("location: /profil/edition/$id");
+      $_SESSION["user"]["avatar"] = "$path";
+      \header("location: /profil/edition/{$_SESSION['user']['id']}");
+      exit;
     }
 
     $form = new FormBuilder();
-    $form->startForm()
+    $form->startForm(attributs: [
+      "enctype" => "multipart/form-data"
+    ])
+
       ->startDiv([
         "class" => "form-container"
       ])
+      ->startDiv([
+        "class" => "form-group"
+      ])
+      ->setLabel("profil_picture", "Photo de profil")
+      ->setInput(type: "file", name: "profil_picture")
+      ->endDiv()
       ->startDiv([
         "class" => "form-group"
       ])
@@ -64,15 +87,7 @@ class ProfileController extends AbstractController
         "value" => isset($user["age"]) ? $user["age"] : ""
       ])
       ->endDiv()
-      ->startDiv([
-        "class" => "form-group"
-      ])
-      ->setLabel("avatar", "Avatar")
-      ->setInput(type: "text", name: "avatar", attributs: [
-        "value" => isset($user["avatar"]) ? $user["avatar"] : ""
-      ])
 
-      ->endDiv()
       ->endDiv()
       ->setButton("Modifier mon profil", [
         "class" => "button button-primary button-login"

@@ -4,7 +4,7 @@ namespace App\services;
 
 use App\models\UserModel;
 
-class Auth
+class AuthService
 {
 
   /**

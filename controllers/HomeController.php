@@ -2,11 +2,13 @@
 
 namespace App\controllers;
 
+use App\services\UtilService;
+
 class HomeController extends AbstractController{
 
   public function index(){
-    // echo "homepage $id";
-    // var_dump($_SESSION);
+    UtilService::beautifulArray($_SESSION);
+    
     return $this->render("home/index");
   }
 }

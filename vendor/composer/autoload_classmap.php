@@ -23,10 +23,10 @@ return array(
     'App\\models\\CommentModel' => $baseDir . '/models/CommentModel.php',
     'App\\models\\UserModel' => $baseDir . '/models/UserModel.php',
     'App\\services\\ArticleService' => $baseDir . '/services/ArticleService.php',
-    'App\\services\\Auth' => $baseDir . '/services/Auth.php',
+    'App\\services\\AuthService' => $baseDir . '/services/AuthService.php',
     'App\\services\\CommentService' => $baseDir . '/services/CommentService.php',
-    'App\\services\\FormatDate' => $baseDir . '/services/FormatDate.php',
+    'App\\services\\ImageService' => $baseDir . '/services/ImageService.php',
     'App\\services\\UserService' => $baseDir . '/services/UserService.php',
-    'App\\services\\Utils' => $baseDir . '/services/Utils.php',
+    'App\\services\\UtilService' => $baseDir . '/services/UtilService.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );
