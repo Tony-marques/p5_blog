@@ -133,7 +133,7 @@ class UserModel extends AbstractModel
    *
    * @return  self
    */
-  public function setAvatar($avatar)
+  public function setAvatar(string $avatar)
   {
     $this->avatar = $avatar;
 

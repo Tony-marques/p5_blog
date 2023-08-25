@@ -2,6 +2,8 @@
 
 namespace App\controllers;
 
+use App\services\AuthService;
+
 class AbstractController
 {
 
@@ -18,6 +20,8 @@ class AbstractController
 
     $content = \ob_get_clean();
 
+    // Render true or false for navbar
+    $isAdmin = AuthService::isAdmin();
     require_once ROOT . "/templates/$template.php";
   }
 }

@@ -8,10 +8,20 @@ use App\models\CommentModel;
 class CommentService
 {
 
-  public static function findBy(array $arr)
+  public static function findBy(array $arr, $targetTable = null, $currentTableId = null,  $targetTableId = null, bool $where = true)
   {
     $commentModel = new CommentModel();
     $comment = $commentModel->findBy($arr);
+    // $comment = $commentModel->findByJoin($arr, $targetTable, $currentTableId, $targetTableId, $where);
+
+    return $comment;
+  }
+
+  public static function findUserAndArticle(array $arr)
+  {
+    $commentModel = new CommentModel();
+    // $comment = $commentModel->findBy($arr);
+    $comment = $commentModel->findUserCommentArticle($arr);
 
     return $comment;
   }

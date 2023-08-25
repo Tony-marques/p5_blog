@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\models\ArticleModel;
 use App\models\CommentModel;
+use App\services\AuthService;
 use App\services\UtilService;
 
 class CommentController extends AbstractController
@@ -30,6 +31,7 @@ class CommentController extends AbstractController
 
   public function checkAllComments()
   {
+    AuthService::checkAdmin("/articles");
     $articleModel = new ArticleModel();
     $articlesWithNoValidateComments = $articleModel->findByJoin([
       "published" => false

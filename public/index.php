@@ -2,6 +2,7 @@
 
 use App\app\Router;
 use App\app\router\Router2;
+use App\services\AuthService;
 
 require '../vendor/autoload.php';
 
@@ -10,6 +11,9 @@ define("ROOT", dirname(__DIR__));
 // $router = new Router();
 // $router->start();
 \session_start();
+
+// Create CSRF Token for session
+// AuthService::createCSRFToken();
 
 $router2 = new Router2($_GET["p"]);
 
@@ -33,6 +37,7 @@ $router2->get("/deconnexion", "App\controllers\SecurityController@logout");
 // ARTICLE
 $router2->get("/articles", "App\controllers\ArticleController@index");
 
+// protected route for admin
 $router2->get("/article/nouveau", "App\controllers\ArticleController@new");
 $router2->post("/article/nouveau", "App\controllers\ArticleController@new");
 

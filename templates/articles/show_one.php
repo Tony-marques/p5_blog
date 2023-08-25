@@ -40,6 +40,8 @@
 
   <?php if (isset($_SESSION["user"])) : ?>
     <?= $commentForm ?>
+  <?php else : ?>
+    <p>Veuillez être connecter pour écrire un commentaire</p>
   <?php endif; ?>
   <div class="comment-container">
     <?php if (!$isAdmin) : ?>
@@ -49,7 +51,11 @@
           <p><?= $comment["content"] ?></p>
           <div class="separator"></div>
           <div class="informations">
-            <span><?= $currentUser["firstname"] ?></span>
+            <div class="people">
+              <span><?= $comment["user"]["firstname"] ?></span>
+              <span><?= substr($comment["user"]["lastname"], 0, 1) . "." ?></span>
+              <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
+            </div>
             <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
           </div>
         </div>
@@ -63,8 +69,8 @@
           <div class="separator"></div>
           <div class="informations">
             <div class="people">
-              <span><?= $currentUser["firstname"] ?></span>
-              <span><?= substr($currentUser["lastname"], 0, 1) . "." ?></span>
+              <span><?= $comment["user"]["firstname"] ?></span>
+              <span><?= substr($comment["user"]["lastname"], 0, 1) . "." ?></span>
               <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
             </div>
             <div class="buttons">

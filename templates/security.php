@@ -12,11 +12,7 @@
 <body>
   <?php include_once ROOT . "/templates/_partials/_navbar.php" ?>
 
-  <?php if (isset($_SESSION["success"])) : ?>
-      <div class="success">
-        <?= $_SESSION["success"]["message"] ?>
-      </div>
-    <?php endif; ?>
+
 
   <div class="container">
 

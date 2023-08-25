@@ -28,8 +28,11 @@ class AuthService
 
   public static function isAdmin()
   {
+    if (empty($_SESSION["user"]["id"])) {
+      return false;
+    }
     $userModel = new UserModel();
-    $currentUser = $userModel->findOne($_SESSION["user"]["id"]);
+    $currentUser = $userModel->findOne($_SESSION["user"]["id"]) ?? "dd";
     $userRole = json_decode($currentUser["role"]);
 
     if (\in_array("ROLE_ADMIN", $userRole)) {
@@ -37,5 +40,29 @@ class AuthService
     } else {
       return false;
     }
+  }
+
+  public static function checkAdmin($pathToRedirect = "/")
+  {
+    $admin = self::isAdmin();
+    if (!$admin) {
+      \header("location: $pathToRedirect");
+      exit;
+    }
+  }
+
+  public static function createCSRFToken()
+  {
+    $CSRFToken = bin2hex(random_bytes(32));
+
+    $_SESSION["csrf_token"] = $CSRFToken;
+  }
+
+  public static function checkCSRFToken($postToken)
+  {
+    if ($postToken == $_SESSION["csrf_token"]) {
+      return true;
+    }
+    return false;
   }
 }

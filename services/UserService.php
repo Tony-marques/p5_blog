@@ -10,7 +10,7 @@ class UserService
   public static function findOne(int $id)
   {
     $userModel = new UserModel();
-    $user = $userModel->findOne($_SESSION["user"]["id"]);
+    $user = $userModel->findOne($id);
 
     return $user;
   }

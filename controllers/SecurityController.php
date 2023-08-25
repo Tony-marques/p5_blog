@@ -21,67 +21,86 @@ class SecurityController extends AbstractController
     \header("location: /");
   }
 
+  /**
+   * login view
+   */
   public function login()
   {
     AuthService::checkUserLogged();
 
+    // $CSRFToken = bin2hex(random_bytes(32));
+
+    // $_SESSION["csrf_token"] = $CSRFToken;
 
     if (isset($_POST["submit"])) {
+      if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "invalid credentials";
+        \header("location: /connexion");
+        exit;
+      }
+
+      // $CSRFToken = bin2hex(random_bytes(32));
+
+      // $_SESSION["csrf_token"] = $CSRFToken;
+      if (!AuthService::checkCSRFToken($_POST["csrf_token"])) {
+        echo "token non valide";
+        exit;
+      }
+
+      $_SESSION["temporary_user"] = [
+        "email" => $_POST["email"],
+      ];
+
       if (\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) == false) {
         $_SESSION["error"] = [
           "email" => "Format d'adresse email incorrect !"
         ];
-        // echo "email invalide";
+
         \header("location: /connexion");
         exit;
       }
-      if (FormBuilder::validate($_POST, ["email", "password"])) {
-        $_POST = \filter_input_array(INPUT_POST, [
-          "email" => \FILTER_SANITIZE_EMAIL,
-          "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS
-        ]);
 
+      $_POST = \filter_input_array(INPUT_POST, [
+        "email" => \FILTER_SANITIZE_EMAIL,
+        "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS
+      ]);
 
+      $userModel = new UserModel();
+      $user = $userModel->findByEmail($_POST["email"]);
 
-        $userModel = new UserModel();
-        $user = $userModel->findByEmail($_POST["email"]);
-        print_r($_POST);
-        // exit;
-        if (!$user) {
-          $_SESSION["error"] = [
-            "login" => "Adresse e-mail ou mot de passe incorrect !"
-          ];
-          // echo $_SESSION["error"]["login"];
-          \header("location: /connexion");
-          exit;
-        }
+      if (!$user) {
+        $_SESSION["error"] = [
+          "login" => "Adresse e-mail ou mot de passe incorrect !"
+        ];
+        // echo $_SESSION["error"]["login"];
+        \header("location: /connexion");
+        exit;
+      }
 
-
-
-        if (\password_verify($_POST["password"], $user["password"])) {
-          $_SESSION = [
-            "user" => [
-              "id" => $user["id"],
-              "firstname" => isset($user["firstname"]) ? $user["firstname"] : "",
-              "lastname" => isset($user["lastname"]) ? $user["lastname"] : "",
-              "age" => isset($user["age"]) ? $user["age"] : "",
-              "avatar" => isset($user["avatar"]) ? $user["avatar"] : "",
-              "role" => isset($user["role"]) ? $user["role"] : "",
-            ]
-          ];
-          \header("location: /");
-          exit;
-        } else {
-          $_SESSION["error"] = [
-            "login" => "Adresse e-mail ou mot de passe incorrect !"
-          ];
-          // echo $_SESSION["error"]["login"];
-          \header("location: /connexion");
-          exit;
-        }
+      if (\password_verify($_POST["password"], $user["password"])) {
+        $_SESSION = [
+          "user" => [
+            "id" => $user["id"],
+            "firstname" => isset($user["firstname"]) ? $user["firstname"] : "",
+            "lastname" => isset($user["lastname"]) ? $user["lastname"] : "",
+            "age" => isset($user["age"]) ? $user["age"] : "",
+            "avatar" => isset($user["avatar"]) ? $user["avatar"] : "",
+            "role" => isset($user["role"]) ? $user["role"] : "",
+          ]
+        ];
+        \header("location: /");
+        exit;
+      } else {
+        $_SESSION["error"] = [
+          "login" => "Adresse e-mail ou mot de passe incorrect !"
+        ];
+        \header("location: /connexion");
+        exit;
       }
     }
+    $CSRFToken = bin2hex(random_bytes(32));
 
+    $_SESSION["csrf_token"] = $CSRFToken;
 
     $form = new FormBuilder();
     $form->startForm()
@@ -92,7 +111,9 @@ class SecurityController extends AbstractController
         "class" => "form-group"
       ])
       ->setLabel("email", "Adresse e-mail")
-      ->setInput(type: "text", name: "email")
+      ->setInput(type: "text", name: "email", attributs: [
+        "value" => !empty($_SESSION["temporary_user"]["email"]) ? $_SESSION["temporary_user"]["email"] : "",
+      ])
       ->startDiv(content: isset($_SESSION["error"]["email"]) ? $_SESSION["error"]["email"] : "", attributs: [
         "class" => isset($_SESSION["error"]["email"]) ? "error mt-10" : ""
       ])
@@ -107,11 +128,17 @@ class SecurityController extends AbstractController
         "class" => isset($_SESSION["error"]["login"]) ? "error mt-10" : ""
       ])
       ->endDiv()
+      ->startDiv(content: isset($_SESSION["error"]["csrf_token"]) ? $_SESSION["error"]["csrf_token"]  : "", attributs: [
+        "class" => isset($_SESSION["error"]["csrf_token"]) ? "error mt-10" : ""
+      ])
       ->endDiv()
-
+      ->endDiv()
       ->endDiv()
       ->setButton("Me connecter", [
         "class" => "button-primary button-login"
+      ])
+      ->setInput(type: "hidden", name: "csrf_token", attributs: [
+        "value" => $_SESSION["csrf_token"]
       ])
       ->endForm();
 

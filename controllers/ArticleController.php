@@ -7,6 +7,7 @@ use App\services\AuthService;
 use App\services\ArticleService;
 use App\services\CommentService;
 use App\services\UserService;
+use App\services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -33,8 +34,31 @@ class ArticleController extends AbstractController
     $article = ArticleService::findOne($id);
 
     // Fetch comment to database
-    $validateComments = CommentService::findBy(["article_id" => $id, "published" => true]);
+    // $allComments = CommentService::findUserAndArticle(["article_id" => $id], "articles", "article_id", "id");
+
+    // $validateComments = CommentService::findUserAndArticle(["article_id" => $id, "published" => true]);
+    $validateComments = CommentService::findBy(["article_id" => $id, "published" => true], "articles", "article_id", "id");
     $allComments = CommentService::findBy(["article_id" => $id]);
+    // UtilService::beautifulArray($allComments);
+    // exit;
+
+    foreach ($allComments as &$comment) {
+      $user = UserService::findOne($comment["user_id"]);
+      $article = ArticleService::findOne($comment["article_id"]);
+      $comment["user"] = $user;
+      $comment["article"] = $article;
+      // UtilService::beautifulArray($comment);
+    }
+    foreach ($validateComments as &$comment) {
+      $user = UserService::findOne($comment["user_id"]);
+      $article = ArticleService::findOne($comment["article_id"]);
+      $comment["user"] = $user;
+      $comment["article"] = $article;
+      // UtilService::beautifulArray($comment);
+    }
+    //   UtilService::beautifulArray($validateComments);
+
+    // exit;
 
     // Check if user is login
     if (isset($_SESSION["user"])) {
@@ -62,13 +86,16 @@ class ArticleController extends AbstractController
     // Sort validate comments by asc created at
     $validateComments = CommentService::sortCommentAsc($validateComments);
 
+    // UtilService::beautifulArray($allComments);
+    // exit;
     return $this->render("articles/show_one", [
       "article" => $article,
       "commentForm" => $commentForm->create(),
       "validateComments" => $validateComments,
       "allComments" => $allComments,
       "isAdmin" => $isAdmin,
-      "currentUser" => $currentUser
+      "currentUser" => $currentUser,
+      // "userComment" => $userComment
     ]);
   }
 
@@ -78,6 +105,8 @@ class ArticleController extends AbstractController
   public function new()
   {
     AuthService::checkUserLogOut();
+    AuthService::checkAdmin(pathToRedirect: "/articles");
+
 
     $form = ArticleService::createForm();
 
