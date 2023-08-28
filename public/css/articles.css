@@ -130,6 +130,7 @@ label {
 }
 
 .name-author {
+   margin-left: 0.25rem;
    color: var(--primary);
    font-weight: 600;
 }

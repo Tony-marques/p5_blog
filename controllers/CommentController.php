@@ -4,14 +4,18 @@ namespace App\controllers;
 
 use App\models\ArticleModel;
 use App\models\CommentModel;
+use App\services\ArticleService;
 use App\services\AuthService;
+use App\services\CommentService;
 use App\services\UtilService;
 
 class CommentController extends AbstractController
 {
-
+  // check if the comment is validate in DB
   public function validate($id)
   {
+    AuthService::checkAdmin(pathToRedirect: "/articles");
+
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
     $commentModel->setPublished(1);
@@ -22,6 +26,8 @@ class CommentController extends AbstractController
 
   public function delete($id)
   {
+    AuthService::checkAdmin(pathToRedirect: "/articles");
+
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
     $commentModel->delete($id);
@@ -32,17 +38,32 @@ class CommentController extends AbstractController
   public function checkAllComments()
   {
     AuthService::checkAdmin("/articles");
-    $articleModel = new ArticleModel();
-    $articlesWithNoValidateComments = $articleModel->findByJoin([
-      "published" => false
-    ], "comments", "article_id");
-    UtilService::beautifulArray($articlesWithNoValidateComments[0]);
+    // $articleModel = new ArticleModel();
+    // $articlesWithNoValidateComments = $articleModel->findByJoin([
+    //   "published" => false
+    // ], "comments", "article_id");
+
     $commentModel = new CommentModel();
-    // $comments = $commentModel->findBy(["published" => false]);
+    $allComments = $commentModel->findAll();
+    foreach ($allComments as &$comment) {
+      $comment["article"] = ArticleService::findOne($comment["article_id"]);
+    };
+    // foreach($allComments as &$comment){
+    //   UtilService::beautifulArray($comment);
+    // };
+
+    // $articleModel = new ArticleModel();
+    // $articles = $articleModel->findAll();
+    // UtilService::beautifulArray($articles);
+    // foreach($articles as &$article){
+    //   $article["comments"] = CommentService::;
+    // };
+
+
+    // exit;
 
     return $this->render("comments/all", [
-      // "comments" => $comments
-      "articlesWithNoValidateComments" => $articlesWithNoValidateComments
+      "comments" => $allComments
     ]);
   }
 }

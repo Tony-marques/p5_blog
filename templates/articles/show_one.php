@@ -1,14 +1,16 @@
 <div class="main-container">
   <div class="article-one">
-    <!-- <a href=""> -->
     <div class="main-article">
       <h2><?= htmlspecialchars($article["title"])  ?></h2>
-      <p class="content"><?= nl2br(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8')) ?></p>
+      <p class="content"><?= htmlspecialchars(nl2br(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8'))) ?></p>
     </div>
     <div class="separator"></div>
     <div class="informations">
       <div class="article-author">
-        <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt="">
+        <!-- <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt=""> -->
+        <?php if (!empty($article["user"]["avatar"])) : ?>
+          <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="">
+        <?php endif; ?>
         <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p>
       </div>
       <div class="date">
@@ -20,7 +22,6 @@
           <p>Modifié le <?= date('d/m/Y à H:i:s', strtotime($article["updated_at"])) ?></p>
         <?php endif; ?>
       </div>
-      <!-- </a> -->
     </div>
   </div>
   <?php if ($article["user_id"] == $currentUser || $isAdmin) : ?>
@@ -48,7 +49,7 @@
       <p> <?= count($validateComments) ?> commentaire<?= count($validateComments) > 1 ? "s" : "" ?></p>
       <?php foreach ($validateComments as $comment) : ?>
         <div class="comment">
-          <p><?= $comment["content"] ?></p>
+          <p><?= htmlspecialchars($comment["content"]) ?></p>
           <div class="separator"></div>
           <div class="informations">
             <div class="people">
@@ -65,7 +66,7 @@
 
       <?php foreach ($allComments as $comment) : ?>
         <div class="comment">
-          <p><?= nl2br($comment["content"]) ?></p>
+          <p><?= htmlspecialchars(nl2br($comment["content"])) ?></p>
           <div class="separator"></div>
           <div class="informations">
             <div class="people">
@@ -88,8 +89,5 @@
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
-
-
-
   </div>
 </div>

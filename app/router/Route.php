@@ -27,6 +27,7 @@ class Route
     }
   }
 
+  // Retravailler la methode public / private
   public function execute()
   {
     $params = \explode("@", $this->action);

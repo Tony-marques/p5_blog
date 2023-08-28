@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
 
     if (isset($_POST["submit"])) {
       if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
-        $_SESSION["error"]["csrf_token"] = "invalid credentials";
+        $_SESSION["error"]["csrf_token"] = "Adresse e-mail ou mot de passe incorrect !";
         \header("location: /connexion");
         exit;
       }
@@ -159,15 +159,7 @@ class SecurityController extends AbstractController
       $user = $userModel->findByEmail($_POST["email"]);
       $userExist = null;
       if ($user) {
-        // User email already exist in db
         $userExist = true;
-        // $_SESSION["error"] = [
-        //   "register" => [
-        //     "email" => "Cet utilisateur existe déjà",
-        //   ]
-        // ];
-        // \header("location: /inscription");
-        // exit;
       }
 
       if (
@@ -177,14 +169,6 @@ class SecurityController extends AbstractController
         || !\preg_match("#$passwordRegex#", $_POST["password"])
         || $userExist
       ) {
-        // if(!\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL)){
-        //   echo "mauvais format";
-        // } else {
-        //   echo "bon format";
-        // };
-        // UtilService::beautifulArray($_POST);
-        // exit;
-
 
         $_SESSION["temporary_user"] = [
           "firstname" => $_POST["firstname"],
@@ -226,9 +210,19 @@ class SecurityController extends AbstractController
       $userModel->setEmail($_POST["email"])
         ->setPassword($hashedPassword)
         ->setFirstname($_POST["firstname"])
-        ->setLastname($_POST["lastname"]);
+        ->setLastname($_POST["lastname"])
+        ->setRole("[\"ROLE_USER\"]");
 
-      $userModel->create();
+      // for ($i = 1; $i < 100; $i++) {
+      //   $userModel->setEmail("test$i@gmail.com")
+      //     ->setPassword("a")
+      //     ->setFirstname("firstname $i")
+      //     ->setLastname("lastname $i")
+      //     ->setAge(\rand(18, 95))
+      //     ->setRole("[\"ROLE_USER\"]");
+      //     $userModel->create();
+      // }
+
       $_SESSION["success"] = [
         "message" => "Votre compte a été créé avec succès !"
       ];
@@ -312,6 +306,21 @@ class SecurityController extends AbstractController
 
     return $this->render(path: "security/register", template: "security", data: [
       "form" => $form->create()
+    ]);
+  }
+
+  public function allUsers()
+  {
+    AuthService::checkAdmin(pathToRedirect: "/");
+
+    $userModel = new UserModel();
+    $users = $userModel->findAll();
+
+    // UtilService::beautifulArray($users);
+    // exit;
+
+    return $this->render(path: "security/allUsers", data: [
+      "users" => $users
     ]);
   }
 }

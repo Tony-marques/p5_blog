@@ -2,7 +2,6 @@
    position: relative;
    /* border: 1px solid red; */
    width: 275px;
-
 }
 
 .sidebar {
@@ -31,7 +30,13 @@
 
 .sidebar li {
    padding: 0.75rem 1rem;
-   /* margin: 0.5rem 0; */
+   transition: background 0.3s;
+   cursor: pointer;
+   border-radius: var(--border-radius);
+}
+
+.sidebar-nav li:hover {
+   background: var(--primary);
 }
 
 .sidebar i {

@@ -1,60 +1,56 @@
 <?php
 
-use App\app\Router;
-use App\app\router\Router2;
+use App\app\router\Router;
 use App\services\AuthService;
 
 require '../vendor/autoload.php';
 
 define("ROOT", dirname(__DIR__));
 
-// $router = new Router();
-// $router->start();
 \session_start();
 
-// Create CSRF Token for session
-// AuthService::createCSRFToken();
-
-$router2 = new Router2($_GET["p"]);
+$Router = new Router($_GET["p"]);
 
 // HOME
-$router2->get("/", "App\controllers\HomeController@index");
+$Router->get("/", "App\controllers\HomeController@index");
 
 
 // PROFILE
-$router2->get("/profil/edition/:id", "App\controllers\ProfileController@edit");
-$router2->post("/profil/edition/:id", "App\controllers\ProfileController@edit");
+$Router->get("/profil/edition/:id", "App\controllers\ProfileController@edit");
+$Router->post("/profil/edition/:id", "App\controllers\ProfileController@edit");
 
 
 // SECURITY
-$router2->get("/connexion", "App\controllers\SecurityController@login");
-$router2->post("/connexion", "App\controllers\SecurityController@login");
-$router2->get("/inscription", "App\controllers\SecurityController@register");
-$router2->post("/inscription", "App\controllers\SecurityController@register");
-$router2->get("/deconnexion", "App\controllers\SecurityController@logout");
+$Router->get("/connexion", "App\controllers\SecurityController@login");
+$Router->post("/connexion", "App\controllers\SecurityController@login");
+$Router->get("/inscription", "App\controllers\SecurityController@register");
+$Router->post("/inscription", "App\controllers\SecurityController@register");
+$Router->get("/deconnexion", "App\controllers\SecurityController@logout");
 
 
 // ARTICLE
-$router2->get("/articles", "App\controllers\ArticleController@index");
+$Router->get("/articles", "App\controllers\ArticleController@index");
 
 // protected route for admin
-$router2->get("/article/nouveau", "App\controllers\ArticleController@new");
-$router2->post("/article/nouveau", "App\controllers\ArticleController@new");
+$Router->get("/article/nouveau", "App\controllers\ArticleController@new");
+$Router->post("/article/nouveau", "App\controllers\ArticleController@new");
 
-$router2->get("/article/:id", "App\controllers\ArticleController@showOne");
-$router2->post("/article/:id", "App\controllers\ArticleController@showOne");
+$Router->get("/article/:id", "App\controllers\ArticleController@showOne");
+$Router->post("/article/:id", "App\controllers\ArticleController@showOne");
 
-$router2->get("/article/edition/:id", "App\controllers\ArticleController@edit");
-$router2->post("/article/edition/:id", "App\controllers\ArticleController@edit");
+$Router->get("/article/edition/:id", "App\controllers\ArticleController@edit");
+$Router->post("/article/edition/:id", "App\controllers\ArticleController@edit");
 
-$router2->get("/article/suppression/:id", "App\controllers\ArticleController@delete");
+$Router->get("/article/suppression/:id", "App\controllers\ArticleController@delete");
 
 // COMMENTS
-$router2->get("/commentaire/validation/:id", "App\controllers\CommentController@validate");
+$Router->get("/commentaire/validation/:id", "App\controllers\CommentController@validate");
+$Router->get("/commentaire/suppression/:id", "App\controllers\CommentController@delete");
+$Router->get("/commentaires", "App\controllers\CommentController@checkAllComments");
 
-$router2->get("/commentaire/suppression/:id", "App\controllers\CommentController@delete");
+// USERS
+$Router->get("/utilisateurs", "App\controllers\SecurityController@allUsers");
+$Router->get("/utilisateur/suppression/:id", "App\controllers\ProfileController@delete");
 
-$router2->get("/commentaires", "App\controllers\CommentController@checkAllComments");
 
-
-$router2->run();
+$Router->run();

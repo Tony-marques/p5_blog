@@ -3,9 +3,11 @@
 @import "./variables.css";
 @import "./navbar.css";
 @import "./sidebar.css";
+@import "./home.css";
 @import "./articles.css";
 @import "./security.css";
 @import "./comments.css";
+@import "./users.css";
 @import "./profile.css";
 @import "./footer.css";
 
@@ -98,42 +100,42 @@ a {
    border-radius: var(--border-radius);
    padding: 10px 20px;
    cursor: pointer;
-   box-shadow: var(--box-shadow);
-   /* width: max-content; */
-   /* width: max-content; */
-   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+   transition: background 0.3s, color 0.3s, border 0.3s;
 }
-.button-primary {
-   color: var(--color-primary);
-   background-color: var(--primary);
-}
-.button-primary-stroke {
-   color: var(--primary);
-   background-color: var(--color-primary);
-}
+
 .button-primary,
 .button-primary-stroke {
    font-weight: 600;
    border: 1px solid var(--primary);
 }
-.button-danger {
-   font-weight: 600;
-   border: 1px solid var(--warning);
+
+.button-primary {
+   color: var(--color-primary);
+   background-color: var(--primary);
+   border: 1px solid var(--primary);
 }
+
+.button-primary-stroke {
+   color: var(--primary);
+   background-color: var(--color-primary);
+}
+
+.button-primary:hover,
+.button-primary-stroke:hover {
+   background: var(--primary-light);
+   color: var(--primary);
+   border-color: transparent;
+}
+
 .button-danger {
    color: var(--color-primary);
    background-color: var(--warning);
+   font-weight: 600;
+   border: 1px solid var(--warning);
 }
 
-.border-primary {
-   border: 1px solid var(--primary);
-   /* box-shadow: none; */
-}
-.border-primary:hover {
-   background: var(--primary);
-   color: white;
-}
-
-.button:hover {
-   box-shadow: none;
+.button-danger:hover {
+   color: var(--color-primary);
+   background-color: var(--warning-light);
+   border-color: transparent;
 }

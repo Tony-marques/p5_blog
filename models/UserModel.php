@@ -10,7 +10,7 @@ class UserModel extends AbstractModel
   public int $age;
   public string $avatar;
   public string $email;
-  public array $role;
+  public string $role;
   public string $password;
   public \DateTime $created_at;
   public \DateTime $updated_at;

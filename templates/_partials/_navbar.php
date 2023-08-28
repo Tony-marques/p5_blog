@@ -29,6 +29,11 @@ $comments = $commentModel->findBy(["published" => false]);
         <?php else : ?>
           <?php if($isAdmin): ?>
           <li>
+            <a href="/utilisateurs" class="button button-primary-stroke">
+              <span>Tous les utilisateurs</span>
+            </a>
+          </li>
+          <li>
             <a href="/commentaires" class="button button-primary">
               <span>Il y a <?= count($comments) ?> commentaire<?= count($comments) > 1 ? "s" : "" ?> à modérer</span>
             </a>

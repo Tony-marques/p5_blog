@@ -1,0 +1,28 @@
+.users {
+   padding: 1.5rem;
+   background: var(--color-primary);
+   border-radius: var(--border-radius);
+}
+
+.users table {
+   background: white;
+   width: 100%;
+   border-collapse: collapse;
+   border: 1px solid var(--primary);
+}
+
+.users table thead tr:nth-child(1) {
+   background: var(--primary);
+   color: var(--color-primary);
+}
+
+.users table tbody tr:nth-child(even) {
+   background: var(--gray-light);
+}
+
+.users table td,
+.users table th {
+   text-align: center;
+   padding: 1rem 0;
+   border-left: 1px solid var(--primary);
+}

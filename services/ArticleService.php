@@ -20,6 +20,7 @@ class ArticleService
     $id = (int)$id;
     $articleModel = new ArticleModel();
     $article = $articleModel->findOne($id);
+    
     return $article;
   }
 
@@ -61,6 +62,7 @@ class ArticleService
 
     \header("location: /articles");
   }
+  
 
   public static function editArticle(string $title, string $content, int $id)
   {

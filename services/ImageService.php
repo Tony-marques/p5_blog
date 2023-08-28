@@ -8,7 +8,7 @@ class ImageService
 
   public static function verifyImage($image, $pathToRedirect = null)
   {
-    $ext_allowed = ["jpg", "jpeg", "png"];
+    $ext_allowed = ["jpg", "jpeg", "png", "webp"];
 
     $ext = \pathinfo($image["name"])["extension"];
 
@@ -16,8 +16,8 @@ class ImageService
       $_SESSION["image"] = [
         "error" => "Extension non autorisée"
       ];
-      echo "no ok";
-      // \header("location: $pathToRedirect");
+      // echo "no ok";
+      \header("location: $pathToRedirect");
       exit;
     } else {
 

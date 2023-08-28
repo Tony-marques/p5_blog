@@ -1,0 +1,73 @@
+.presentation-container {
+   /* border: 1px solid red; */
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   /* gap: 1rem; */
+   border-radius: var(--border-radius);
+   background: var(--color-primary);
+   /* min-height: 75vh; */
+   padding: 1.5rem 0;
+}
+
+.presentation-left,
+.presentation-right {
+
+   width: 45%;
+   height: 500px;
+   padding: 1rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   flex-direction: column;
+}
+
+.presentation-left {
+   gap: 2rem;
+   border: 2px solid var(--primary);
+   border-radius: var(--border-radius);
+   background: var(--primary);
+}
+
+.presentation-right {
+   font-size: 1rem;
+   gap: 1.5rem;
+   line-height: 1.4;
+}
+
+.presentation-right i {
+   font-size: 1.5rem;
+   color: var(--primary);
+}
+
+.presentation-right p {
+   text-align: center;
+}
+
+.presentation-left .name {
+   font-size: 2rem;
+}
+.presentation-left .job {
+   font-size: 1.5rem;
+}
+
+.presentation-left .top {
+   /* flex: 1; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: var(--color-primary);
+}
+
+.presentation-left .bottom {
+   /* width: 25%; */
+   /* border: 1px solid blue; */
+}
+
+.presentation-left img {
+   height: 275px;
+   width: 200px;
+   object-fit: cover;
+   border-radius: var(--border-radius);
+}

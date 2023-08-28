@@ -1,10 +1,9 @@
 <div class="main-container">
   <?php foreach ($articles as $article) : ?>
     <a href="/article/<?= $article["id"] ?>" class="article">
-      <!-- <a href=""> -->
       <div class="main-article">
         <h2><?= htmlspecialchars($article["title"])  ?></h2>
-        <p class="content"><?= nl2br(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8')) ?></p>
+        <p class="content"><?= htmlspecialchars(nl2br(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8'))) ?></p>
       </div>
       <div class="separator"></div>
       <div class="informations">

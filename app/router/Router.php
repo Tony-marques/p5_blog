@@ -2,32 +2,42 @@
 
 namespace App\app\router;
 
+use Exception;
 
 class Router
 {
-  public function start()
+
+  private string $url;
+  protected array $routes = [];
+
+  public function __construct(string $url)
   {
-    $uri = $_SERVER["REQUEST_URI"];
+    $this->url = trim($url, "/");
+  }
 
-    if ($uri != "/" && $uri[-1] == "/") {
-      $uri = \substr($uri, 0, -1);
-      \header("location: $uri");
-    }
+  public function get(string $path, string $action)
+  {
+    $this->routes["GET"][] = new Route($path, $action);
+  }
 
-    $params = \explode("/", $_GET["p"]);
-    if ($params[0] != "") {
-      $controller = "App\\controllers\\" . \ucfirst(\array_shift($params)) . "Controller";
+  public function post(string $path, string $action)
+  {
+    $this->routes["POST"][] = new Route($path, $action);
+  }
 
-      $action = isset($params[0]) ? \array_shift($params) : "index";
+  public function run()
+  {
+    // try {
+    foreach ($this->routes[$_SERVER["REQUEST_METHOD"]] as $route) {
+      if ($route->matches($this->url)) {
+        // throw new \Exception("Cette page n'existe pas");
 
-      if (\method_exists($controller, $action)) {
-        $controller = new $controller();
-        isset($params[0]) ? $controller->$action($params) : $controller->$action();
-      } else {
-           echo "la page n'existe pas";
+        //     } else {
+              $route->execute();
+        //     }
       }
-    } else {
-      echo "testtsdsdfsdfstt";
+      // } catch (Exception $e) {
+      //   echo $e->getMessage();
     }
   }
 }
