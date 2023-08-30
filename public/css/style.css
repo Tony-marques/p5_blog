@@ -35,6 +35,7 @@ form {
 }
 
 .container {
+   align-items: center;
    /* border: 1px solid blue; */
    display: flex;
    /* flex-direction: column; */
@@ -52,7 +53,7 @@ form {
 .main-container {
    /* border: 1px solid purple; */
    flex: 1;
-   margin-left: 2rem;
+   /* margin-left: 2rem; */
 }
 
 li {
@@ -95,17 +96,25 @@ a {
    margin-left: 10px;
 }
 
+input,
+textarea {
+   font-size: 1.1rem;
+   font-family: "montserrat";
+}
+
 /* BUTTON */
 .button {
    border-radius: var(--border-radius);
    padding: 10px 20px;
    cursor: pointer;
    transition: background 0.3s, color 0.3s, border 0.3s;
+   width: max-content;
+   font-family: "Montserrat", sans-serif;
 }
 
 .button-primary,
 .button-primary-stroke {
-   font-weight: 600;
+   /* font-weight: 600; */
    border: 1px solid var(--primary);
 }
 

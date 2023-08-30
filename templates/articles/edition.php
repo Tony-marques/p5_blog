@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container edit-article">
 
   <h2>Modifier l'article: <?= $article["title"] ?></h2>
   <?= $form ?>

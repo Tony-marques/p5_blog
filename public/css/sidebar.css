@@ -29,10 +29,16 @@
 }
 
 .sidebar li {
-   padding: 0.75rem 1rem;
+   /* padding: 0.75rem 1rem; */
    transition: background 0.3s;
    cursor: pointer;
    border-radius: var(--border-radius);
+}
+
+.sidebar .link {
+   display: flex;
+   align-items: center;
+   padding: 0.75rem 1rem;
 }
 
 .sidebar-nav li:hover {

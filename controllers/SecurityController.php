@@ -143,7 +143,7 @@ class SecurityController extends AbstractController
       ->endForm();
 
 
-    return $this->render(path: "security/login", template: "security", data: [
+    return $this->render(path: "security/login", data: [
       "form" => $form->create()
     ]);
   }
@@ -304,7 +304,7 @@ class SecurityController extends AbstractController
       ->endForm();
 
 
-    return $this->render(path: "security/register", template: "security", data: [
+    return $this->render(path: "security/register", data: [
       "form" => $form->create()
     ]);
   }

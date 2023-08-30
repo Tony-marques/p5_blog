@@ -1,4 +1,5 @@
-<div class="main-container">
+<div class="main-container articles">
+  <h3>Articles: <?= count($articles) ?></h3>
   <?php foreach ($articles as $article) : ?>
     <a href="/article/<?= $article["id"] ?>" class="article">
       <div class="main-article">

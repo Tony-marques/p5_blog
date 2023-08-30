@@ -27,17 +27,12 @@ class Router
 
   public function run()
   {
-    // try {
     foreach ($this->routes[$_SERVER["REQUEST_METHOD"]] as $route) {
       if ($route->matches($this->url)) {
-        // throw new \Exception("Cette page n'existe pas");
-
-        //     } else {
-              $route->execute();
-        //     }
+        $route->execute();
       }
-      // } catch (Exception $e) {
-      //   echo $e->getMessage();
     }
+    \header("location: /");
+    exit;
   }
 }

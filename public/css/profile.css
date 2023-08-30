@@ -1,7 +1,9 @@
 .profil-picture{
-  width: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   margin-bottom: 2rem;
+  border-radius: 50%;
 }
 
 .edit{

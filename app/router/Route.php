@@ -15,7 +15,7 @@ class Route
     $this->action = $action;
   }
 
-  public function matches(string $url)
+  public function matches(string $url): bool
   {
     $path = \preg_replace("#:([\w]+)#", "([^/]+)", $this->path);
 
@@ -33,6 +33,7 @@ class Route
     $params = \explode("@", $this->action);
     $controller = new $params[0]();
     $method = $params[1];
+
     return isset($this->matches[1]) ? $controller->$method($this->matches[1]) : $controller->$method();
   }
 }
