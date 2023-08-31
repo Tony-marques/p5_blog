@@ -8,15 +8,44 @@
 
 .login form,
 .register form {
-   border: 1px solid var(--gray-2);
+   /* border: 1px solid var(--gray-2); */
    border-radius: var(--border-radius);
-   padding: 1rem;
-   width: 500px;
+   /* padding: 1rem; */
+   width: 400px;
 }
 
-.button-login {
+.login .form-container {
+   height: 175px;
+}
+
+.login .form-container,
+.register .form-container {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+
+
+   background: var(--color-primary);
    border-radius: var(--border-radius);
-   padding: 10px 20px;
-   cursor: pointer;
-   /* box-shadow: var(--box-shadow); */
+   padding: 2rem;
+   gap: 1.5rem;
+}
+
+.login input,
+.register input {
+   outline: none;
+   border: none;
+   border-bottom: 1px solid var(--gray-2);
+   transition: border-color 0.3s;
+   padding-bottom: 0.5rem;
+   color: var(--gray);
+}
+
+.login input:focus,
+.register input:focus {
+   border-color: var(--primary);
+}
+.login input::placeholder,
+.register input::placeholder {
+   color: var(--gray);
 }

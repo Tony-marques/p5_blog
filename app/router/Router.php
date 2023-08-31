@@ -32,7 +32,7 @@ class Router
         $route->execute();
       }
     }
-    \header("location: /");
-    exit;
+    // \header("location: /");
+    // exit;
   }
 }

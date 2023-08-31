@@ -15,10 +15,12 @@ class SecurityController extends AbstractController
   {
     if (!isset($_SESSION["user"])) {
       \header("location: /");
+      exit; // test
     }
 
     unset($_SESSION["user"]);
     \header("location: /");
+    exit; // test
   }
 
   /**
@@ -110,9 +112,10 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("email", "Adresse e-mail")
+      // ->setLabel("email", "Adresse e-mail")
       ->setInput(type: "text", name: "email", attributs: [
         "value" => !empty($_SESSION["temporary_user"]["email"]) ? $_SESSION["temporary_user"]["email"] : "",
+        "placeholder" => "Adresse e-mail"
       ])
       ->startDiv(content: isset($_SESSION["error"]["email"]) ? $_SESSION["error"]["email"] : "", attributs: [
         "class" => isset($_SESSION["error"]["email"]) ? "error mt-10" : ""
@@ -122,8 +125,10 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("password", "Mot de passe")
-      ->setInput(type: "password", name: "password")
+      // ->setLabel("password", "Mot de passe")
+      ->setInput(type: "password", name: "password", attributs: [
+        "placeholder" => "Mot de passe"
+      ])
       ->startDiv(content: isset($_SESSION["error"]["login"]) ? $_SESSION["error"]["login"] : "", attributs: [
         "class" => isset($_SESSION["error"]["login"]) ? "error mt-10" : ""
       ])
@@ -135,7 +140,7 @@ class SecurityController extends AbstractController
       ->endDiv()
       ->endDiv()
       ->setButton("Me connecter", [
-        "class" => "button-primary button-login"
+        "class" => "button-primary button"
       ])
       ->setInput(type: "hidden", name: "csrf_token", attributs: [
         "value" => $_SESSION["csrf_token"]
@@ -240,12 +245,14 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("firstname", "Prénom")
+      // ->setLabel("firstname", "Prénom")
       ->setInput(
         type: "text",
         name: "firstname",
         attributs: [
           "value" => !empty($_SESSION["temporary_user"]["firstname"]) ? $_SESSION["temporary_user"]["firstname"] : "",
+          "placeholder" => "Prénom",
+          "autocomplete" => "off"
         ]
       )
       ->startDiv(attributs: [
@@ -256,12 +263,13 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("lastname", "Nom")
+      // ->setLabel("lastname", "Nom")
       ->setInput(
         type: "text",
         name: "lastname",
         attributs: [
           "value" => !empty($_SESSION["temporary_user"]["lastname"]) ? $_SESSION["temporary_user"]["lastname"] : "",
+          "placeholder" => "Nom"
         ]
       )
       ->startDiv(attributs: [
@@ -272,12 +280,13 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("email", "Adresse e-mail")
+      // ->setLabel("email", "Adresse e-mail")
       ->setInput(
         type: "text",
         name: "email",
         attributs: [
           "value" => !empty($_SESSION["temporary_user"]["email"]) ? $_SESSION["temporary_user"]["email"] : "",
+          "placeholder" => "Adresse e-mail"
         ]
       )
       ->startDiv(attributs: [
@@ -288,9 +297,10 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("password", "Mot de passe")
+      // ->setLabel("password", "Mot de passe")
       ->setInput(type: "text", name: "password", attributs: [
-        "value" => "Azertyuiop78@",
+        "value" => "",
+        "placeholder" => "Mot de passe"
       ])
       ->startDiv(attributs: [
         "class" => !empty($_SESSION["error"]["register"]["password"]) ? "error mt-10" : ""
@@ -299,7 +309,7 @@ class SecurityController extends AbstractController
       ->endDiv()
       ->endDiv()
       ->setButton("Créer mon compte", [
-        "class" => "button-primary button-login"
+        "class" => "button-primary button"
       ])
       ->endForm();
 
@@ -314,7 +324,8 @@ class SecurityController extends AbstractController
     AuthService::checkAdmin(pathToRedirect: "/");
 
     $userModel = new UserModel();
-    $users = $userModel->findAll();
+    // $users = $userModel->findAll();
+    $users = $userModel->findBy(["role" => "[\"ROLE_USER\"]"]);
 
     // UtilService::beautifulArray($users);
     // exit;

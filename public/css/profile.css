@@ -1,14 +1,51 @@
-.profil-picture{
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  margin-bottom: 2rem;
-  border-radius: 50%;
+.profil-picture {
+   width: 150px;
+   height: 150px;
+   object-fit: cover;
+   margin-bottom: 2rem;
+   border-radius: 50%;
 }
 
-.edit{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.edit {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.edit .form-container {
+   gap: 1.5rem;
+   background: var(--color-primary);
+   border-radius: var(--border-radius);
+   padding: 2rem;
+   display: flex;
+   flex-direction: column;
+}
+
+.edit form {
+   width: 75%;
+}
+
+.edit label {
+  color: var(--gray);
+  font-size: 1.1rem;
+}
+
+.edit input{
+  padding: 0.75rem 0;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--gray-2);
+  background: inherit;
+  border-radius: 0;
+  color: var(--gray);
+  transition: border-color 0.3s;
+}
+.edit input:focus{
+  border-color: var(--primary);
+}
+
+.edit input::placeholder {
+   font-size: 1.1rem;
+   font-family: "montserrat";
 }
 

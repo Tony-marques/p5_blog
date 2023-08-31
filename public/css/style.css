@@ -17,7 +17,8 @@ body {
    display: flex;
    flex-direction: column;
    background: var(--gray-light);
-   font-size: 0.8rem;
+   font-size: 0.9rem;
+   color: var(--gray);
 }
 
 .logo {
@@ -94,6 +95,9 @@ a {
 }
 .ml-10 {
    margin-left: 10px;
+}
+.mb-10{
+   margin-bottom: 10px;
 }
 
 input,

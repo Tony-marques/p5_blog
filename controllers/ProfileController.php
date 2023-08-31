@@ -27,7 +27,7 @@ class ProfileController extends AbstractController
 
     // not current user profile
     if ($user["id"] != $_SESSION["user"]["id"] && !$isAdmin) {
-      header("location: /profil/edition/{$_SESSION["user"]["id"]}");
+      \header("location: /profil/edition/{$_SESSION["user"]["id"]}");
       exit;
     }
 
@@ -47,6 +47,10 @@ class ProfileController extends AbstractController
       $newUser = $userModel->setAge($_POST["age"])
         ->setFirstname($_POST["firstname"])
         ->setLastname($_POST["lastname"]);
+
+        $_SESSION["user"]["firstname"] = $_POST["firstname"];
+        $_SESSION["user"]["lastname"] = $_POST["lastname"];
+        $_SESSION["user"]["age"] = $_POST["age"];
 
       // 1. The user already has an image but does not submit a new one
       if (!empty($user["avatar"]) && empty($_FILES["profil_picture"]["name"])) {
@@ -102,5 +106,6 @@ class ProfileController extends AbstractController
     $userModel->delete($id);
 
     \header("location: /utilisateurs");
+    exit; // test
   }
 }

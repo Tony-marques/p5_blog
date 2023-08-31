@@ -126,6 +126,7 @@ class ArticleController extends AbstractController
     // If not the same user, redirect this
     if ($article["user_id"] != $_SESSION["user"]["id"]) {
       \header("location: /articles");
+      exit; // test 
     }
 
     // Create form

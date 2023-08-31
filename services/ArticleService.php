@@ -61,6 +61,7 @@ class ArticleService
     $article->create();
 
     \header("location: /articles");
+    exit;
   }
   
 
@@ -88,6 +89,7 @@ class ArticleService
 
     $article->update($id);
     \header("location: /articles");
+    exit;
   }
 
   public static function deleteArticle(int $id)
@@ -120,9 +122,10 @@ class ArticleService
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("title", "Titre")
+      ->setLabel(!empty($subject) ? "title" : "", !empty($subject) ? "Titre" : "")
       ->setInput("text", "title", [
-        "value" => !empty($subject["title"]) ? $subject["title"] : ""
+        "value" => !empty($subject["title"]) ? $subject["title"] : "",
+        "placeholder" => !empty($subject) ? "" : "Titre"
       ])
       ->startDiv(attributs: [
         "class" => !empty($_SESSION["error"]["article"]["title"]) ? "error mt-10" : ""
@@ -132,9 +135,10 @@ class ArticleService
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("content", "Contenu")
+      ->setLabel(!empty($subject) ? "content" : "", !empty($subject) ? "Contenu" : "")
       ->setTextarea("content", !empty($subject["content"]) ? $subject["content"] : "", [
-        "rows" => 15
+        "rows" => 15,
+        "placeholder" => !empty($subject) ? "" : "Contenu"
       ])
       ->startDiv(attributs: [
         "class" => !empty($_SESSION["error"]["article"]["content"]) ? "error mt-10" : ""

@@ -3,10 +3,12 @@
 use App\models\CommentModel;
 use App\services\UtilService;
 
+// $commentModel = new CommentModel();
+// $comments = $commentModel->findBy(["published" => false]);
+
 $commentModel = new CommentModel();
-$comments = $commentModel->findBy(["published" => false]);
-
-
+// $allComments = $commentModel->findAll();
+$allComments = $commentModel->findBy(["published" => 0]);
 // UtilService::beautifulArray($_SERVER);
 // exit;
 
@@ -27,7 +29,8 @@ $comments = $commentModel->findBy(["published" => false]);
           </a>
         </li>
         <li>
-          <a href="/articles" class="link <?= $_SERVER["REQUEST_URI"] == "/articles" ? "active-link" : "" ?>">
+          <!-- <a href="/articles" class="link <?= $_SERVER["REQUEST_URI"] == "/articles" ? "active-link" : "" ?>"> -->
+          <a href="/articles" class="<?= str_starts_with($_SERVER["REQUEST_URI"], "/article") ? "active-link" : "" ?>">
             Articles
           </a>
         </li>
@@ -45,12 +48,14 @@ $comments = $commentModel->findBy(["published" => false]);
           </li>
         <?php else : ?>
           <div class="menu-button">
-            <img src="/assets/images/pp.png" alt="">
+            <!-- <img src="/uploads/profile/<?= $_SESSION["user"]["avatar"] ?>" alt=""> -->
+            <img src="<?= !empty($_SESSION["user"]["avatar"]) ? '/uploads/profile/' . $_SESSION["user"]["avatar"]  : "/assets/images/default-profile.jpg" ?>" alt="">
             <i class="fa-solid fa-chevron-down"></i>
           </div>
       </ul>
       <nav class="navbar-toggle invisible">
-        <p>Tony marques</p>
+        <!-- <p>Tony marques</p> -->
+        <p><?= $_SESSION["user"]["firstname"] ?> <?= substr(strtolower($_SESSION["user"]["lastname"]), 0, 1) . "." ?></p>
         <div class="separator"></div>
         <ul>
           <?php if ($isAdmin) : ?>
@@ -68,7 +73,7 @@ $comments = $commentModel->findBy(["published" => false]);
             <li>
               <a href="/commentaires" class="<?= $_SERVER["REQUEST_URI"] == "/commentaires" ? "active" : "" ?>">
                 <i class="fa-solid fa-comments"></i>
-                Commentaires à valider</a>
+                Commentaires à valider <span class="notification"><?= count($allComments) ?></span></a>
             </li>
             <div class="separator"></div>
           <?php endif; ?>

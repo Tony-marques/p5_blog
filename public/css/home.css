@@ -187,6 +187,8 @@
    border-bottom: 1px solid var(--gray-2);
    background: inherit;
    border-radius: 0;
+   color: var(--gray);
+   transition: border-color 0.3s;
 }
 
 .input-contact {

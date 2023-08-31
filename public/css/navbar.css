@@ -78,6 +78,8 @@ header .navbar ul li a {
 
 .menu-button img {
    width: 35px;
+   height: 35px;
+   object-fit: cover;
    border-radius: 50%;
 }
 
@@ -150,6 +152,18 @@ header .navbar ul li a {
 
 .invisible {
    display: none;
+}
+
+.notification{
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   background: var(--warning);
+   color: var(--color-primary);
+   /* padding: 0.5rem; */
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
 }
 
 @keyframes showMenu {

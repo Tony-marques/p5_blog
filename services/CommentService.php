@@ -56,7 +56,7 @@ class CommentService
     // Create form for comments
     $form = new FormBuilder();
     $form->startForm(attributs: [
-      "class" => "mt-30",
+      "class" => "mt-30 add-comment",
       "required" => "true"
     ])
       ->startDiv([
@@ -65,10 +65,13 @@ class CommentService
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setLabel("commentaire", "Commentaire")
+      // ->setLabel("commentaire", "Commentaire", [
+      //   "class" => "mb-10"
+      // ])
       ->setTextarea(name: "comment", attributs: [
         "placeholder" => "Ecrit ton commentaire",
-        "rows" => 5
+        "rows" => 5, 
+        "class" => ""
       ])
       ->endDiv()
 

@@ -45,6 +45,7 @@ $Router->get("/article/suppression/:id", "App\controllers\ArticleController@dele
 
 // COMMENTS
 $Router->get("/commentaire/validation/:id", "App\controllers\CommentController@validate");
+$Router->get("/commentaire/validation/page/:id", "App\controllers\CommentController@validateFromComments");
 $Router->get("/commentaire/suppression/:id", "App\controllers\CommentController@delete");
 $Router->get("/commentaires", "App\controllers\CommentController@checkAllComments");
 
