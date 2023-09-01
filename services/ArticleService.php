@@ -20,7 +20,7 @@ class ArticleService
     $id = (int)$id;
     $articleModel = new ArticleModel();
     $article = $articleModel->findOne($id);
-    
+
     return $article;
   }
 
@@ -63,7 +63,7 @@ class ArticleService
     \header("location: /articles");
     exit;
   }
-  
+
 
   public static function editArticle(string $title, string $content, int $id)
   {
@@ -116,6 +116,8 @@ class ArticleService
   {
     $form = new FormBuilder();
     $form->startForm()
+      ->startDiv(content: !empty($subject) ? "Modifier l'article {$subject['title']}": "Créer un article")
+      ->endDiv()
       ->startDiv([
         "class" => "form-container"
       ])

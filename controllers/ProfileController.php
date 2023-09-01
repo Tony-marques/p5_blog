@@ -74,6 +74,8 @@ class ProfileController extends AbstractController
         $userModel->setAvatar($path);
         $_SESSION["user"]["avatar"] = "$path";
       }
+      
+      $_SESSION["profile"]["message"] =  "Profil mis à jour avec succès.";
 
       $newUser->update($id);
       \header("location: /profil/edition/{$_SESSION['user']['id']}");
@@ -82,7 +84,8 @@ class ProfileController extends AbstractController
 
     $form = UserService::createForm($_SESSION, $user);
 
-    return $this->render("profile/edit", [
+
+    return $this->render("profile/edit", "mon profil",[
       "form" => $form->create(),
       "user" => $user
     ]);
@@ -90,8 +93,6 @@ class ProfileController extends AbstractController
 
   public function delete($id)
   {
-    // echo "ok";
-    // exit;
     AuthService::checkAdmin(pathToRedirect: "/");
 
     $id = (int)$id;
@@ -106,6 +107,6 @@ class ProfileController extends AbstractController
     $userModel->delete($id);
 
     \header("location: /utilisateurs");
-    exit; // test
+    exit;
   }
 }

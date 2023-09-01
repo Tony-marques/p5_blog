@@ -10,10 +10,7 @@
    align-items: center;
    justify-content: center;
    border-radius: var(--border-radius);
-   /* background: var(--color-primary); */
-
    padding: 1.5rem 0;
-   /* border: 1px solid var(--primary); */
 }
 
 .presentation-left,
@@ -41,7 +38,6 @@
    font-size: 1rem;
    gap: 1.5rem;
    line-height: 1.4;
-   /* border: 1px solid var(--primary); */
    transform: translateX(-5px);
    border-radius: var(--border-radius);
    background: var(--color-primary);
@@ -64,7 +60,6 @@
 }
 
 .presentation-left .top {
-   /* flex: 1; */
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -81,20 +76,11 @@
 .home .contact {
    display: flex;
    align-items: center;
-   /* flex-direction: column;
-   border-radius: var(--border-radius);
-   padding: 2rem; */
-   /* width: 50%; */
    margin: 0 auto;
    margin-bottom: 2rem;
-
-   /* border: 1px solid var(--gray-2); */
-   /* height: 400px;
-   width: 600px; */
 }
 
 .contact-right {
-   /* border: 1px solid red; */
    background: var(--primary);
    border-radius: var(--border-radius);
    width: 375px;
@@ -125,7 +111,6 @@
 }
 
 .contact-right i {
-   /* border: 1px solid red; */
    border-radius: 50%;
    width: 50px;
    height: 50px;
@@ -141,7 +126,6 @@
 .contact-left {
    height: 400px;
    width: 600px;
-   /* border: 1px solid var(--primary); */
    background: var(--color-primary);
    transform: translateX(5px);
    display: flex;
@@ -194,6 +178,7 @@
 .input-contact {
    width: 47%;
 }
+
 .textarea-contact {
    resize: none;
 }

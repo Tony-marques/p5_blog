@@ -3,7 +3,7 @@
     <div class="article-one">
       <div class="main-article">
         <h2><?= htmlspecialchars($article["title"])  ?></h2>
-        <p class="content"><?= htmlspecialchars(nl2br(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8'))) ?></p>
+        <p class="content"><?= nl2br(htmlspecialchars(html_entity_decode($article["content"], ENT_QUOTES, 'UTF-8'))) ?></p>
       </div>
       <div class="separator"></div>
       <div class="informations">
@@ -11,7 +11,8 @@
           <?php if (!empty($article["user"]["avatar"])) : ?>
             <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="">
           <?php endif; ?>
-          <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p>
+          <!-- <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p> -->
+          <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["user"]["firstname"]) ?> <?= htmlspecialchars(strtolower(substr($article["user"]["lastname"], 0, 1))) . "." ?></span> </p>
         </div>
         <div class="date">
           <?php if (date('d/m/Y à H:i:s', strtotime($article["created_at"])) == date('d/m/Y à H:i:s', strtotime($article["updated_at"]))) : ?>
@@ -51,7 +52,7 @@
         <p> <?= count($validateComments) ?> commentaire<?= count($validateComments) > 1 ? "s" : "" ?></p>
         <?php foreach ($validateComments as $comment) : ?>
           <div class="comment">
-            <p><?= htmlspecialchars($comment["content"]) ?></p>
+            <p><?= nl2br(htmlspecialchars($comment["content"])) ?></p>
             <div class="separator"></div>
             <div class="informations">
               <div class="people">
@@ -68,12 +69,12 @@
 
         <?php foreach ($allComments as $comment) : ?>
           <div class="comment">
-            <p><?= htmlspecialchars(nl2br($comment["content"])) ?></p>
+            <p><?= nl2br(htmlspecialchars($comment["content"])) ?></p>
             <div class="separator"></div>
             <div class="informations">
               <div class="people">
                 <span><?= $comment["user"]["firstname"] ?></span>
-                <span><?= substr($comment["user"]["lastname"], 0, 1) . "." ?></span>
+                <span><?= substr(strtolower($comment["user"]["lastname"]), 0, 1) . "." ?></span>
                 <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
               </div>
               <div class="buttons">

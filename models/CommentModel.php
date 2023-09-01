@@ -18,8 +18,6 @@ class CommentModel extends AbstractModel
 
   public function findByJoin(array $arr, $targetTable = null, $currentTableId = null, $targetTableId = null, bool $where = true)
   {
-    // Utils::beautifulArray($arr);
-    // 
     $keys = [];
     $values = [];
 
@@ -30,17 +28,11 @@ class CommentModel extends AbstractModel
 
     $list_keys = implode(" AND ", $keys);
 
-    // "SELECT * FROM articles INNER JOIN comments ON articles.id = comments.id WHERE $list_keys"
-
-    // \substr()
     if($where){
       $sql = "SELECT * FROM $this->table AS {$this->table[0]} INNER JOIN $targetTable AS $targetTable[0] ON {$this->table[0]}.$currentTableId = $targetTable[0].$targetTableId WHERE $list_keys";
     } else {
       $sql = "SELECT * FROM $this->table AS {$this->table[0]} INNER JOIN $targetTable AS $targetTable[0] ON {$this->table[0]}.$currentTableId = $targetTable[0].$targetTableId";
     }
-  
-    // echo $sql;
-    // exit();
 
     $stmt = $this->request($sql, $values);
     return $stmt->fetchAll();
@@ -68,16 +60,6 @@ class CommentModel extends AbstractModel
       INNER JOIN users AS u 
       ON c.user_id = u.id 
       WHERE $list_keys";
-      // $sql = "SELECT a.created_at as articled_created_at, u.created_at as user_created_at, c.created_at as comment_created_at FROM $this->table AS {$this->table[0]} 
-      // INNER JOIN articles AS a 
-      // ON c.article_id = a.id 
-      // INNER JOIN users AS u 
-      // ON c.user_id = u.id 
-      // WHERE $list_keys";
-
-  
-    // echo $sql;
-    // exit();
 
     $stmt = $this->request($sql, $values);
     return $stmt->fetchAll();

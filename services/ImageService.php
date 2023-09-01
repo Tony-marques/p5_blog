@@ -16,7 +16,7 @@ class ImageService
       $_SESSION["image"] = [
         "error" => "Extension non autorisée"
       ];
-      // echo "no ok";
+
       \header("location: $pathToRedirect");
       exit;
     } else {
@@ -25,7 +25,6 @@ class ImageService
         $_SESSION["image"] = [
           "error" => "Image trop volumineuse"
         ];
-
         exit;
       }
 
@@ -35,10 +34,5 @@ class ImageService
       }
       return "$newName.$ext";
     }
-    // UtilService::beautifulArray($ext);
-    // exit;
-
-
-    // return $image;
   }
 }

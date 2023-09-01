@@ -1,14 +1,10 @@
 .users {
-   /* padding: 1.5rem;
-   background: var(--color-primary);
-   border-radius: var(--border-radius); */
    display: flex;
    justify-content: center;
 }
 
 .users table {
    background: var(--color-primary);
-
    width: 75%;
    border-collapse: collapse;
    border: 1px solid var(--primary);

@@ -17,9 +17,15 @@ class ArticleController extends AbstractController
   public function index()
   {
     $articles = ArticleService::findAllArticles();
+    
+    foreach($articles as &$article){
+      $user = UserService::findOne($article["user_id"]);
+      $article["user"] = $user;
+    }
+
     $articlesSorted = ArticleService::sortArticlesAsc($articles);
 
-    return $this->render("articles/index", [
+    return $this->render("articles/index", "articles", [
       "articles" => $articlesSorted,
     ]);
   }
@@ -37,25 +43,22 @@ class ArticleController extends AbstractController
       exit;
     } 
     $article["user"] = UserService::findOne((int)$article["user_id"]);
-
     // UtilService::beautifulArray($article);
-    // exit;
-
 
     $validateComments = CommentService::findBy(["article_id" => $id, "published" => true], "articles", "article_id", "id");
     $allComments = CommentService::findBy(["article_id" => $id]);
 
     foreach ($allComments as &$comment) {
       $user = UserService::findOne($comment["user_id"]);
-      $article = ArticleService::findOne($comment["article_id"]);
+      $article_ = ArticleService::findOne($comment["article_id"]);
       $comment["user"] = $user;
-      $comment["article"] = $article;
+      $comment["article"] = $article_;
     }
     foreach ($validateComments as &$comment) {
       $user = UserService::findOne($comment["user_id"]);
-      $article = ArticleService::findOne($comment["article_id"]);
+      $article_ = ArticleService::findOne($comment["article_id"]);
       $comment["user"] = $user;
-      $comment["article"] = $article;
+      $comment["article"] = $article_;
     }
 
     // Check if user is login
@@ -84,7 +87,11 @@ class ArticleController extends AbstractController
     // Sort validate comments by asc created at
     $validateComments = CommentService::sortCommentAsc($validateComments);
 
-    return $this->render("articles/show_one", [
+    
+    // UtilService::beautifulArray($article);
+    // exit;
+
+    return $this->render("articles/show_one", "article $id", [
       "article" => $article,
       "commentForm" => $commentForm->create(),
       "validateComments" => $validateComments,
@@ -110,7 +117,7 @@ class ArticleController extends AbstractController
       }
     }
 
-    return $this->render("articles/new", ["form" => $form->create()]);
+    return $this->render("articles/new", "création article", ["form" => $form->create()]);
   }
 
   /**
@@ -126,7 +133,7 @@ class ArticleController extends AbstractController
     // If not the same user, redirect this
     if ($article["user_id"] != $_SESSION["user"]["id"]) {
       \header("location: /articles");
-      exit; // test 
+      exit;
     }
 
     // Create form
@@ -141,7 +148,7 @@ class ArticleController extends AbstractController
       }
     }
 
-    return $this->render("articles/edition", [
+    return $this->render("articles/edition","édition article $id",[
       "article" => $article,
       "form" => $form->create()
     ]);

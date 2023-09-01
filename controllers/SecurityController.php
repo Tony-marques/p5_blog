@@ -15,12 +15,12 @@ class SecurityController extends AbstractController
   {
     if (!isset($_SESSION["user"])) {
       \header("location: /");
-      exit; // test
+      exit;
     }
 
     unset($_SESSION["user"]);
     \header("location: /");
-    exit; // test
+    exit;
   }
 
   /**
@@ -30,10 +30,6 @@ class SecurityController extends AbstractController
   {
     AuthService::checkUserLogged();
 
-    // $CSRFToken = bin2hex(random_bytes(32));
-
-    // $_SESSION["csrf_token"] = $CSRFToken;
-
     if (isset($_POST["submit"])) {
       if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
         $_SESSION["error"]["csrf_token"] = "Adresse e-mail ou mot de passe incorrect !";
@@ -41,9 +37,6 @@ class SecurityController extends AbstractController
         exit;
       }
 
-      // $CSRFToken = bin2hex(random_bytes(32));
-
-      // $_SESSION["csrf_token"] = $CSRFToken;
       if (!AuthService::checkCSRFToken($_POST["csrf_token"])) {
         echo "token non valide";
         exit;
@@ -112,7 +105,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("email", "Adresse e-mail")
       ->setInput(type: "text", name: "email", attributs: [
         "value" => !empty($_SESSION["temporary_user"]["email"]) ? $_SESSION["temporary_user"]["email"] : "",
         "placeholder" => "Adresse e-mail"
@@ -125,7 +117,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("password", "Mot de passe")
       ->setInput(type: "password", name: "password", attributs: [
         "placeholder" => "Mot de passe"
       ])
@@ -148,7 +139,7 @@ class SecurityController extends AbstractController
       ->endForm();
 
 
-    return $this->render(path: "security/login", data: [
+    return $this->render(path: "security/login", title: "connexion", data: [
       "form" => $form->create()
     ]);
   }
@@ -192,16 +183,10 @@ class SecurityController extends AbstractController
           ]
         ];
 
-
-
         \header("location: /inscription");
         exit;
       }
 
-
-
-
-      // if (FormBuilder::validate($_POST, ["email", "password", "firstname", "lastname"])) {
       $_POST = \filter_input_array(INPUT_POST, [
         "email" => \FILTER_SANITIZE_EMAIL,
         "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS,
@@ -235,8 +220,6 @@ class SecurityController extends AbstractController
       exit;
     }
 
-    // UtilService::beautifulArray($_SESSION);
-
     $form = new FormBuilder();
     $form->startForm()
       ->startDiv([
@@ -245,7 +228,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("firstname", "Prénom")
       ->setInput(
         type: "text",
         name: "firstname",
@@ -263,7 +245,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("lastname", "Nom")
       ->setInput(
         type: "text",
         name: "lastname",
@@ -280,7 +261,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("email", "Adresse e-mail")
       ->setInput(
         type: "text",
         name: "email",
@@ -297,7 +277,6 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("password", "Mot de passe")
       ->setInput(type: "text", name: "password", attributs: [
         "value" => "",
         "placeholder" => "Mot de passe"
@@ -314,9 +293,9 @@ class SecurityController extends AbstractController
       ->endForm();
 
 
-    return $this->render(path: "security/register", data: [
+    return $this->render(path: "security/register",title: "inscription", data: [
       "form" => $form->create()
-    ]);
+    ] );
   }
 
   public function allUsers()
@@ -324,14 +303,11 @@ class SecurityController extends AbstractController
     AuthService::checkAdmin(pathToRedirect: "/");
 
     $userModel = new UserModel();
-    // $users = $userModel->findAll();
+
     $users = $userModel->findBy(["role" => "[\"ROLE_USER\"]"]);
 
-    // UtilService::beautifulArray($users);
-    // exit;
-
-    return $this->render(path: "security/allUsers", data: [
+    return $this->render(path: "security/allUsers",title: "gestion utilisateurs", data: [
       "users" => $users
-    ]);
+    ] );
   }
 }

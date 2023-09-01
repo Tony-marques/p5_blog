@@ -15,8 +15,7 @@ abstract class AbstractModel
     $fields = [];
     $separator = [];
     $values = [];
-    // print_r($this);
-    // exit;
+
     foreach ($this as $key => $value) {
       if ($key != "table") {
         $fields[] = "$key";
@@ -48,8 +47,6 @@ abstract class AbstractModel
 
   public function findBy(array $arr, bool $join = false, $targetTable = null, $targetTableId = null)
   {
-    // Utils::beautifulArray($arr);
-    // 
     $keys = [];
     $values = [];
 
@@ -59,8 +56,6 @@ abstract class AbstractModel
     }
 
     $list_keys = implode(" AND ", $keys);
-
-    // "SELECT * FROM articles INNER JOIN comments ON articles.id = comments.id WHERE $list_keys"
 
     if ($join) {
       $sql = "SELECT * FROM $this->table INNER JOIN $targetTable ON $this->table.id = $targetTable.$targetTableId  WHERE $list_keys";

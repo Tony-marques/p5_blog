@@ -31,30 +31,22 @@ body {
    justify-content: center;
 }
 
-form {
+/* form {
    width: 100%;
-}
+} */
 
 .container {
    align-items: center;
-   /* border: 1px solid blue; */
    display: flex;
-   /* flex-direction: column; */
-   /* align-items: center; */
    max-width: 1200px;
    width: 100%;
    margin: 3rem auto;
-   /* margin-top: 3rem; */
-   /* height: 100%; */
    display: flex;
    flex: 1;
-   /* overflow: hidden; */
 }
 
 .main-container {
-   /* border: 1px solid purple; */
    flex: 1;
-   /* margin-left: 2rem; */
 }
 
 li {
@@ -67,11 +59,8 @@ a {
 }
 
 .error {
-   /* background: var(--warning); */
-   /* padding: 1rem; */
    color: var(--warning);
    border-radius: var(--border-radius);
-   /* color: var(--color-primary); */
    font-size: 0.7rem;
 }
 
@@ -81,7 +70,6 @@ a {
    width: 500px;
    background: var(--success);
    padding: 1rem;
-   /* color: var(--warning); */
    border-radius: var(--border-radius);
    color: var(--color-primary);
    font-size: 0.7rem;
@@ -118,7 +106,6 @@ textarea {
 
 .button-primary,
 .button-primary-stroke {
-   /* font-weight: 600; */
    border: 1px solid var(--primary);
 }
 

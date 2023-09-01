@@ -13,6 +13,7 @@ $Router = new Router($_GET["p"]);
 
 // HOME
 $Router->get("/", "App\controllers\HomeController@index");
+$Router->post("/", "App\controllers\HomeController@index");
 
 
 // PROFILE

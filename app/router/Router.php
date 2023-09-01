@@ -2,8 +2,6 @@
 
 namespace App\app\router;
 
-use Exception;
-
 class Router
 {
 
@@ -27,12 +25,18 @@ class Router
 
   public function run()
   {
-    foreach ($this->routes[$_SERVER["REQUEST_METHOD"]] as $route) {
-      if ($route->matches($this->url)) {
-        $route->execute();
+    try {
+      foreach ($this->routes[$_SERVER["REQUEST_METHOD"]] as $route) {
+        if ($route->matches($this->url)) {
+          $route->execute();
+        } else {
+          // throw new RouterException("Cette page n'existe pas");
+        }
       }
+    } catch (RouterException $e) {
+      echo $e->getMessage();
+      // \header("location: /");
+      exit;
     }
-    // \header("location: /");
-    // exit;
   }
 }

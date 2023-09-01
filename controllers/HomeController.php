@@ -10,6 +10,12 @@ class HomeController extends AbstractController
   public function index()
   {
 
+    if (isset($_POST["submit"])) {
+      echo "ok";
+
+      \mail(to: "tony.marques@live.fr", subject: "", message: "message test");
+    }
+
     $form = new FormBuilder();
     $form->startForm()
       ->startDiv(attributs: [
@@ -35,7 +41,7 @@ class HomeController extends AbstractController
       ->endForm();
 
 
-    return $this->render("home/index", [
+    return $this->render("home/index", "accueil", [
       "form" => $form->create()
     ]);
   }

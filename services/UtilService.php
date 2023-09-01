@@ -13,6 +13,5 @@ class UtilService
     echo "<pre>";
     var_dump($arr);
     echo "</pre>";
-    // exit();
   }
 }

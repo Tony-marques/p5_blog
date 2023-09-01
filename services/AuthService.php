@@ -34,8 +34,7 @@ class AuthService
     $userModel = new UserModel();
     $currentUser = $userModel->findOne($_SESSION["user"]["id"]) ?? "dd";
     $userRole = json_decode($currentUser["role"]);
-    // UtilService::beautifulArray($userRole);
-    // exit;
+
     if (\in_array("ROLE_ADMIN", $userRole)) {
       return true;
     } else {

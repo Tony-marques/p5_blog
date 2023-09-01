@@ -1,8 +1,6 @@
 header {
-   /* border: 1px solid red; */
    padding: 0.25rem 0;
    background: var(--color-primary);
-   /* box-shadow: var(--box-shadow); */
    border-bottom: 1px solid var(--gray-2);
    position: relative;
 }
@@ -18,8 +16,6 @@ header {
    margin: 0 auto;
    justify-content: space-between;
    align-items: center;
-   /* position: relative; */
-   /* width: 100%; */
 }
 
 .nav ul {
@@ -33,7 +29,6 @@ header {
 
 .nav ul li a {
    font-size: 1.1rem;
-   /* border: 1px solid red; */
    padding: 0.75rem 1rem;
    transition: color 0.3s;
 }
@@ -49,16 +44,17 @@ header .navbar {
 header .navbar ul {
    display: flex;
 }
+
 header .navbar ul li {
    margin: 0 0.5rem;
 }
+
 header .navbar ul li a {
    display: block;
 }
 
 .menu-button {
    cursor: pointer;
-   /* border: 1px solid var(--primary); */
    padding: 0.2rem;
    display: flex;
    align-items: center;
@@ -87,18 +83,15 @@ header .navbar ul li a {
    margin-right: 0.75rem;
    color: white;
    transition: color 0.3s, transform 0.3s;
-   /* color: var(--primary); */
 }
 
 .overlay {
    border: 1px solid blue;
-   /* width: 100%; */
    position: absolute;
    top: 0;
    left: 0;
    bottom: 0;
    right: 0;
-   /* background: red; */
    pointer-events: visible;
    z-index: 9;
 }
@@ -121,7 +114,6 @@ header .navbar ul li a {
 .navbar-toggle ul {
    display: flex;
    flex-direction: column;
-   /* gap: 0.5rem; */
 }
 
 .navbar-toggle ul li a {

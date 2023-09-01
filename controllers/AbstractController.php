@@ -8,10 +8,8 @@ class AbstractController
 {
 
 
-  public function render($path, $data = [], $template = "default")
+  public function render($path, $title, $data = [], $template = "default")
   {
-    // print_r($data);
-
     \extract($data);
 
     ob_start();

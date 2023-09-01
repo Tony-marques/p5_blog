@@ -64,13 +64,6 @@ class FormBuilder
 
     return $this;
   }
-  // public function startDiv(array $attributs = [])
-  // {
-  //   $this->html .= "<div ";
-  //   $this->html .= $attributs ? $this->setAttribute($attributs) . ">" : ">";
-
-  //   return $this;
-  // }
 
   public function endDiv()
   {

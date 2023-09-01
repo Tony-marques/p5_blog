@@ -31,9 +31,6 @@ class UserService
 
   public static function createErrorSessionFields($post)
   {
-
-    // \var_dump($post);
-    // exit;
     $_SESSION["error"] = [
       "profile" => [
         "firstname" => \strlen($post["firstname"]) < 3 ? "Votre prénom doit faire au minimum 3 caractères" : "",
@@ -107,7 +104,13 @@ class UserService
       ], content: !empty($session["error"]["profile"]["age"]) ? $session["error"]["profile"]["age"] : "")
       ->endDiv()
       ->endDiv()
-
+      ->startDiv(
+        attributs: [
+          "class" => "success-profile"
+        ],
+        content: !empty($_SESSION["profile"]["message"]) ? $_SESSION["profile"]["message"] : ""
+      )
+      ->endDiv()
       ->endDiv()
       ->setButton("Modifier mon profil", [
         "class" => "button button-primary button-login"

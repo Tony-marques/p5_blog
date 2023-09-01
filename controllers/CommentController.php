@@ -54,32 +54,15 @@ class CommentController extends AbstractController
   public function checkAllComments()
   {
     AuthService::checkAdmin("/articles");
-    // $articleModel = new ArticleModel();
-    // $articlesWithNoValidateComments = $articleModel->findByJoin([
-    //   "published" => false
-    // ], "comments", "article_id");
 
     $commentModel = new CommentModel();
-    // $allComments = $commentModel->findAll();
+
     $allComments = $commentModel->findBy(["published" => 0]);
     foreach ($allComments as &$comment) {
       $comment["article"] = ArticleService::findOne($comment["article_id"]);
     };
-    // foreach($allComments as &$comment){
-    //   UtilService::beautifulArray($comment);
-    // };
 
-    // $articleModel = new ArticleModel();
-    // $articles = $articleModel->findAll();
-    // UtilService::beautifulArray($articles);
-    // foreach($articles as &$article){
-    //   $article["comments"] = CommentService::;
-    // };
-
-
-    // exit;
-
-    return $this->render("comments/all", [
+    return $this->render("comments/all","commentaires",[
       "comments" => $allComments
     ]);
   }

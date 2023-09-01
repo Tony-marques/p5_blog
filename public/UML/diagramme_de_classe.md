@@ -17,11 +17,18 @@ classDiagram
 
   class Articles{
     titre: string
-    content: string
+    contenu: string
     image: string
     auteur: string
   }
 
+  class Commentaires{
+    contenu: string
+    publié: bool
+  }
+
+  Utilisateurs "1"--"1..n" Commentaires
+  Articles "1"--"1..n" Commentaires
   Utilisateurs "1"--"1..n" Articles
 
 ```

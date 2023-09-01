@@ -12,7 +12,6 @@ class CommentService
   {
     $commentModel = new CommentModel();
     $comment = $commentModel->findBy($arr);
-    // $comment = $commentModel->findByJoin($arr, $targetTable, $currentTableId, $targetTableId, $where);
 
     return $comment;
   }
@@ -20,7 +19,6 @@ class CommentService
   public static function findUserAndArticle(array $arr)
   {
     $commentModel = new CommentModel();
-    // $comment = $commentModel->findBy($arr);
     $comment = $commentModel->findUserCommentArticle($arr);
 
     return $comment;
@@ -36,6 +34,8 @@ class CommentService
       // if is admin, comment is directly published
       ->setPublished($isAdmin ? 1 : 0)
       ->setUser_id($_SESSION["user"]["id"]);
+
+    $_SESSION["comment"]["message"] = "Commentaire soumis avec succès.";
 
     $comment->create();
     \header("location: /article/$id");
@@ -65,16 +65,19 @@ class CommentService
       ->startDiv([
         "class" => "form-group"
       ])
-      // ->setLabel("commentaire", "Commentaire", [
-      //   "class" => "mb-10"
-      // ])
       ->setTextarea(name: "comment", attributs: [
         "placeholder" => "Ecrit ton commentaire",
-        "rows" => 5, 
+        "rows" => 5,
         "class" => ""
       ])
       ->endDiv()
-
+      ->startDiv(
+        attributs: [
+          "class" => !empty($_SESSION["comment"]["message"]) ?   "success-comment" : ""
+        ],
+        content: !empty($_SESSION["comment"]["message"]) ?   $_SESSION["comment"]["message"] : ""
+      )
+      ->endDiv()
       ->endDiv()
       ->setButton("Soumettre mon commentaire", [
         "class" => "button button-primary"

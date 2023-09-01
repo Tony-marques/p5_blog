@@ -20,8 +20,6 @@ class ArticleModel extends AbstractModel
 
   public function findByJoin(array $arr, $targetTable = null, $targetTableId = null)
   {
-    // Utils::beautifulArray($arr);
-    // 
     $keys = [];
     $values = [];
 
@@ -32,12 +30,7 @@ class ArticleModel extends AbstractModel
 
     $list_keys = implode(" AND ", $keys);
 
-    // "SELECT * FROM articles INNER JOIN comments ON articles.id = comments.id WHERE $list_keys"
-
-
     $sql = "SELECT * FROM $this->table AS a INNER JOIN $targetTable AS $targetTable[0] ON {$this->table[0]}.id = $targetTable[0].$targetTableId  WHERE $list_keys";
-    // echo $sql;
-    // exit();
 
     $stmt = $this->request($sql, $values);
     return $stmt->fetchAll();
