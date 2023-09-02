@@ -20,7 +20,7 @@
 
   <link rel=" stylesheet" href="/css/style.css">
   <script src="https://kit.fontawesome.com/6274398224.js" crossorigin="anonymous"></script>
-  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <script src="/js/navbar.js" defer></script>
   <title><?= $title ?></title>
 </head>

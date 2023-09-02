@@ -28,13 +28,12 @@ class Route
   }
 
   // Retravailler la methode public / private
-  public function execute()
+  public function execute(): mixed
   {
     $params = \explode("@", $this->action);
     $controller = new $params[0]();
     $method = $params[1];
-    // echo $method;
-    // echo $this->matches[1];
+
     return isset($this->matches[1]) ? $controller->$method($this->matches[1]) : $controller->$method();
   }
 }

@@ -13,17 +13,17 @@ class Router
     $this->url = trim($url, "/");
   }
 
-  public function get(string $path, string $action)
+  public function get(string $path, string $action):void
   {
     $this->routes["GET"][] = new Route($path, $action);
   }
 
-  public function post(string $path, string $action)
+  public function post(string $path, string $action):void
   {
     $this->routes["POST"][] = new Route($path, $action);
   }
 
-  public function run()
+  public function run():void
   {
     // print_r($this->url);
     try {

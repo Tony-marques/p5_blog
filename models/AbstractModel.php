@@ -109,7 +109,7 @@ abstract class AbstractModel
   protected function request(string $sql, array $params = [])
   {
     $db = Db::getInstance();
-    if ($params != null) {
+    if ($params !== null) {
       $stmt = $db->prepare($sql);
       $stmt->execute($params);
       return $stmt;

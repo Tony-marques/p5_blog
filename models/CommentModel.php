@@ -69,7 +69,7 @@ class CommentModel extends AbstractModel
   /**
    * Get the value of user_id
    */
-  public function getUser_id()
+  public function getUserId()
   {
     return $this->user_id;
   }
@@ -79,7 +79,7 @@ class CommentModel extends AbstractModel
    *
    * @return  self
    */
-  public function setUser_id($user_id)
+  public function setUserId($user_id)
   {
     $this->user_id = $user_id;
 
@@ -89,7 +89,7 @@ class CommentModel extends AbstractModel
   /**
    * Get the value of article_id
    */
-  public function getArticle_id()
+  public function getArticleId()
   {
     return $this->article_id;
   }
@@ -99,7 +99,7 @@ class CommentModel extends AbstractModel
    *
    * @return  self
    */
-  public function setArticle_id($article_id)
+  public function setArticleId($article_id)
   {
     $this->article_id = $article_id;
 

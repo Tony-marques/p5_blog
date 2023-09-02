@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
         "email" => $_POST["email"],
       ];
 
-      if (\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) == false) {
+      if (\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) === false) {
         $_SESSION["error"] = [
           "email" => "Format d'adresse email incorrect !"
         ];

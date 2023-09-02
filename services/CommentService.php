@@ -30,10 +30,10 @@ class CommentService
     $content = \htmlspecialchars($comment);
     $commentModel = new CommentModel();
     $comment = $commentModel->setContent($content)
-      ->setArticle_id($id)
+      ->setArticleId($id)
       // if is admin, comment is directly published
       ->setPublished($isAdmin ? 1 : 0)
-      ->setUser_id($_SESSION["user"]["id"]);
+      ->setUserId($_SESSION["user"]["id"]);
 
     $_SESSION["comment"]["message"] = "Commentaire soumis avec succès.";
 

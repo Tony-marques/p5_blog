@@ -139,7 +139,7 @@ class ArticleModel extends AbstractModel
   /**
    * Get the value of user_id
    */
-  public function getUser_id()
+  public function getUserId()
   {
     return $this->user_id;
   }
@@ -149,7 +149,7 @@ class ArticleModel extends AbstractModel
    *
    * @return  self
    */
-  public function setUser_id($user_id)
+  public function setUserId($user_id)
   {
     $this->user_id = $user_id;
 

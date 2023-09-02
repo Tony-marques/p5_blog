@@ -7,31 +7,31 @@ class FormBuilder
 
   public $html;
 
-  public function create()
+  public function create(): string
   {
     return $this->html;
   }
 
-  public function startForm(string $method = "POST", string $action = "#", array $attributs = [])
+  public function startForm(string $method = "POST", string $action = "#", array $attributs = []):self
   {
     $this->html .= "<form method='$method' action='$action'";
     $this->html .= $attributs ? $this->setAttribute($attributs) . ">" : ">";
     return $this;
   }
 
-  public function endForm()
+  public function endForm(): void
   {
     $this->html .= "</form>";
   }
 
-  public function setInput(?string $type, ?string $name, array $attributs = [])
+  public function setInput(?string $type, ?string $name, array $attributs = []):self
   {
     $this->html .= "<input type='$type' name='$name'";
     $this->html .= $attributs ? $this->setAttribute($attributs) . ">" : ">";
     return $this;
   }
 
-  public function setTextarea(string $name, string $content = null, array $attributs = [])
+  public function setTextarea(string $name, string $content = null, array $attributs = []):self
   {
     $this->html .= "<textarea name='$name'";
     $this->html .= $attributs ? $this->setAttribute($attributs) : "";
@@ -39,7 +39,7 @@ class FormBuilder
     return $this;
   }
 
-  public function setLabel(string $for, string $name, array $attributs = [])
+  public function setLabel(string $for, string $name, array $attributs = []):self
   {
     $this->html .= "<label for='$for'";
     $this->html .= $attributs ? $this->setAttribute($attributs) : "";
@@ -48,7 +48,7 @@ class FormBuilder
     return $this;
   }
 
-  public function setButton(string $name, array $attributs = [])
+  public function setButton(string $name, array $attributs = []):self
   {
     $this->html .= "<button type='submit' name='submit'";
     $this->html .= $attributs ? $this->setAttribute($attributs) : "";
@@ -57,7 +57,7 @@ class FormBuilder
     return $this;
   }
 
-  public function startDiv(array $attributs = [], string $content = null)
+  public function startDiv(array $attributs = [], string $content = null):self
   {
     $this->html .= "<div ";
     $this->html .= $attributs ? $this->setAttribute($attributs) . ">$content" : ">$content";
@@ -65,21 +65,21 @@ class FormBuilder
     return $this;
   }
 
-  public function endDiv()
+  public function endDiv():self
   {
     $this->html .= "</div> ";
 
     return $this;
   }
 
-  private function setAttribute(array $attributs)
+  private function setAttribute(array $attributs):void
   {
     foreach ($attributs as $key => $value) {
       $this->html .= " $key='$value'";
     }
   }
 
-  public static function validate(array $form, array $fields)
+  public static function validate(array $form, array $fields):bool
   {
     foreach ($fields as $field) {
       if (!isset($form[$field]) || empty($form[$field])) {

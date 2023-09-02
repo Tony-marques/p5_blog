@@ -61,7 +61,7 @@ class ArticleService
     $article->setTitle($title)
       ->setContent($content)
       ->setAuthor($_SESSION["user"]["firstname"])
-      ->setUser_id($_SESSION["user"]["id"]);
+      ->setUserId($_SESSION["user"]["id"]);
 
     $article->create();
 
