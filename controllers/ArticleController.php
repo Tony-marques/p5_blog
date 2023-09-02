@@ -17,8 +17,8 @@ class ArticleController extends AbstractController
   public function index()
   {
     $articles = ArticleService::findAllArticles();
-    
-    foreach($articles as &$article){
+
+    foreach ($articles as &$article) {
       $user = UserService::findOne($article["user_id"]);
       $article["user"] = $user;
     }
@@ -35,13 +35,17 @@ class ArticleController extends AbstractController
    */
   public function showOne(string $id)
   {
+    // echo $id;
     $id = (int)$id;
-
+    // die();
     $article = ArticleService::findOne($id);
-    if(!$article){
+    if (!$article) {
       \header("location: /");
+
       exit;
-    } 
+    }
+
+
     $article["user"] = UserService::findOne((int)$article["user_id"]);
     // UtilService::beautifulArray($article);
 
@@ -87,7 +91,7 @@ class ArticleController extends AbstractController
     // Sort validate comments by asc created at
     $validateComments = CommentService::sortCommentAsc($validateComments);
 
-    
+
     // UtilService::beautifulArray($article);
     // exit;
 
@@ -112,9 +116,9 @@ class ArticleController extends AbstractController
     $form = ArticleService::createForm();
 
     if (isset($_POST["submit"])) {
-      if (FormBuilder::validate($_POST, ["title", "content"])) {
+      // if (FormBuilder::validate($_POST, ["title", "content"])) {
         ArticleService::createArticle($_POST["title"], $_POST["content"]);
-      }
+      // }
     }
 
     return $this->render("articles/new", "création article", ["form" => $form->create()]);
@@ -142,13 +146,13 @@ class ArticleController extends AbstractController
     // If form is submitted
     if (isset($_POST["submit"])) {
       // If form validation is ok
-      if (FormBuilder::validate($_POST, ["title", "content"])) {
+      // if (FormBuilder::validate($_POST, ["title", "content"])) {
         // Edit article
         ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
-      }
+      // }
     }
 
-    return $this->render("articles/edition","édition article $id",[
+    return $this->render("articles/edition", "édition article $id", [
       "article" => $article,
       "form" => $form->create()
     ]);

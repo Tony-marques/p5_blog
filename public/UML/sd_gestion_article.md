@@ -6,7 +6,6 @@ sequenceDiagram
 
   Note over Administrateur,system: ref: Authentification
 
-  loop pour chaque article
     alt création
       Administrateur ->>+ system: ajout titre
       Administrateur ->> system: ajout contenu
@@ -15,7 +14,6 @@ sequenceDiagram
     else erreur
       system ->> Administrateur : erreur, article non publié
     end
-  end
 
 
 

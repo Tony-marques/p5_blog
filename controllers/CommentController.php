@@ -50,6 +50,17 @@ class CommentController extends AbstractController
     \header("location: /article/{$comment['article_id']}");
     exit;
   }
+  public function deleteFromComments($id)
+  {
+    AuthService::checkAdmin(pathToRedirect: "/articles");
+
+    $commentModel = new CommentModel();
+    $comment = $commentModel->findOne($id);
+    $commentModel->delete($id);
+
+    \header("location: /commentaires");
+    exit;
+  }
 
   public function checkAllComments()
   {

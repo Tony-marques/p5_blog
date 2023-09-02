@@ -6,7 +6,6 @@
 
   subgraph system ["Création article"]
     auth([Authentification])
-    gestion([gestion d'un article])
     supp([supprimer un article])
     mod([modifier un article])
     creer([créer un article])
@@ -25,9 +24,10 @@ classDef blackBorder stroke: #000
 classDef noBorder stroke:none
 classDef blackFont color:#000
 
-administrateur --- gestion
-gestion -. << include >> .-> auth
-supp -. << extends >> .-> gestion
-mod -. << extends >> .-> gestion
-creer -. << extends >> .-> gestion
+administrateur --- supp
+administrateur --- mod
+administrateur --- creer
+supp -. << extends >> .-> auth
+mod -. << extends >> .-> auth
+creer -. << extends >> .-> auth
 ```

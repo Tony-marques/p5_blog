@@ -1,4 +1,5 @@
 ```mermaid
+
   flowchart LR
   subgraph actor[<< actor >>]
     Utilisateur[Utilisateur]
@@ -6,14 +7,14 @@
 
   subgraph system ["Création compte"]
     create([création compte])
-    access([accès aux pages authentifiées])
+    login([connexion])
   end
 
-class Utilisateur,create noBg
-class actor,system,access,create whiteBg
-class create,access blackBorder
+class Utilisateur,create,login noBg
+class actor,system,login,create whiteBg
+class create,login blackBorder
 class Utilisateur noBorder
-class actor,Utilisateur,create,access blackFont
+class actor,Utilisateur,create,login blackFont
 
 
 classDef noBg fill: none
@@ -23,6 +24,6 @@ classDef noBorder stroke:none
 classDef blackFont color:#000
 
 Utilisateur --- create
-access -. << include >> .-> create
+Utilisateur --- login
 
 ```

@@ -10,7 +10,7 @@
       <div class="informations">
         <div class="article-author">
           <!-- <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt=""> -->
-          <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="">
+          <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="profile picture">
           <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["user"]["firstname"]) ?> <?= htmlspecialchars(substr(strtolower($article["user"]["lastname"]), 0, 1)) . "." ?></span> </p>
           <!-- <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p> -->
         </div>

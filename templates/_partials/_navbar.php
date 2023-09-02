@@ -41,7 +41,7 @@ $allComments = $commentModel->findBy(["published" => 0]);
         <?php else : ?>
           <div class="menu-button">
             <!-- <img src="/uploads/profile/<?= $_SESSION["user"]["avatar"] ?>" alt=""> -->
-            <img src="<?= !empty($_SESSION["user"]["avatar"]) ? '/uploads/profile/' . $_SESSION["user"]["avatar"]  : "/assets/images/default-profile.jpg" ?>" alt="">
+            <img src="<?= !empty($_SESSION["user"]["avatar"]) ? '/uploads/profile/' . $_SESSION["user"]["avatar"]  : "/assets/images/default-profile.jpg" ?>" alt="profile picture">
             <i class="fa-solid fa-chevron-down"></i>
           </div>
       </ul>
@@ -65,7 +65,11 @@ $allComments = $commentModel->findBy(["published" => 0]);
             <li>
               <a href="/commentaires" class="<?= $_SERVER["REQUEST_URI"] == "/commentaires" ? "active" : "" ?>">
                 <i class="fa-solid fa-comments"></i>
-                Commentaires à valider <span class="notification"><?= count($allComments) ?></span></a>
+                Commentaires à valider 
+                <?php if(count($allComments) !=0): ?>
+                <span class="notification"><?= count($allComments) ?></span>
+                <?php endif; ?>
+              </a>
             </li>
             <div class="separator"></div>
           <?php endif; ?>

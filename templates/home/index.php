@@ -7,14 +7,14 @@
         <div class="job">Développeur PHP / Symfony</div>
       </div>
       <div class="bottom">
-        <img src="/assets/images/pp.png" alt="">
+        <img src="/assets/images/pp.png" alt="default profile picture">
       </div>
     </div>
     <div class="presentation-right">
       <p>Actuellement en formation chez OpenClassrooms en tant que développeur web PHP/Symfony. </p>
       <p>Tu souhaites voir mon CV ?</p>
       <i class="fa-solid fa-hand-point-down"></i>
-      <a href="/assets/cv.pdf" class="button button-primary-stroke">C'est ici !</a>
+      <a href="/assets/cv.pdf" class="button button-primary-stroke" target="_blank">C'est ici !</a>
     </div>
   </div>
   <i class="fa-solid fa-arrow-down-long"></i>

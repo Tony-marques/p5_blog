@@ -12,7 +12,7 @@ $comments = $commentModel->findBy(["published" => false]);
 
     <a href="/" class="logo-container">
 
-      <img src="/assets/images/logo.png" class="logo"></img>
+      <img src="/assets/images/logo.png" alt="logo du site" class="logo"></img>
     </a>
     <nav>
       <ul>

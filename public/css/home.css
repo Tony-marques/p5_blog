@@ -163,6 +163,10 @@
    font-family: "montserrat";
 }
 
+.name-field, .email-field{
+   width: 47%;
+}
+
 .input-contact,
 .textarea-contact {
    padding: 0.75rem 0;
@@ -173,10 +177,8 @@
    border-radius: 0;
    color: var(--gray);
    transition: border-color 0.3s;
-}
+   width: 100%;
 
-.input-contact {
-   width: 47%;
 }
 
 .textarea-contact {

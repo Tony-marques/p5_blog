@@ -7,12 +7,11 @@ sequenceDiagram
   actor Administrateur
 
 
-  loop pour chaque article
+      Utilisateur ->>+ system: Demande d'accès à la page
+      Utilisateur ->> system: remplir et soumettre commentaire
     alt création commentaire
-      Utilisateur ->>+ system: ajout commentaire
-      Utilisateur ->> system: soumettre commentaire
-      system ->>- Utilisateur: Confirmation de soumission du commentaire
-      system ->> Administrateur: notification commentaire à soummettre
+
+      system ->> Administrateur: notification commentaire à soumettre
       alt validation commentaire
         Administrateur ->> system: validation du commentaire
         system ->> Utilisateur: rend le commentaire visible
@@ -23,7 +22,6 @@ sequenceDiagram
     else erreur
       system ->> Utilisateur : erreur, commentaire non soumis
     end
-  end
 
 
 

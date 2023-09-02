@@ -7,8 +7,7 @@
   subgraph system ["Création commentaire"]
     auth([Authentification])
     create([création commentaire])
-    voir([voir commentaire])
-    validate([validation du commentaire par l'administrateur])
+
   end
 
 class utilisateur,auth,create,voir,validate noBg
@@ -25,8 +24,7 @@ classDef noBorder stroke:none
 classDef blackFont color:#000
 
 utilisateur --- create
+
 create -. << include >> .-> auth
-voir -. << extends >> .-> create
-voir -. << include >> .-> validate
 
 ```

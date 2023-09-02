@@ -48,6 +48,11 @@ class ArticleService
         ]
       ];
 
+      $_SESSION["tmp_article"] = [
+        "title" => $title,
+        "content" => $content
+      ];
+
       \header("location: /article/nouveau");
       exit;
     }
@@ -78,6 +83,14 @@ class ArticleService
           "content" =>  \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
         ]
       ];
+
+      $_SESSION["tmp_article"] = [
+        "title" => $title,
+        "content" => $content
+      ];
+
+      // UtilService::beautifulArray($_SESSION["tmp_article"]);
+      // exit;
 
       \header("location: /article/edition/$id");
       exit;
@@ -116,7 +129,7 @@ class ArticleService
   {
     $form = new FormBuilder();
     $form->startForm()
-      ->startDiv(content: !empty($subject) ? "Modifier l'article {$subject['title']}": "Créer un article")
+      ->startDiv(content: !empty($subject) ? "Modifier l'article {$subject['title']}" : "Créer un article")
       ->endDiv()
       ->startDiv([
         "class" => "form-container"
@@ -126,7 +139,9 @@ class ArticleService
       ])
       ->setLabel(!empty($subject) ? "title" : "", !empty($subject) ? "Titre" : "")
       ->setInput("text", "title", [
-        "value" => !empty($subject["title"]) ? $subject["title"] : "",
+        "value" => (!empty($_SESSION["tmp_article"]["title"])) ?
+          ($_SESSION["tmp_article"]["title"])
+          : (!empty($subject["title"]) ? $subject["title"] : ""),
         "placeholder" => !empty($subject) ? "" : "Titre"
       ])
       ->startDiv(attributs: [
@@ -138,10 +153,16 @@ class ArticleService
         "class" => "form-group"
       ])
       ->setLabel(!empty($subject) ? "content" : "", !empty($subject) ? "Contenu" : "")
-      ->setTextarea("content", !empty($subject["content"]) ? $subject["content"] : "", [
-        "rows" => 15,
-        "placeholder" => !empty($subject) ? "" : "Contenu"
-      ])
+      ->setTextarea(
+        "content",
+        (!empty($_SESSION["tmp_article"]["content"])) ?
+          ($_SESSION["tmp_article"]["content"])
+          : (!empty($subject["content"]) ? $subject["content"] : ""),
+        [
+          "rows" => 15,
+          "placeholder" => !empty($subject) ? "" : "Contenu"
+        ]
+      )
       ->startDiv(attributs: [
         "class" => !empty($_SESSION["error"]["article"]["content"]) ? "error mt-10" : ""
       ], content: !empty($_SESSION["error"]["article"]["content"]) ? $_SESSION["error"]["article"]["content"] : "")

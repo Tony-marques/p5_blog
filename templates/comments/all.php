@@ -11,7 +11,7 @@
           <div class="separator"></div>
           <div class="informations">
             <div class="article-author">
-              <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt="">
+              <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt="profile picture">
               <p>Ecrit par <span class="name-author"><?= htmlspecialchars($comment["article"]["author"]) ?></span> </p>
             </div>
             <div class="date">
@@ -34,7 +34,7 @@
             <p>tony M. le 29/08/2023</p>
             <div class="button-group">
              <a href="/commentaire/validation/page/<?= $comment["id"] ?>" class="button button-primary">Valider</a>
-             <a href="" class="button button-danger">Supprimer</a>
+             <a href="/commentaire/suppression/page/<?= $comment["id"] ?>" class="button button-danger">Supprimer</a>
             </div>
           </div>
         </div>

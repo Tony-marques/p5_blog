@@ -159,8 +159,8 @@ class SecurityController extends AbstractController
       }
 
       if (
-        \strlen($_POST["firstname"]) < 3
-        || \strlen($_POST["lastname"]) < 3
+        \strlen($_POST["firstname"]) <= 3
+        || \strlen($_POST["lastname"]) <= 3
         || !\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL)
         || !\preg_match("#$passwordRegex#", $_POST["password"])
         || $userExist
@@ -174,12 +174,12 @@ class SecurityController extends AbstractController
 
         $_SESSION["error"] = [
           "register" => [
-            "firstname" => \strlen($_POST["firstname"]) < 3 ? "Votre prénom doit faire au minimum 3 caractères" : "",
-            "lastname" =>  \strlen($_POST["lastname"]) < 3 ? "Votre nom doit faire au minimum 3 caractères" : "",
+            "firstname" => \strlen($_POST["firstname"]) <= 3 ? "Votre prénom doit faire au minimum 3 caractères." : "",
+            "lastname" =>  \strlen($_POST["lastname"]) <= 3 ? "Votre nom doit faire au minimum 3 caractères." : "",
 
-            "email" => ($userExist) ? "Cet utilisateur existe déjà" : (!\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) ? "Format incorrect pour votre adresse e-mail" : ""),
+            "email" => ($userExist) ? "Cet utilisateur existe déjà" : (!\filter_var($_POST["email"], \FILTER_VALIDATE_EMAIL) ? "Format incorrect pour votre adresse e-mail." : ""),
 
-            "password" => !\preg_match("#$passwordRegex#", $_POST["password"]) ? "Votre mot de passe doit faire au minimum 8 caractères et contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial" : "",
+            "password" => !\preg_match("#$passwordRegex#", $_POST["password"]) ? "Votre mot de passe doit faire au minimum 8 caractères et contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial." : "",
           ]
         ];
 
@@ -210,7 +210,7 @@ class SecurityController extends AbstractController
       //     ->setLastname("lastname $i")
       //     ->setAge(\rand(18, 95))
       //     ->setRole("[\"ROLE_USER\"]");
-      //     $userModel->create();
+          $userModel->create();
       // }
 
       $_SESSION["success"] = [

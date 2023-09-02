@@ -65,15 +65,12 @@ a {
 }
 
 .success {
-   margin: 0 auto;
-   margin-bottom: 20px;
-   width: 500px;
-   background: var(--success);
-   padding: 1rem;
+   width: max-content;
+   color: var(--success);
    border-radius: var(--border-radius);
-   color: var(--color-primary);
    font-size: 0.7rem;
 }
+
 
 .mt-10 {
    margin-top: 10px;
