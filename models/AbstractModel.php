@@ -68,14 +68,18 @@ abstract class AbstractModel
     return $stmt->fetchAll();
   }
 
-  public function findAll()
+  public function findAll($limit = null, $offset = 0, $orderBy = "DESC")
   {
-    $sql = "SELECT * FROM $this->table";
+    if ($limit !== null && $offset !== null) {
+      $sql = "SELECT * FROM $this->table LIMIT $limit OFFSET $offset ORDER BY created_at $orderBy";
+    } else {
+
+      $sql = "SELECT * FROM $this->table ORDER BY created_at $orderBy";
+    }
     $stmt = $this->request($sql);
     return $stmt->fetchAll();
   }
 
-  // public function update(AbstractModel $model, int $id)
   public function update($id)
   {
     // UPDATE SET title = ?, content = ? WHERE id = ?

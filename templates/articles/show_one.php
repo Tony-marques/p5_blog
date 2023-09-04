@@ -45,7 +45,7 @@
     <?php if (isset($_SESSION["user"])) : ?>
       <?= $commentForm ?>
     <?php else : ?>
-      <p>Veuillez être connecter pour écrire un commentaire</p>
+      <p>Veuillez vous connecter pour écrire un commentaire</p>
     <?php endif; ?>
     <div class="comment-container">
       <?php if (!$isAdmin) : ?>

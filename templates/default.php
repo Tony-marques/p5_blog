@@ -33,6 +33,7 @@
   </div>
   <?php include_once ROOT . "/templates/_partials/_footer.php" ?>
   <?php unset($_SESSION["error"]) ?>
+  <?php unset($_SESSION["success"]) ?>
   <?php unset($_SESSION["image"]) ?>
   <?php unset($_SESSION["comment"]) ?>
   <?php unset($_SESSION["profile"]) ?>

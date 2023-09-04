@@ -14,19 +14,37 @@ class ArticleController extends AbstractController
   /**
    * all articles show
    */
-  public function index()
+  public function index($page = null)
   {
-    $articles = ArticleService::findAllArticles();
+    $limit = 3;
+    $allArticles = ArticleService::findAllArticles();
+    $numberOfArticles = \count($allArticles);
 
-    foreach ($articles as &$article) {
+    $currentPage = $page ?? 1;
+    $offset = ($currentPage - 1) * $limit;
+
+    $totalPages = ceil($numberOfArticles / $limit);
+
+    if($currentPage > $totalPages || $currentPage <= 0){
+      \header("location: /articles");
+      exit;
+    }
+
+    // $articlesPerPage = ArticleService::findAllArticles($limit, $offset);
+    $articlesPerPage = \array_slice($allArticles, $offset, $limit);
+
+    foreach ($articlesPerPage as &$article) {
       $user = UserService::findOne($article["user_id"]);
       $article["user"] = $user;
     }
 
-    $articlesSorted = ArticleService::sortArticlesAsc($articles);
+    $articlesSorted = ArticleService::sortArticlesAsc($articlesPerPage);
 
     return $this->render("articles/index", "articles", [
       "articles" => $articlesSorted,
+      "allArticles" => $allArticles,
+      "currentPage" => $currentPage,
+      "totalPages" => $totalPages
     ]);
   }
 
@@ -117,7 +135,7 @@ class ArticleController extends AbstractController
 
     if (isset($_POST["submit"])) {
       // if (FormBuilder::validate($_POST, ["title", "content"])) {
-        ArticleService::createArticle($_POST["title"], $_POST["content"]);
+      ArticleService::createArticle($_POST["title"], $_POST["content"]);
       // }
     }
 
@@ -147,8 +165,8 @@ class ArticleController extends AbstractController
     if (isset($_POST["submit"])) {
       // If form validation is ok
       // if (FormBuilder::validate($_POST, ["title", "content"])) {
-        // Edit article
-        ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
+      // Edit article
+      ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
       // }
     }
 

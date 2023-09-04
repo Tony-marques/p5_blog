@@ -31,6 +31,7 @@ $Router->get("/deconnexion", "App\controllers\SecurityController@logout");
 
 // ARTICLE
 $Router->get("/articles", "App\controllers\ArticleController@index");
+$Router->get("/articles/:page", "App\controllers\ArticleController@index");
 
 // protected route for admin
 $Router->get("/article/nouveau", "App\controllers\ArticleController@new");

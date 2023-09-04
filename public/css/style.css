@@ -26,9 +26,10 @@ body {
 }
 
 .logo-container {
-   width: 250px;
+   /* width: 250px; */
    display: flex;
-   justify-content: center;
+   /* justify-content: center; */
+   margin-left: 1rem;
 }
 
 /* form {
@@ -46,7 +47,8 @@ body {
 }
 
 .main-container {
-   flex: 1;
+   /* flex: 1; */
+   width: 100%;
 }
 
 li {
@@ -71,7 +73,6 @@ a {
    font-size: 0.7rem;
 }
 
-
 .mt-10 {
    margin-top: 10px;
 }
@@ -81,7 +82,7 @@ a {
 .ml-10 {
    margin-left: 10px;
 }
-.mb-10{
+.mb-10 {
    margin-bottom: 10px;
 }
 
@@ -135,4 +136,14 @@ textarea {
    color: var(--color-primary);
    background-color: var(--warning-light);
    border-color: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+   .logo {
+      width: 100px;
+   }
+   .button {
+   
+      padding: 5px;
+   }
 }

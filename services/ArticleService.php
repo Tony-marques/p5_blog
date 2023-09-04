@@ -7,10 +7,15 @@ use App\models\ArticleModel;
 
 class ArticleService
 {
-  public static function findAllArticles()
+  public static function findAllArticles($limit = null, $offset = 0)
   {
     $articleModel = new ArticleModel();
-    $articles = $articleModel->findAll();
+    if ($limit !== null) {
+
+      $articles = $articleModel->findAll($limit, $offset);
+    } else {
+      $articles = $articleModel->findAll();
+    }
 
     return $articles;
   }

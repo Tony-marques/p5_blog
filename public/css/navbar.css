@@ -5,7 +5,7 @@ header {
    position: relative;
 }
 
-.rotate{
+.rotate {
    transform: rotate(180deg);
 }
 
@@ -23,8 +23,8 @@ header {
    gap: 0.75rem;
 }
 
-.nav .active-link {
-   background: var(--primary-light);
+.active-link {
+   background: var(--primary-light) !important;
 }
 
 .nav ul li a {
@@ -39,6 +39,10 @@ header {
 
 header .navbar {
    position: relative;
+   margin-right: 1rem;
+}
+header .navbar .responsive-nav {
+   display: none;
 }
 
 header .navbar ul {
@@ -57,9 +61,22 @@ header .navbar ul li a {
    cursor: pointer;
    padding: 0.2rem;
    display: flex;
+   height: 40px;
    align-items: center;
    gap: 0.75rem;
    border-radius: 50px;
+   transition: 0.3s background;
+   background-color: var(--primary);
+}
+.menu-button-responsive {
+   cursor: pointer;
+   padding: 0.2rem;
+   display: none;
+   height: 40px;
+   width: 40px;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
    transition: 0.3s background;
    background-color: var(--primary);
 }
@@ -69,6 +86,13 @@ header .navbar ul li a {
 }
 
 .menu-button:hover i {
+   color: var(--primary);
+}
+.menu-button-responsive:hover {
+   background: var(--primary-light);
+}
+
+.menu-button-responsive:hover i {
    color: var(--primary);
 }
 
@@ -81,6 +105,10 @@ header .navbar ul li a {
 
 .menu-button i {
    margin-right: 0.75rem;
+   color: white;
+   transition: color 0.3s, transform 0.3s;
+}
+.menu-button-responsive i {
    color: white;
    transition: color 0.3s, transform 0.3s;
 }
@@ -137,6 +165,46 @@ header .navbar ul li a {
 .navbar-toggle ul li a {
    padding: 0.5rem;
 }
+.navbar-toggle-responsive {
+   animation: showMenu 0.3s forwards;
+   transform-origin: top;
+   border-radius: var(--border-radius);
+   position: absolute;
+   z-index: 10;
+   right: 0;
+   width: max-content;
+   top: 60px;
+   background: var(--color-primary);
+   display: flex;
+   flex-direction: column;
+   box-shadow: var(--box-shadow);
+}
+
+.navbar-toggle-responsive ul {
+   display: flex;
+   flex-direction: column;
+}
+
+.navbar-toggle-responsive ul li a {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   transition: background 0.3s;
+}
+
+.navbar-toggle-responsive ul li a:hover {
+   background: var(--primary-light);
+}
+.navbar-toggle-responsive ul li a i {
+   transition: color 0.3s;
+}
+.navbar-toggle-responsive ul li a:hover i {
+   color: var(--primary);
+}
+.navbar-toggle-responsive p,
+.navbar-toggle-responsive ul li a {
+   padding: 0.5rem;
+}
 
 .navbar-toggle .separator {
    border-top: 1px solid var(--gray-light);
@@ -146,7 +214,7 @@ header .navbar ul li a {
    display: none;
 }
 
-.notification{
+.notification {
    display: inline-flex;
    justify-content: center;
    align-items: center;
@@ -156,6 +224,55 @@ header .navbar ul li a {
    width: 20px;
    height: 20px;
    border-radius: 50%;
+}
+
+@media only screen and (max-width: 1000px) {
+   header .navbar > ul > li {
+      display: none;
+   }
+   header .navbar .responsive-nav {
+      display: flex;
+   }
+   .menu-button-responsive {
+      display: flex;
+   }
+}
+@media only screen and (max-width: 600px) {
+   .nav ul li a {
+      font-size: 0.9rem;
+      padding: 0.5rem 0.75rem;
+   }
+
+   header .logo-container {
+      margin-left: 0.25rem;
+   }
+   header .navbar {
+      margin-right: 0.25rem;
+   }
+
+   .nav ul {
+      gap: 0;
+   }
+
+   .menu-button {
+      height: max-content;
+      gap: 0.25rem;
+   }
+   .menu-button i {
+      margin-right: 0.25rem;
+   }
+
+   .menu-button img {
+      width: 25px;
+      height: 25px;
+   }
+
+   .menu-button-responsive {
+      height: 25px;
+      width: 25px;
+   }
+   .menu-button-responsive i {
+   }
 }
 
 @keyframes showMenu {

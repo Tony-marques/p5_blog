@@ -37,10 +37,10 @@ class SecurityController extends AbstractController
         exit;
       }
 
-      if (!AuthService::checkCSRFToken($_POST["csrf_token"])) {
-        echo "token non valide";
-        exit;
-      }
+      // if (!AuthService::checkCSRFToken($_POST["csrf_token"])) {
+      //   echo "token non valide";
+      //   exit;
+      // }
 
       $_SESSION["temporary_user"] = [
         "email" => $_POST["email"],
@@ -129,6 +129,10 @@ class SecurityController extends AbstractController
       ])
       ->endDiv()
       ->endDiv()
+      ->startDiv(content: !empty($_SESSION["success"]["message"]) ? $_SESSION["success"]["message"] : "", attributs: [
+        "class" => !empty($_SESSION["success"]["message"]) ? "success" : ""
+      ])
+      ->endDiv()
       ->endDiv()
       ->setButton("Me connecter", [
         "class" => "button-primary button"
@@ -149,6 +153,11 @@ class SecurityController extends AbstractController
     AuthService::checkUserLogged();
 
     if (isset($_POST["submit"])) {
+      if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token !";
+        \header("location: /inscription");
+        exit;
+      }
       $passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,})$";
 
       $userModel = new UserModel();
@@ -210,7 +219,7 @@ class SecurityController extends AbstractController
       //     ->setLastname("lastname $i")
       //     ->setAge(\rand(18, 95))
       //     ->setRole("[\"ROLE_USER\"]");
-          $userModel->create();
+      $userModel->create();
       // }
 
       $_SESSION["success"] = [
@@ -219,6 +228,10 @@ class SecurityController extends AbstractController
       \header("location: /connexion");
       exit;
     }
+
+    $CSRFToken = bin2hex(random_bytes(32));
+
+    $_SESSION["csrf_token"] = $CSRFToken;
 
     $form = new FormBuilder();
     $form->startForm()
@@ -286,16 +299,23 @@ class SecurityController extends AbstractController
       ], content: !empty($_SESSION["error"]["register"]["password"]) ? $_SESSION["error"]["register"]["password"] : "")
       ->endDiv()
       ->endDiv()
+      ->startDiv(content: !empty($_SESSION["error"]["csrf_token"]) ? $_SESSION["error"]["csrf_token"] : "", attributs: [
+        "class" => !empty($_SESSION["error"]["csrf_token"]) ? "error mt-10" : ""
+      ])
       ->endDiv()
+      ->endDiv()
+      ->setInput("hidden", "csrf_token", attributs: [
+        "value" => $_SESSION["csrf_token"]
+      ])
       ->setButton("Créer mon compte", [
         "class" => "button-primary button"
       ])
       ->endForm();
 
 
-    return $this->render(path: "security/register",title: "inscription", data: [
+    return $this->render(path: "security/register", title: "inscription", data: [
       "form" => $form->create()
-    ] );
+    ]);
   }
 
   public function allUsers()
@@ -306,8 +326,8 @@ class SecurityController extends AbstractController
 
     $users = $userModel->findBy(["role" => "[\"ROLE_USER\"]"]);
 
-    return $this->render(path: "security/allUsers",title: "gestion utilisateurs", data: [
+    return $this->render(path: "security/allUsers", title: "gestion utilisateurs", data: [
       "users" => $users
-    ] );
+    ]);
   }
 }

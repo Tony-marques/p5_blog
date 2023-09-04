@@ -5,9 +5,9 @@ title: Diagramme de classe blog PHP
 ---
 
 classDiagram
-  class Utilisateur{
-    prenom: string
-    nom: string
+  class User{
+    firstname: string
+    lastname: string
     age: int
     avatar: string
     role: array
@@ -16,19 +16,19 @@ classDiagram
   }
 
   class Article{
-    titre: string
-    contenu: string
+    title: string
+    content: string
     image: string
-    auteur: string
+    author: string
   }
 
-  class Commentaire{
-    contenu: string
-    publié: bool
+  class Comment{
+    content: string
+    published: bool
   }
 
-  Utilisateur "1"--"0..n" Commentaire
-  Article "1"--"0..n" Commentaire
-  Utilisateur"1"--"0..n" Article
+  User "1"--"0..n" Comment
+  Article "1"--"0..n" Comment
+  User"1"--"0..n" Article
 
 ```

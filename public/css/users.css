@@ -25,3 +25,21 @@
    padding: 1rem 0;
    border-left: 1px solid var(--primary);
 }
+
+@media only screen and (max-width: 600px) {
+   .users {
+      padding: 0 1rem;
+      color: red;
+      font-size: 0.6rem;
+   }
+   .users table {
+      width: 100%;
+   }
+   .users table .table-button{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem;
+   }
+}

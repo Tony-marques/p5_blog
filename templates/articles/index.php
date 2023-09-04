@@ -1,5 +1,5 @@
 <div class="main-container articles">
-  <h3>Articles: <?= count($articles) ?></h3>
+  <h3>Articles: <?= count($allArticles) ?></h3>
   <?php foreach ($articles as $article) : ?>
     <a href="/article/<?= $article["id"] ?>" class="article">
       <div class="main-article">
@@ -24,8 +24,21 @@
           <?php endif; ?>
         </div>
 
-
       </div>
     </a>
   <?php endforeach; ?>
+  <div class="button-group">
+    <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
+
+
+      <!-- Si /articles = /articles -->
+      <!-- Alors $p[0] -->
+      <?php if ($_SERVER["REQUEST_URI"] == "/articles" && $p == 1) : ?>
+        <a href="/articles/1" class="button button-primary-stroke active-link">1</a>
+      <?php else : ?>
+        <a href="/articles/<?= $p ?>" class="button button-primary-stroke <?= str_starts_with($_SERVER["REQUEST_URI"], "/articles/$p") ? "active-link" : "" ?>"><?= $p ?></a>
+      <?php endif; ?>
+
+    <?php endfor; ?>
+  </div>
 </div>

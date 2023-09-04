@@ -25,7 +25,6 @@
    justify-content: center;
    flex-direction: column;
 
-
    background: var(--color-primary);
    border-radius: var(--border-radius);
    padding: 2rem;
@@ -50,4 +49,14 @@
 .login input::placeholder,
 .register input::placeholder {
    color: var(--gray);
+}
+
+@media only screen and (max-width: 600px) {
+   .login, .register{
+      margin: 0 1rem;
+   }
+   .login form,
+   .register form {
+      width: 100%;
+   }
 }

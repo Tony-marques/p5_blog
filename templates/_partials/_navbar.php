@@ -38,6 +38,27 @@ $allComments = $commentModel->findBy(["published" => 0]);
           <li>
             <a href="/inscription" class="button button-primary-stroke">Inscription</a>
           </li>
+          <div class="menu-button-responsive">
+
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <nav class="navbar-toggle-responsive invisible">
+
+            <ul>
+
+              <li>
+                <a href="/connexion">
+                  <i class="fa-solid fa-pen-nib"></i>
+                  Connexion</a>
+              </li>
+              <li>
+                <a href="/inscription">
+                  <i class="fa-solid fa-users"></i>
+                  Inscription</a>
+              </li>
+
+            </ul>
+          </nav>
         <?php else : ?>
           <div class="menu-button">
             <!-- <img src="/uploads/profile/<?= $_SESSION["user"]["avatar"] ?>" alt=""> -->
@@ -65,9 +86,9 @@ $allComments = $commentModel->findBy(["published" => 0]);
             <li>
               <a href="/commentaires" class="<?= $_SERVER["REQUEST_URI"] == "/commentaires" ? "active" : "" ?>">
                 <i class="fa-solid fa-comments"></i>
-                Commentaires à valider 
-                <?php if(count($allComments) !=0): ?>
-                <span class="notification"><?= count($allComments) ?></span>
+                Commentaires à valider
+                <?php if (count($allComments) != 0) : ?>
+                  <span class="notification"><?= count($allComments) ?></span>
                 <?php endif; ?>
               </a>
             </li>

@@ -27,7 +27,7 @@
    height: 500px;
    z-index: 5;
    gap: 2rem;
-   border: 2px solid var(--primary);
+   /* border: 2px solid var(--primary); */
    border-radius: var(--border-radius);
    background: var(--primary);
 }
@@ -163,8 +163,12 @@
    font-family: "montserrat";
 }
 
-.name-field, .email-field{
-   width: 47%;
+.name-field {
+   width: 35%;
+}
+
+.email-field {
+   width: 62%;
 }
 
 .input-contact,
@@ -178,7 +182,6 @@
    color: var(--gray);
    transition: border-color 0.3s;
    width: 100%;
-
 }
 
 .textarea-contact {
@@ -194,4 +197,137 @@
    margin: 0 auto;
    color: var(--primary);
    font-size: 2rem;
+}
+
+@media only screen and (max-width: 1000px) {
+   .home {
+      /* max-width: 1000px; */
+   }
+   .presentation-container {
+      flex-direction: column;
+      margin: 0 auto;
+      width: 100%;
+      /* width: 90%; */
+      /* border: 1px solid red; */
+      padding: 1rem;
+      align-items: flex-start;
+   }
+   .presentation-left {
+      width: 95%;
+      gap: 4rem;
+      height: auto;
+      flex-direction: row;
+      height: 275px;
+   }
+   .presentation-left img {
+      height: 200px;
+      width: 175px;
+      display: block;
+   }
+
+   .presentation-right {
+      height: 275px;
+      width: 95%;
+      /* height: auto; */
+      margin-left: auto;
+      padding: 1rem;
+      gap: 1rem;
+      transform: translateY(-20px);
+      position: relative;
+      z-index: 15;
+      /* padding-right: 0; */
+   }
+   .presentation-right p:nth-child(1) {
+      width: 60%;
+   }
+   .home .name {
+      font-size: 1.5rem;
+      display: flex;
+      /* justify-content: center; */
+   }
+   .home .job {
+      font-size: 1.2rem;
+   }
+
+   .home .contact {
+      flex-direction: column;
+      /* border: 1px solid red; */
+      width: 100%;
+      align-items: flex-start;
+      padding: 1rem;
+      margin-bottom: 0;
+   }
+   .home .contact .contact-left,
+   .home .contact .contact-right {
+      width: 95%;
+      padding: 1rem;
+      font-size: 0.9rem;
+   }
+
+   .home .contact .contact-left {
+      order: 2;
+      height: 275px;
+      justify-content: space-between;
+      /* border: 1px solid blue; */
+      margin-left: auto;
+      transform: translateY(-20px);
+      position: relative;
+      z-index: 15;
+   }
+   .home .contact .contact-right {
+      order: 1;
+      height: 275px;
+      gap: 1rem;
+   }
+
+   .home form {
+      /* border: 1px solid green; */
+      /* justify-content: space-between;
+      gap: 0; */
+   }
+   .home .contact .contact-right i {
+      width: 30px;
+      height: 30px;
+      font-size: 0.9rem;
+   }
+
+   .input-contact,
+   .textarea-contact {
+      padding: 0.25rem 0;
+   }
+   .textarea-contact {
+      height: 80px;
+   }
+   .mt-10 {
+      margin-top: 0 !important;
+   }
+   .home .fa-arrow-down-long {
+      display: none;
+   }
+}
+
+@media only screen and (max-width: 600px) {
+   .presentation-left {
+      gap: 1rem;
+      flex-direction: column;
+   }
+   .presentation-left img{
+    height: 150px;
+   }
+   .presentation-left .top {
+      /* flex: 1; */
+   }
+   .presentation-right {
+      font-size: 0.8rem;
+   }
+   .presentation-right p:nth-child(1) {
+      width: 100%;
+   }
+
+   .home .name {
+      font-size: 1.2rem;
+   }
+   .home .job {
+      font-size: 1rem;
+   }
 }
