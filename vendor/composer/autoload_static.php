@@ -25,7 +25,6 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
         'App\\app\\FormBuilder' => __DIR__ . '/../..' . '/app/FormBuilder.php',
         'App\\app\\router\\Route' => __DIR__ . '/../..' . '/app/router/Route.php',
         'App\\app\\router\\Router' => __DIR__ . '/../..' . '/app/router/Router.php',
-        'App\\app\\router\\Router2' => __DIR__ . '/../..' . '/app/router/Router2.php',
         'App\\app\\router\\RouterException' => __DIR__ . '/../..' . '/app/router/RouterException.php',
         'App\\controllers\\AbstractController' => __DIR__ . '/../..' . '/controllers/AbstractController.php',
         'App\\controllers\\ArticleController' => __DIR__ . '/../..' . '/controllers/ArticleController.php',
