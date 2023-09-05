@@ -6,11 +6,12 @@ namespace App\controllers;
 use App\app\FormBuilder;
 use App\models\UserModel;
 use App\services\AuthService;
-use App\services\UtilService;
 
 class SecurityController extends AbstractController
 {
-
+  /**
+   * Logout
+   */
   public function logout()
   {
     if (!isset($_SESSION["user"])) {
@@ -37,11 +38,6 @@ class SecurityController extends AbstractController
         exit;
       }
 
-      // if (!AuthService::checkCSRFToken($_POST["csrf_token"])) {
-      //   echo "token non valide";
-      //   exit;
-      // }
-
       $_SESSION["temporary_user"] = [
         "email" => $_POST["email"],
       ];
@@ -67,7 +63,7 @@ class SecurityController extends AbstractController
         $_SESSION["error"] = [
           "login" => "Adresse e-mail ou mot de passe incorrect !"
         ];
-        // echo $_SESSION["error"]["login"];
+
         \header("location: /connexion");
         exit;
       }
@@ -89,12 +85,13 @@ class SecurityController extends AbstractController
         $_SESSION["error"] = [
           "login" => "Adresse e-mail ou mot de passe incorrect !"
         ];
+
         \header("location: /connexion");
         exit;
       }
     }
-    $CSRFToken = bin2hex(random_bytes(32));
 
+    $CSRFToken = bin2hex(random_bytes(32));
     $_SESSION["csrf_token"] = $CSRFToken;
 
     $form = new FormBuilder();
@@ -148,6 +145,9 @@ class SecurityController extends AbstractController
     ]);
   }
 
+  /**
+   * Register page
+   */
   public function register()
   {
     AuthService::checkUserLogged();
@@ -212,19 +212,12 @@ class SecurityController extends AbstractController
         ->setLastname($_POST["lastname"])
         ->setRole("[\"ROLE_USER\"]");
 
-      // for ($i = 1; $i < 100; $i++) {
-      //   $userModel->setEmail("test$i@gmail.com")
-      //     ->setPassword("a")
-      //     ->setFirstname("firstname $i")
-      //     ->setLastname("lastname $i")
-      //     ->setAge(\rand(18, 95))
-      //     ->setRole("[\"ROLE_USER\"]");
       $userModel->create();
-      // }
 
       $_SESSION["success"] = [
         "message" => "Votre compte a été créé avec succès !"
       ];
+
       \header("location: /connexion");
       exit;
     }
@@ -318,6 +311,9 @@ class SecurityController extends AbstractController
     ]);
   }
 
+  /**
+   * Manage users page
+   */
   public function allUsers()
   {
     AuthService::checkAdmin(pathToRedirect: "/");

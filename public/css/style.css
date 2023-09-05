@@ -26,15 +26,9 @@ body {
 }
 
 .logo-container {
-   /* width: 250px; */
    display: flex;
-   /* justify-content: center; */
    margin-left: 1rem;
 }
-
-/* form {
-   width: 100%;
-} */
 
 .container {
    align-items: center;
@@ -47,7 +41,6 @@ body {
 }
 
 .main-container {
-   /* flex: 1; */
    width: 100%;
 }
 

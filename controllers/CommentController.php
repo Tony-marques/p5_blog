@@ -2,16 +2,16 @@
 
 namespace App\controllers;
 
-use App\models\ArticleModel;
 use App\models\CommentModel;
 use App\services\ArticleService;
 use App\services\AuthService;
-use App\services\CommentService;
-use App\services\UtilService;
+use App\services\UserService;
 
 class CommentController extends AbstractController
 {
-  // Validate the comment from the article page
+  /**
+   * Validate the comment from article page
+   */
   public function validate($id)
   {
     AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -25,7 +25,9 @@ class CommentController extends AbstractController
     exit;
   }
 
-  // Validate the comment from the comments page
+  /**
+   * Validate the comment from comments page
+   */
   public function validateFromComments($id)
   {
     AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -39,6 +41,9 @@ class CommentController extends AbstractController
     exit;
   }
 
+  /**
+   * Delete comment from the article page
+   */
   public function delete($id)
   {
     AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -50,6 +55,10 @@ class CommentController extends AbstractController
     \header("location: /article/{$comment['article_id']}");
     exit;
   }
+  
+  /**
+   * Delete comment from comments page
+   */
   public function deleteFromComments($id)
   {
     AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -62,6 +71,9 @@ class CommentController extends AbstractController
     exit;
   }
 
+  /**
+   * Display comments
+   */
   public function checkAllComments()
   {
     AuthService::checkAdmin("/articles");
@@ -71,6 +83,8 @@ class CommentController extends AbstractController
     $allComments = $commentModel->findBy(["published" => 0]);
     foreach ($allComments as &$comment) {
       $comment["article"] = ArticleService::findOne($comment["article_id"]);
+      $comment["user_comment"] = UserService::findOne($comment["user_id"]);
+      $comment["user_article"] = UserService::findOne($comment["article"]["user_id"]);
     };
 
     return $this->render("comments/all","commentaires",[

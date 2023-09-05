@@ -9,10 +9,8 @@
       <div class="separator"></div>
       <div class="informations">
         <div class="article-author">
-          <!-- <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt=""> -->
           <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="profile picture">
-          <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["user"]["firstname"]) ?> <?= htmlspecialchars(substr(strtolower($article["user"]["lastname"]), 0, 1)) . "." ?></span> </p>
-          <!-- <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p> -->
+          <p>Ecrit par <span class="name-author"><?= htmlspecialchars(ucfirst($article["user"]["firstname"])) ?> <?= htmlspecialchars(substr(strtoupper($article["user"]["lastname"]), 0, 1)) . "." ?></span> </p>
         </div>
         <div class="date">
           <?php if (date('d/m/Y à H:i:s', strtotime($article["created_at"])) == date('d/m/Y à H:i:s', strtotime($article["updated_at"]))) : ?>
@@ -29,10 +27,6 @@
   <?php endforeach; ?>
   <div class="button-group">
     <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
-
-
-      <!-- Si /articles = /articles -->
-      <!-- Alors $p[0] -->
       <?php if ($_SERVER["REQUEST_URI"] == "/articles" && $p == 1) : ?>
         <a href="/articles/1" class="button button-primary-stroke active-link">1</a>
       <?php else : ?>

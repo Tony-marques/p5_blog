@@ -94,9 +94,6 @@ class ArticleService
         "content" => $content
       ];
 
-      // UtilService::beautifulArray($_SESSION["tmp_article"]);
-      // exit;
-
       \header("location: /article/edition/$id");
       exit;
     }

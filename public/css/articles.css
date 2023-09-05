@@ -119,7 +119,11 @@
 .content {
    overflow: hidden; /* Masque le contenu excédentaire */
    position: relative; /* Crée un contexte pour le pseudo-élément */
-   max-height: 12em; /* Hauteur maximale du contenu visible (4em est approximativement 4 lignes de texte) */
+   max-height: 12.5em; /* Hauteur maximale du contenu visible (4em est approximativement 4 lignes de texte) */
+}
+
+.article-one .content{
+   max-height: max-content;
 }
 
 .content::after {
@@ -257,6 +261,5 @@
    .edit-article form .form-container,
    .new-article form .form-container {
       padding: 1rem;
-      /* border: 1px solid red; */
    }
 }

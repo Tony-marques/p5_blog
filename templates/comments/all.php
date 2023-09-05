@@ -11,8 +11,10 @@
           <div class="separator"></div>
           <div class="informations">
             <div class="article-author">
-              <img class="article-author-picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsfoSrq6gkVinDFbu36sCpC8i-Y07zkivRg&usqp=CAU" alt="profile picture">
-              <p>Ecrit par <span class="name-author"><?= htmlspecialchars($comment["article"]["author"]) ?></span> </p>
+              <img class="article-author-picture" src="/uploads/profile/<?= $comment["user_article"]["avatar"]  ?>" alt="profile picture">
+              <p>Ecrit par <span class="name-author"><?= htmlspecialchars(ucfirst($comment["user_article"]["firstname"])) ?>
+                  <?= htmlspecialchars(substr(ucfirst($comment["user_article"]["lastname"]), 0, 1)) . "." ?>
+                </span> </p>
             </div>
             <div class="date">
               <?php if (date('d/m/Y à H:i:s', strtotime($comment["article"]["created_at"])) == date('d/m/Y à H:i:s', strtotime($comment["article"]["updated_at"]))) : ?>
@@ -31,10 +33,15 @@
           <p><?= $comment["content"] ?></p>
           <div class="separator"></div>
           <div class="comment-group">
-            <p>tony M. le 29/08/2023</p>
+            <p>
+              <?= htmlspecialchars(ucfirst($comment["user_comment"]["firstname"])) ?>
+              <?= htmlspecialchars(substr(strtoupper($comment["user_comment"]["lastname"]), 0, 1)) . "." ?>
+              le <?= date("d/m/Y", strtotime($comment["created_at"])) ?>
+
+            </p>
             <div class="button-group">
-             <a href="/commentaire/validation/page/<?= $comment["id"] ?>" class="button button-primary">Valider</a>
-             <a href="/commentaire/suppression/page/<?= $comment["id"] ?>" class="button button-danger">Supprimer</a>
+              <a href="/commentaire/validation/page/<?= $comment["id"] ?>" class="button button-primary">Valider</a>
+              <a href="/commentaire/suppression/page/<?= $comment["id"] ?>" class="button button-danger">Supprimer</a>
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@ use App\services\AuthService;
 use App\services\ArticleService;
 use App\services\CommentService;
 use App\services\UserService;
-use App\services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -53,19 +52,15 @@ class ArticleController extends AbstractController
    */
   public function showOne(string $id)
   {
-    // echo $id;
     $id = (int)$id;
-    // die();
+
     $article = ArticleService::findOne($id);
     if (!$article) {
-      \header("location: /");
-
+      \header("location: /articles");
       exit;
     }
 
-
     $article["user"] = UserService::findOne((int)$article["user_id"]);
-    // UtilService::beautifulArray($article);
 
     $validateComments = CommentService::findBy(["article_id" => $id, "published" => true], "articles", "article_id", "id");
     $allComments = CommentService::findBy(["article_id" => $id]);
@@ -109,10 +104,6 @@ class ArticleController extends AbstractController
     // Sort validate comments by asc created at
     $validateComments = CommentService::sortCommentAsc($validateComments);
 
-
-    // UtilService::beautifulArray($article);
-    // exit;
-
     return $this->render("articles/show_one", "article $id", [
       "article" => $article,
       "commentForm" => $commentForm->create(),
@@ -134,9 +125,7 @@ class ArticleController extends AbstractController
     $form = ArticleService::createForm();
 
     if (isset($_POST["submit"])) {
-      // if (FormBuilder::validate($_POST, ["title", "content"])) {
       ArticleService::createArticle($_POST["title"], $_POST["content"]);
-      // }
     }
 
     return $this->render("articles/new", "création article", ["form" => $form->create()]);
@@ -163,11 +152,8 @@ class ArticleController extends AbstractController
 
     // If form is submitted
     if (isset($_POST["submit"])) {
-      // If form validation is ok
-      // if (FormBuilder::validate($_POST, ["title", "content"])) {
       // Edit article
       ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
-      // }
     }
 
     return $this->render("articles/edition", "édition article $id", [

@@ -17,25 +17,6 @@ class ArticleModel extends AbstractModel
   {
     $this->table = "articles";
   }
-
-  public function findByJoin(array $arr, $targetTable = null, $targetTableId = null)
-  {
-    $keys = [];
-    $values = [];
-
-    foreach ($arr as $key => $value) {
-      $keys[] = "$key = ?";
-      $values[] = $value;
-    }
-
-    $list_keys = implode(" AND ", $keys);
-
-    $sql = "SELECT * FROM $this->table AS a INNER JOIN $targetTable AS $targetTable[0] ON {$this->table[0]}.id = $targetTable[0].$targetTableId  WHERE $list_keys";
-
-    $stmt = $this->request($sql, $values);
-    return $stmt->fetchAll();
-  }
-
   /**
    * Get the value of content
    */

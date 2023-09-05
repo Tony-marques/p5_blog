@@ -220,7 +220,6 @@ header .navbar ul li a {
    align-items: center;
    background: var(--warning);
    color: var(--color-primary);
-   /* padding: 0.5rem; */
    width: 20px;
    height: 20px;
    border-radius: 50%;

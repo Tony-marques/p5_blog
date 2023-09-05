@@ -3,13 +3,15 @@
 namespace App\models;
 
 use App\app\Db;
-use App\services\UtilService;
 
 abstract class AbstractModel
 {
 
   protected $table;
 
+  /**
+   * C of CRUD for Create
+   */
   public function create()
   {
     $fields = [];
@@ -31,6 +33,9 @@ abstract class AbstractModel
     $this->request($sql, $values);
   }
 
+  /**
+   * R of CRUD for Read one
+   */
   public function findOne(int $id)
   {
     $sql = "SELECT * FROM $this->table WHERE id = ?";
@@ -38,6 +43,9 @@ abstract class AbstractModel
     return $stmt->fetch();
   }
 
+  /**
+   * R of CRUD for Read one by email
+   */
   public function findByEmail(string $email)
   {
     $sql = "SELECT * FROM $this->table WHERE email = ?";
@@ -45,6 +53,9 @@ abstract class AbstractModel
     return $stmt->fetch();
   }
 
+  /**
+   * R of CRUD for Read
+   */
   public function findBy(array $arr, bool $join = false, $targetTable = null, $targetTableId = null)
   {
     $keys = [];
@@ -68,6 +79,9 @@ abstract class AbstractModel
     return $stmt->fetchAll();
   }
 
+  /**
+   * R of CRUD for Read
+   */
   public function findAll($limit = null, $offset = 0, $orderBy = "DESC")
   {
     if ($limit !== null && $offset !== null) {
@@ -80,9 +94,11 @@ abstract class AbstractModel
     return $stmt->fetchAll();
   }
 
+  /**
+   * U of CRUD for Update
+   */
   public function update($id)
   {
-    // UPDATE SET title = ?, content = ? WHERE id = ?
     $fields = [];
     $values = [];
 
@@ -94,9 +110,6 @@ abstract class AbstractModel
     };
     $values[] = $id;
 
-    // print_r($fields);
-    // exit;
-
     $list_fields = \implode(", ", $fields);
 
     $sql = "UPDATE $this->table SET $list_fields WHERE id = ?";
@@ -104,12 +117,18 @@ abstract class AbstractModel
     return $this->request($sql, $values);
   }
 
+  /**
+   * D of CRUD for Delete
+   */
   public function delete(int $id)
   {
     $sql = "DELETE FROM $this->table WHERE id = ?";
     return $this->request($sql, [$id]);
   }
 
+  /**
+   * Request for all method of CRUD
+   */
   protected function request(string $sql, array $params = [])
   {
     $db = Db::getInstance();

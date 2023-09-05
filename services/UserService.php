@@ -7,7 +7,6 @@ use App\models\UserModel;
 
 class UserService
 {
-
   public static function findOne(int $id)
   {
     $userModel = new UserModel();

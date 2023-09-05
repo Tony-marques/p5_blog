@@ -13,31 +13,28 @@ class Router
     $this->url = trim($url, "/");
   }
 
-  public function get(string $path, string $action):void
+  public function get(string $path, string $action): void
   {
     $this->routes["GET"][] = new Route($path, $action);
   }
 
-  public function post(string $path, string $action):void
+  public function post(string $path, string $action): void
   {
     $this->routes["POST"][] = new Route($path, $action);
   }
 
-  public function run():void
+  public function run(): void
   {
-    // print_r($this->url);
     try {
       foreach ($this->routes[$_SERVER["REQUEST_METHOD"]] as $route) {
         if ($route->matches($this->url)) {
           $route->execute();
           return;
-        } else {
-          // throw new RouterException("Cette page n'existe pas");
-        }
+        } 
       }
+      throw new RouterException("Cette page n'existe pas");
     } catch (RouterException $e) {
-      echo $e->getMessage();
-      // \header("location: /");
+      \header("location: /");
       exit;
     }
   }

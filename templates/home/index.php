@@ -17,7 +17,6 @@
       <a href="/assets/cv.pdf" class="button button-primary-stroke" target="_blank">C'est ici !</a>
     </div>
   </div>
-  <!-- <i class="fa-solid fa-arrow-down-long"></i> -->
   <div class="contact">
     <div class="contact-left">
       <h2>Me <span>contacter</span></h2>

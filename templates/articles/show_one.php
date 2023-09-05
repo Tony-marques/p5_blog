@@ -11,8 +11,7 @@
           <?php if (!empty($article["user"]["avatar"])) : ?>
             <img class="article-author-picture" src="/uploads/profile/<?= $article["user"]["avatar"] ?>" alt="profile picture">
           <?php endif; ?>
-          <!-- <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["author"]) ?></span> </p> -->
-          <p>Ecrit par <span class="name-author"><?= htmlspecialchars($article["user"]["firstname"]) ?> <?= htmlspecialchars(strtolower(substr($article["user"]["lastname"], 0, 1))) . "." ?></span> </p>
+          <p>Ecrit par <span class="name-author"><?= htmlspecialchars(ucfirst($article["user"]["firstname"])) ?> <?= htmlspecialchars(strtoupper(substr($article["user"]["lastname"], 0, 1))) . "." ?></span> </p>
         </div>
         <div class="date">
           <?php if (date('d/m/Y à H:i:s', strtotime($article["created_at"])) == date('d/m/Y à H:i:s', strtotime($article["updated_at"]))) : ?>
@@ -55,12 +54,11 @@
             <p><?= nl2br(htmlspecialchars($comment["content"])) ?></p>
             <div class="separator"></div>
             <div class="informations">
-            <div class="people">
-                <span><?= $comment["user"]["firstname"] ?></span>
-                <span><?= substr(strtolower($comment["user"]["lastname"]), 0, 1) . "." ?></span>
+              <div class="people">
+                <span><?= htmlspecialchars(ucfirst($comment["user"]["firstname"])) ?></span>
+                <span><?= htmlspecialchars(substr(strtoupper($comment["user"]["lastname"]), 0, 1)) . "." ?></span>
                 <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
               </div>
-              <!-- <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span> -->
             </div>
           </div>
         <?php endforeach; ?>
@@ -72,9 +70,9 @@
             <p><?= nl2br(htmlspecialchars($comment["content"])) ?></p>
             <div class="separator"></div>
             <div class="informations">
-              <div class="people">
-                <span><?= $comment["user"]["firstname"] ?></span>
-                <span><?= substr(strtolower($comment["user"]["lastname"]), 0, 1) . "." ?></span>
+            <div class="people">
+                <span><?= htmlspecialchars(ucfirst($comment["user"]["firstname"])) ?></span>
+                <span><?= htmlspecialchars(substr(strtoupper($comment["user"]["lastname"]), 0, 1)) . "." ?></span>
                 <span>le <?= date("d/m/Y", strtotime($comment["created_at"])) ?></span>
               </div>
               <div class="buttons">

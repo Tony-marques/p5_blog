@@ -3,14 +3,15 @@
 namespace App\controllers;
 
 use App\services\AuthService;
-use App\app\FormBuilder;
 use App\models\UserModel;
 use App\services\ImageService;
 use App\services\UserService;
-use App\services\UtilService;
 
 class ProfileController extends AbstractController
 {
+  /**
+   * Edit profile page
+   */
   public function edit($id)
   {
     $id = (int)$id;
@@ -84,13 +85,15 @@ class ProfileController extends AbstractController
 
     $form = UserService::createForm($_SESSION, $user);
 
-
     return $this->render("profile/edit", "mon profil",[
       "form" => $form->create(),
       "user" => $user
     ]);
   }
 
+  /**
+   * Delete profile
+   */
   public function delete($id)
   {
     AuthService::checkAdmin(pathToRedirect: "/");
