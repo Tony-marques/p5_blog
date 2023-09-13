@@ -1,4 +1,1 @@
 *.env
-./public/.env.dev
-../.env.prod
-.
