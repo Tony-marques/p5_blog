@@ -114,7 +114,7 @@ textarea {
 .button-primary:hover,
 .button-primary-stroke:hover {
    background: var(--primary-light);
-   color: var(--primary);
+   color: var(--color-primary);
    border-color: transparent;
 }
 
@@ -129,6 +129,12 @@ textarea {
    color: var(--color-primary);
    background-color: var(--warning-light);
    border-color: transparent;
+}
+
+.active {
+   border-left: 5px solid var(--primary);
+   color: var(--color-primary);
+   background-color: var(--primary-light);
 }
 
 @media only screen and (max-width: 600px) {

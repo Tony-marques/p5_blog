@@ -118,8 +118,9 @@
    justify-content: center;
    font-size: 1.5rem;
    margin-right: 1rem;
-   background: #4fe7e2;
+   background: #004AAD;
    color: var(--color-primary);
+   /* border: 1px solid red; */
 }
 
 .contact-left {

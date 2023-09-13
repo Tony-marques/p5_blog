@@ -14,6 +14,13 @@ class HomeController extends AbstractController
   {
 
     if (isset($_POST["submit"])) {
+      if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
+
+        \header("location: /");
+        exit;
+      }
+
       $email = \htmlspecialchars($_POST["email"]);
       $name = \htmlspecialchars($_POST["name"]);
       $message = \htmlspecialchars($_POST["message"]);
@@ -45,6 +52,9 @@ class HomeController extends AbstractController
       \mail("tony.marques@live.fr",  "Mail test", $message, $headers);
       $_SESSION["contact"]["success"] = "Votre message a été envoyé avec succès.";
     }
+
+    $CSRFToken = bin2hex(random_bytes(32));
+    $_SESSION["csrf_token"] = $CSRFToken;
 
     $form = new FormBuilder();
     $form->startForm()
@@ -105,6 +115,9 @@ class HomeController extends AbstractController
       )
       ->endDiv()
       ->endDiv()
+      ->setInput("hidden", "csrf_token", attributs: [
+        "value" => $_SESSION["csrf_token"]
+      ])
       ->setButton("Envoyer", [
         "class" => "button button-primary"
       ])
@@ -112,6 +125,13 @@ class HomeController extends AbstractController
         content: !empty($_SESSION["contact"]["success"]) ? $_SESSION["contact"]["success"] : "",
         attributs: [
           "class" => !empty($_SESSION["contact"]["success"]) ? "success mt-10" : ""
+        ]
+      )
+      ->endDiv()
+      ->startDiv(
+        content: !empty($_SESSION["error"]["csrf_token"]) ? $_SESSION["error"]["csrf_token"] : "",
+        attributs: [
+          "class" => !empty($_SESSION["error"]["csrf_token"]) ? "error mt-10" : ""
         ]
       )
       ->endDiv()

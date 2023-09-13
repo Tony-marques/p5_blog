@@ -40,6 +40,7 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
         'App\\services\\AuthService' => __DIR__ . '/../..' . '/services/AuthService.php',
         'App\\services\\CommentService' => __DIR__ . '/../..' . '/services/CommentService.php',
         'App\\services\\ImageService' => __DIR__ . '/../..' . '/services/ImageService.php',
+        'App\\services\\Pagination' => __DIR__ . '/../..' . '/services/Pagination.php',
         'App\\services\\UserService' => __DIR__ . '/../..' . '/services/UserService.php',
         'App\\services\\UtilService' => __DIR__ . '/../..' . '/services/UtilService.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',

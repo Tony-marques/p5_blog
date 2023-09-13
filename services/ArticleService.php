@@ -129,6 +129,9 @@ class ArticleService
 
   public static function createForm(mixed $subject = null)
   {
+    $CSRFToken = bin2hex(random_bytes(32));
+    $_SESSION["csrf_token"] = $CSRFToken;
+    
     $form = new FormBuilder();
     $form->startForm()
       ->startDiv(content: !empty($subject) ? "Modifier l'article {$subject['title']}" : "Créer un article")
@@ -169,8 +172,15 @@ class ArticleService
         "class" => !empty($_SESSION["error"]["article"]["content"]) ? "error mt-10" : ""
       ], content: !empty($_SESSION["error"]["article"]["content"]) ? $_SESSION["error"]["article"]["content"] : "")
       ->endDiv()
+      ->startDiv(attributs: [
+        "class" => !empty($_SESSION["error"]["csrf_token"]) ? "error mt-10" : ""
+      ], content: !empty($_SESSION["error"]["csrf_token"]) ? $_SESSION["error"]["csrf_token"] : "")
       ->endDiv()
       ->endDiv()
+      ->endDiv()
+      ->setInput("hidden", "csrf_token", [
+        "value" => $_SESSION["csrf_token"]
+      ])
       ->setButton($subject ? "Modifier" : "Créer", [
         "class" => "button button-primary"
       ])

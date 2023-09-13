@@ -25,6 +25,7 @@ return array(
     'App\\services\\AuthService' => $baseDir . '/services/AuthService.php',
     'App\\services\\CommentService' => $baseDir . '/services/CommentService.php',
     'App\\services\\ImageService' => $baseDir . '/services/ImageService.php',
+    'App\\services\\Pagination' => $baseDir . '/services/Pagination.php',
     'App\\services\\UserService' => $baseDir . '/services/UserService.php',
     'App\\services\\UtilService' => $baseDir . '/services/UtilService.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',

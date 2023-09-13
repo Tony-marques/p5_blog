@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
 
     if (isset($_POST["submit"])) {
       if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
-        $_SESSION["error"]["csrf_token"] = "Adresse e-mail ou mot de passe incorrect !";
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
         \header("location: /connexion");
         exit;
       }
@@ -283,7 +283,7 @@ class SecurityController extends AbstractController
       ->startDiv([
         "class" => "form-group"
       ])
-      ->setInput(type: "text", name: "password", attributs: [
+      ->setInput(type: "password", name: "password", attributs: [
         "value" => "",
         "placeholder" => "Mot de passe"
       ])
