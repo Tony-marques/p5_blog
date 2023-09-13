@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\app\\Db' => $baseDir . '/app/Db.php',
     'App\\app\\FormBuilder' => $baseDir . '/app/FormBuilder.php',
+    'App\\app\\exceptions\\ArticleException' => $baseDir . '/app/exceptions/ArticleException.php',
     'App\\app\\router\\Route' => $baseDir . '/app/router/Route.php',
     'App\\app\\router\\Router' => $baseDir . '/app/router/Router.php',
     'App\\app\\router\\RouterException' => $baseDir . '/app/router/RouterException.php',

@@ -2,6 +2,7 @@
 
 namespace App\controllers;
 
+use App\app\exceptions\ArticleException;
 use App\app\FormBuilder;
 use App\services\AuthService;
 use App\services\ArticleService;
@@ -31,7 +32,7 @@ class ArticleController extends AbstractController
     //   exit;
     // }
 
-    [$articlesPerPage, $allArticles, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: ArticleService::findAllArticles(),redirect:"/articles", limit: 3);
+    [$articlesPerPage, $allArticles, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: ArticleService::findAllArticles(), redirect: "/articles", limit: 3);
 
     // $articlesPerPage = \array_slice($allArticles, $offset, $limit);
 
@@ -59,8 +60,10 @@ class ArticleController extends AbstractController
 
     $article = ArticleService::findOne($id);
     if (!$article) {
+      // \header("location: /articles");
+      // exit;
       \header("location: /articles");
-      exit;
+      throw new ArticleException();
     }
 
     $article["user"] = UserService::findOne((int)$article["user_id"]);

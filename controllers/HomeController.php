@@ -12,7 +12,6 @@ class HomeController extends AbstractController
    */
   public function index()
   {
-
     if (isset($_POST["submit"])) {
       if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
@@ -52,7 +51,6 @@ class HomeController extends AbstractController
       \mail("tony.marques@live.fr",  "Mail test", $message, $headers);
       $_SESSION["contact"]["success"] = "Votre message a été envoyé avec succès.";
     }
-
     $CSRFToken = bin2hex(random_bytes(32));
     $_SESSION["csrf_token"] = $CSRFToken;
 
@@ -136,7 +134,6 @@ class HomeController extends AbstractController
       )
       ->endDiv()
       ->endForm();
-
 
     return $this->render("home/index", "accueil", [
       "form" => $form->create()
