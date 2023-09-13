@@ -7,6 +7,7 @@ class Pagination
 
   public static function paginate($page, $service, $redirect, $limit)
   {
+    $test = "";
     $limit = $limit;
     $allItems = $service;
     $numberOfItems = \count($allItems);
