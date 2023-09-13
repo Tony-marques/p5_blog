@@ -9,7 +9,6 @@ use App\services\ArticleService;
 use App\services\CommentService;
 use App\services\Pagination;
 use App\services\UserService;
-use App\services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -18,23 +17,7 @@ class ArticleController extends AbstractController
    */
   public function index($page = null)
   {
-    // $limit = 3;
-    // $allArticles = ArticleService::findAllArticles();
-    // $numberOfArticles = \count($allArticles);
-
-    // $currentPage = $page ?? 1;
-    // $offset = ($currentPage - 1) * $limit;
-
-    // $totalPages = ceil($numberOfArticles / $limit);
-
-    // if ($currentPage > $totalPages || $currentPage <= 0) {
-    //   \header("location: /articles");
-    //   exit;
-    // }
-
     [$articlesPerPage, $allArticles, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: ArticleService::findAllArticles(), redirect: "/articles", limit: 3);
-
-    // $articlesPerPage = \array_slice($allArticles, $offset, $limit);
 
     foreach ($articlesPerPage as &$article) {
       $user = UserService::findOne($article["user_id"]);
@@ -60,8 +43,6 @@ class ArticleController extends AbstractController
 
     $article = ArticleService::findOne($id);
     if (!$article) {
-      // \header("location: /articles");
-      // exit;
       \header("location: /articles");
       throw new ArticleException();
     }
