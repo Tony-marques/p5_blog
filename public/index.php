@@ -4,6 +4,15 @@ use App\app\router\Router;
 
 require '../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+$env = $_ENV["APP_ENV"];
+
+if (file_exists(__DIR__ . "/.env.$env")) {
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__, "/.env.$env");
+  $dotenv->load();
+}
+
 define("ROOT", dirname(__DIR__));
 
 \session_start();

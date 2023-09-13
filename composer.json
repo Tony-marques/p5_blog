@@ -12,5 +12,7 @@
             "email": "tony.marques@live.fr"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
 }
