@@ -27,7 +27,3 @@ class Db extends PDO
     return $instance;
   }
 }
-
-
-    // $_dsn = "mysql:host=tonymapdb78totom.mysql.db;dbname=tonymapdb78totom;charset=utf8";
-      // parent::__construct($_dsn, "tonymapdb78totom", "MarquesTony78");

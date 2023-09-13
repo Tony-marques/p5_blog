@@ -3,8 +3,7 @@
 use App\app\router\Router;
 
 require '../vendor/autoload.php';
-// echo dirname(__DIR__);
-// exit;
+
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 $env = $_ENV["APP_ENV"];
