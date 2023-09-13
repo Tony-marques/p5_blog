@@ -72,11 +72,13 @@ class FormBuilder
     return $this;
   }
 
-  private function setAttribute(array $attributs)
+  private function setAttribute(array $attributs):string
   {
+    exit;
     foreach ($attributs as $key => $value) {
       $this->html .= " $key='$value'";
     }
+
   }
 
   public static function validate(array $form, array $fields):bool
