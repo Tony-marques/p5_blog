@@ -72,7 +72,7 @@ class FormBuilder
     return $this;
   }
 
-  private function setAttribute(array $attributs):void
+  private function setAttribute(array $attributs)
   {
     foreach ($attributs as $key => $value) {
       $this->html .= " $key='$value'";
