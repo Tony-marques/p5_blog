@@ -1,4 +1,4 @@
-./public/.env
+*.env
 ./public/.env.dev
-public/.env.prod
+../.env.prod
 .
