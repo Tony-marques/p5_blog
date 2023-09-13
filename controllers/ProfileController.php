@@ -38,6 +38,14 @@ class ProfileController extends AbstractController
     }
 
     if (isset($_POST["submit"])) {
+      // Edit article
+      if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
+
+        \header("location: /profil/edition/$id");
+        exit;
+      }
+
       if (!UserService::checkFields($_POST)) {
         UserService::createErrorSessionFields($_POST);
         UserService::createTmpProfileSession($_POST);
@@ -49,9 +57,9 @@ class ProfileController extends AbstractController
         ->setFirstname($_POST["firstname"])
         ->setLastname($_POST["lastname"]);
 
-        $_SESSION["user"]["firstname"] = $_POST["firstname"];
-        $_SESSION["user"]["lastname"] = $_POST["lastname"];
-        $_SESSION["user"]["age"] = $_POST["age"];
+      $_SESSION["user"]["firstname"] = $_POST["firstname"];
+      $_SESSION["user"]["lastname"] = $_POST["lastname"];
+      $_SESSION["user"]["age"] = $_POST["age"];
 
       // 1. The user already has an image but does not submit a new one
       if (!empty($user["avatar"]) && empty($_FILES["profil_picture"]["name"])) {
@@ -75,7 +83,7 @@ class ProfileController extends AbstractController
         $userModel->setAvatar($path);
         $_SESSION["user"]["avatar"] = "$path";
       }
-      
+
       $_SESSION["profile"]["message"] =  "Profil mis à jour avec succès.";
 
       $newUser->update($id);
@@ -85,7 +93,7 @@ class ProfileController extends AbstractController
 
     $form = UserService::createForm($_SESSION, $user);
 
-    return $this->render("profile/edit", "mon profil",[
+    return $this->render("profile/edit", "mon profil", [
       "form" => $form->create(),
       "user" => $user
     ]);

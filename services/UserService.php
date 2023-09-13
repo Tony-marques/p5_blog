@@ -50,6 +50,9 @@ class UserService
 
   public static function createForm($session, $user)
   {
+    $CSRFToken = bin2hex(random_bytes(32));
+    $_SESSION["csrf_token"] = $CSRFToken;
+
     $form = new FormBuilder();
     $form->startForm(attributs: [
       "enctype" => "multipart/form-data"
@@ -110,7 +113,17 @@ class UserService
         content: !empty($_SESSION["profile"]["message"]) ? $_SESSION["profile"]["message"] : ""
       )
       ->endDiv()
+      ->startDiv(
+        attributs: [
+          "class" => !empty($_SESSION["error"]["csrf_token"]) ? "error mt-10" : ""
+        ],
+        content: !empty($_SESSION["error"]["csrf_token"]) ? $_SESSION["error"]["csrf_token"] : ""
+      )
       ->endDiv()
+      ->endDiv()
+      ->setInput("hidden", "csrf_token", [
+        "value" => $_SESSION["csrf_token"]
+      ])
       ->setButton("Modifier mon profil", [
         "class" => "button button-primary button-login"
       ])

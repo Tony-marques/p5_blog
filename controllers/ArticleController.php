@@ -6,7 +6,9 @@ use App\app\FormBuilder;
 use App\services\AuthService;
 use App\services\ArticleService;
 use App\services\CommentService;
+use App\services\Pagination;
 use App\services\UserService;
+use App\services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -15,22 +17,23 @@ class ArticleController extends AbstractController
    */
   public function index($page = null)
   {
-    $limit = 3;
-    $allArticles = ArticleService::findAllArticles();
-    $numberOfArticles = \count($allArticles);
+    // $limit = 3;
+    // $allArticles = ArticleService::findAllArticles();
+    // $numberOfArticles = \count($allArticles);
 
-    $currentPage = $page ?? 1;
-    $offset = ($currentPage - 1) * $limit;
+    // $currentPage = $page ?? 1;
+    // $offset = ($currentPage - 1) * $limit;
 
-    $totalPages = ceil($numberOfArticles / $limit);
+    // $totalPages = ceil($numberOfArticles / $limit);
 
-    if($currentPage > $totalPages || $currentPage <= 0){
-      \header("location: /articles");
-      exit;
-    }
+    // if ($currentPage > $totalPages || $currentPage <= 0) {
+    //   \header("location: /articles");
+    //   exit;
+    // }
 
-    // $articlesPerPage = ArticleService::findAllArticles($limit, $offset);
-    $articlesPerPage = \array_slice($allArticles, $offset, $limit);
+    [$articlesPerPage, $allArticles, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: ArticleService::findAllArticles(),redirect:"/articles", limit: 3);
+
+    // $articlesPerPage = \array_slice($allArticles, $offset, $limit);
 
     foreach ($articlesPerPage as &$article) {
       $user = UserService::findOne($article["user_id"]);
@@ -122,11 +125,17 @@ class ArticleController extends AbstractController
     AuthService::checkUserLogOut();
     AuthService::checkAdmin(pathToRedirect: "/articles");
 
-    $form = ArticleService::createForm();
-
     if (isset($_POST["submit"])) {
+      if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
+
+        \header("location: /article/nouveau");
+        exit;
+      }
       ArticleService::createArticle($_POST["title"], $_POST["content"]);
     }
+
+    $form = ArticleService::createForm();
 
     return $this->render("articles/new", "création article", ["form" => $form->create()]);
   }
@@ -147,14 +156,20 @@ class ArticleController extends AbstractController
       exit;
     }
 
-    // Create form
-    $form = ArticleService::createForm($article);
-
     // If form is submitted
     if (isset($_POST["submit"])) {
       // Edit article
+      if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
+        $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
+
+        \header("location: /article/edition/$id");
+        exit;
+      }
       ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
     }
+
+    // Create form
+    $form = ArticleService::createForm($article);
 
     return $this->render("articles/edition", "édition article $id", [
       "article" => $article,

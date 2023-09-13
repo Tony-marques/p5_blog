@@ -43,10 +43,7 @@
    margin-right: 5px;
 }
 
-.active {
-   border-left: 5px solid var(--primary);
-   background-color: var(--primary-light);
-}
+
 
 .profil {
    margin-top: 1rem;
