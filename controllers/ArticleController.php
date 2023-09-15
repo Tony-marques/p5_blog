@@ -44,7 +44,7 @@ class ArticleController extends AbstractController
     $article = ArticleService::findOne($id);
     if (!$article) {
       \header("location: /articles");
-      throw new ArticleException();
+      return;
     }
 
     $article["user"] = UserService::findOne((int)$article["user_id"]);

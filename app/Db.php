@@ -15,7 +15,7 @@ class Db extends PDO
       parent::__construct($_dsn, $_ENV["DB_USERNAME"],$_ENV["DB_PASSWORD"]);
       parent::setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-      die($e->getMessage());
+      return;
     }
   }
 

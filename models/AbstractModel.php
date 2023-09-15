@@ -71,7 +71,6 @@ abstract class AbstractModel
     if ($join) {
       $sql = "SELECT * FROM $this->table INNER JOIN $targetTable ON $this->table.id = $targetTable.$targetTableId  WHERE $list_keys";
       echo $sql;
-      exit();
     } else {
       $sql = "SELECT * FROM $this->table WHERE $list_keys";
     }
