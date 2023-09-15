@@ -39,7 +39,7 @@ class CommentService
 
     $comment->create();
     \header("location: /article/$id");
-    exit;
+    return;
   }
 
   public static function sortCommentAsc(array $comments)

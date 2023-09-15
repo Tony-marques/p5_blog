@@ -18,7 +18,7 @@ class Pagination
 
     if ($currentPage > $totalPages || $currentPage <= 0) {
       \header("location: $redirect");
-      exit;
+      return;
     }
 
     $itemsPerPage = \array_slice($allItems, $offset, $limit);

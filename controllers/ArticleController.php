@@ -114,7 +114,7 @@ class ArticleController extends AbstractController
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
         \header("location: /article/nouveau");
-        exit;
+        return;
       }
       ArticleService::createArticle($_POST["title"], $_POST["content"]);
     }
@@ -137,7 +137,7 @@ class ArticleController extends AbstractController
     // If not the same user, redirect this
     if ($article["user_id"] != $_SESSION["user"]["id"]) {
       \header("location: /articles");
-      exit;
+      return;
     }
 
     // If form is submitted
@@ -147,7 +147,7 @@ class ArticleController extends AbstractController
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
         \header("location: /article/edition/$id");
-        exit;
+        return;
       }
       ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
     }

@@ -8,7 +8,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 $env = $_ENV["APP_ENV"];
 
-
 if (file_exists(dirname(__DIR__) . "/.env.$env")) {
   $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__), ".env.$env");
   $dotenv->load();

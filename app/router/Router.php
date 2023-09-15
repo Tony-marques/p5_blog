@@ -35,7 +35,7 @@ class Router
       throw new RouterException("Cette page n'existe pas");
     } catch (RouterException $e) {
       \header("location: /");
-      exit;
+      return;
     }
   }
 }

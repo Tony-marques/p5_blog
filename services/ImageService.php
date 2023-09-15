@@ -16,14 +16,14 @@ class ImageService
       ];
 
       \header("location: $pathToRedirect");
-      exit;
+      return;
     } else {
 
       if ($image["size"] > 2000000) {
         $_SESSION["image"] = [
           "error" => "Image trop volumineuse"
         ];
-        exit;
+        return;
       }
 
       $newName = md5(\uniqid());

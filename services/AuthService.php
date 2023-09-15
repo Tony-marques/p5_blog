@@ -14,7 +14,7 @@ class AuthService
   {
     if (!isset($_SESSION["user"])) {
       \header("location: $pathToRedirect");
-      exit;
+      return;
     }
   }
 
@@ -22,7 +22,7 @@ class AuthService
   {
     if (isset($_SESSION["user"])) {
       \header("location: $pathToRedirect");
-      exit;
+      return;
     }
   }
 
@@ -47,7 +47,7 @@ class AuthService
     $admin = self::isAdmin();
     if (!$admin) {
       \header("location: $pathToRedirect");
-      exit;
+      return;
     }
   }
 

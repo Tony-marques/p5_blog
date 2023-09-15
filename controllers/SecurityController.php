@@ -16,12 +16,12 @@ class SecurityController extends AbstractController
   {
     if (!isset($_SESSION["user"])) {
       \header("location: /");
-      exit;
+      return;
     }
 
     unset($_SESSION["user"]);
     \header("location: /");
-    exit;
+    return;
   }
 
   /**
@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
       if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
         \header("location: /connexion");
-        exit;
+        return;
       }
 
       $_SESSION["temporary_user"] = [
@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
         ];
 
         \header("location: /connexion");
-        exit;
+        return;
       }
 
       $_POST = \filter_input_array(INPUT_POST, [
@@ -65,7 +65,7 @@ class SecurityController extends AbstractController
         ];
 
         \header("location: /connexion");
-        exit;
+        return;
       }
 
       if (\password_verify($_POST["password"], $user["password"])) {
@@ -80,14 +80,14 @@ class SecurityController extends AbstractController
           ]
         ];
         \header("location: /");
-        exit;
+        return;
       } else {
         $_SESSION["error"] = [
           "login" => "Adresse e-mail ou mot de passe incorrect !"
         ];
 
         \header("location: /connexion");
-        exit;
+        return;
       }
     }
 
@@ -156,7 +156,7 @@ class SecurityController extends AbstractController
       if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token !";
         \header("location: /inscription");
-        exit;
+        return;
       }
       $passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,})$";
 
@@ -193,7 +193,7 @@ class SecurityController extends AbstractController
         ];
 
         \header("location: /inscription");
-        exit;
+        return;
       }
 
       $_POST = \filter_input_array(INPUT_POST, [
@@ -219,7 +219,7 @@ class SecurityController extends AbstractController
       ];
 
       \header("location: /connexion");
-      exit;
+      return;
     }
 
     $CSRFToken = bin2hex(random_bytes(32));

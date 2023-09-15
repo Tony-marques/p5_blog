@@ -17,7 +17,7 @@ class HomeController extends AbstractController
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
         \header("location: /");
-        exit;
+        return;
       }
 
       $email = \htmlspecialchars($_POST["email"]);
@@ -42,7 +42,7 @@ class HomeController extends AbstractController
         ];
 
         \header("location: /");
-        exit;
+        return;
       }
 
       $headers = [

@@ -22,7 +22,7 @@ class CommentController extends AbstractController
     $commentModel->update($id);
 
     \header("location: /article/{$comment['article_id']}");
-    exit;
+    return;
   }
 
   /**
@@ -38,7 +38,7 @@ class CommentController extends AbstractController
     $commentModel->update($id);
 
     \header("location: /commentaires");
-    exit;
+    return;
   }
 
   /**
@@ -53,7 +53,7 @@ class CommentController extends AbstractController
     $commentModel->delete($id);
 
     \header("location: /article/{$comment['article_id']}");
-    exit;
+    return;
   }
   
   /**
@@ -68,7 +68,7 @@ class CommentController extends AbstractController
     $commentModel->delete($id);
 
     \header("location: /commentaires");
-    exit;
+    return;
   }
 
   /**

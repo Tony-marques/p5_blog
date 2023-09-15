@@ -59,7 +59,7 @@ class ArticleService
       ];
 
       \header("location: /article/nouveau");
-      exit;
+      return;
     }
 
     $article = new ArticleModel();
@@ -71,7 +71,7 @@ class ArticleService
     $article->create();
 
     \header("location: /articles");
-    exit;
+    return;
   }
 
 
@@ -95,7 +95,7 @@ class ArticleService
       ];
 
       \header("location: /article/edition/$id");
-      exit;
+      return;
     }
 
     $article = new ArticleModel();
@@ -104,7 +104,7 @@ class ArticleService
 
     $article->update($id);
     \header("location: /articles");
-    exit;
+    return;
   }
 
   public static function deleteArticle(int $id)
@@ -116,7 +116,7 @@ class ArticleService
     // If not the same user, redirect
     if ($article["user_id"] != $_SESSION["user"]["id"]) {
       \header("location: /article/$id");
-      exit();
+      return;
     }
 
     // Delete article
@@ -124,7 +124,7 @@ class ArticleService
 
     // Redirect after deleted article
     \header("location: /articles");
-    exit();
+    return;
   }
 
   public static function createForm(mixed $subject = null)

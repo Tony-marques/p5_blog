@@ -20,7 +20,7 @@ class ProfileController extends AbstractController
 
     if (!$user) {
       \header("location: /utilisateurs");
-      exit;
+      return;
     }
 
     AuthService::checkUserLogOut();
@@ -29,7 +29,7 @@ class ProfileController extends AbstractController
     // not current user profile
     if ($user["id"] != $_SESSION["user"]["id"] && !$isAdmin) {
       \header("location: /profil/edition/{$_SESSION["user"]["id"]}");
-      exit;
+      return;
     }
 
     // Check image
@@ -43,14 +43,14 @@ class ProfileController extends AbstractController
         $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
         \header("location: /profil/edition/$id");
-        exit;
+        return;
       }
 
       if (!UserService::checkFields($_POST)) {
         UserService::createErrorSessionFields($_POST);
         UserService::createTmpProfileSession($_POST);
         \header("location: /profil/edition/$id");
-        exit;
+        return;
       }
 
       $newUser = $userModel->setAge($_POST["age"])
@@ -88,7 +88,7 @@ class ProfileController extends AbstractController
 
       $newUser->update($id);
       \header("location: /profil/edition/{$_SESSION['user']['id']}");
-      exit;
+      return;
     }
 
     $form = UserService::createForm($_SESSION, $user);
@@ -112,12 +112,12 @@ class ProfileController extends AbstractController
 
     if (!$user) {
       \header("location: /utilisateurs");
-      exit;
+      return;
     }
 
     $userModel->delete($id);
 
     \header("location: /utilisateurs");
-    exit;
+    return;
   }
 }
