@@ -1,5 +1,14 @@
 # Projet 5 OpenClassrooms - Blog
 
+### Installation du projet 
+1. Cloner le repository.
+2. Importer le fichier dump SQL dans votre base de donnée:
+   - p5_blog.sql se situe dans le dossier app/.
+3. Modifier le fichier .env.dev avec les informations de votre base de donnée.
+4. Démarrer le projet en local en pointant bien sur le dossier public/
+5. Accès administrateur:
+    - Identifiant: admin@gmail.com
+    - Mot de passe: Admin75@
 
 ### Contexte
 
