@@ -9,29 +9,29 @@ abstract class AbstractService
 
     protected $table;
 
-    /**
-     * C of CRUD for Create
-     */
-    public function create()
-    {
-        $fields = [];
-        $separator = [];
-        $values = [];
-
-        foreach ($this as $key => $value) {
-            if ($key != "table") {
-                $fields[] = "$key";
-                $separator[] = "?";
-                $values[] = "$value";
-            }
-        }
-
-        $list_fields = implode(", ", $fields);
-        $list_separator = implode(", ", $separator);
-
-        $sql = "INSERT INTO $this->table($list_fields) VALUES($list_separator)";
-        $this->request($sql, $values);
-    }
+//    /**
+//     * C of CRUD for Create
+//     */
+//    public function create()
+//    {
+//        $fields = [];
+//        $separator = [];
+//        $values = [];
+//
+//        foreach ($this as $key => $value) {
+//            if ($key != "table") {
+//                $fields[] = "$key";
+//                $separator[] = "?";
+//                $values[] = "$value";
+//            }
+//        }
+//
+//        $list_fields = implode(", ", $fields);
+//        $list_separator = implode(", ", $separator);
+//
+//        $sql = "INSERT INTO $this->table($list_fields) VALUES($list_separator)";
+//        $this->request($sql, $values);
+//    }
 
     /**
      * R of CRUD for Read one
@@ -118,27 +118,27 @@ abstract class AbstractService
         return $this->request($sql, $values);
     }
 
-    /**
-     * D of CRUD for Delete
-     */
-    public function delete(int $id)
-    {
-        $sql = "DELETE FROM $this->table WHERE id = ?";
-        return $this->request($sql, [$id]);
-    }
+//    /**
+//     * D of CRUD for Delete
+//     */
+//    public function delete(int $id)
+//    {
+//        $sql = "DELETE FROM $this->table WHERE id = ?";
+//        return $this->request($sql, [$id]);
+//    }
 
-    /**
-     * Request for all method of CRUD
-     */
-    protected function request(string $sql, array $params = [])
-    {
-        $db = Db::getInstance();
-        if ($params !== null) {
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
-        } else {
-            return $db->query($sql);
-        }
-    }
+//    /**
+//     * Request for all method of CRUD
+//     */
+//    protected function request(string $sql, array $params = [])
+//    {
+//        $db = Db::getInstance();
+//        if ($params !== null) {
+//            $stmt = $db->prepare($sql);
+//            $stmt->execute($params);
+//            return $stmt;
+//        } else {
+//            return $db->query($sql);
+//        }
+//    }
 }

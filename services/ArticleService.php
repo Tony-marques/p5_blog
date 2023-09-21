@@ -23,7 +23,7 @@ class ArticleService extends AbstractService
         $sql = "INSERT INTO articles(`title`, `content`, `author`, `userId`) VALUES(?, ?, ?, ?)";
         $statement = $this->db->prepare($sql);
         $statement->execute([$article->getTitle(), $article->getContent(), $article->getAuthor(), $article->getUserId()]);
-        return $statement;
+//        return $statement;
     }
 
     public function checkCreateArticle(string $title, string $content)
@@ -144,7 +144,7 @@ class ArticleService extends AbstractService
             $sql = "SELECT * FROM articles ORDER BY createdAt $orderBy";
 //            Utilservice::beautifulArray($sql);
         }
-        $stmt = $this->request($sql);
+        $stmt = $this->db->query($sql);
         return $stmt->fetchAll();
     }
 

@@ -162,7 +162,17 @@ class ArticleController extends AbstractController
             // If form validation is ok
             if (FormBuilder::validate($_POST, ["comment"])) {
                 // Create comment
-                CommentService::createComment($id, $_POST["comment"]);
+                $comment = htmlspecialchars($_POST["comment"]);
+
+                $commentModel = new CommentModel();
+                $commentModel->setContent($comment)
+                    ->setArticleId($id)
+                    // if is admin, comment is directly published
+                    ->setPublished($isAdmin ? true : 0)
+                    ->setUserId($_SESSION["user"]["id"]);
+
+                $commentService = new CommentService();
+                $commentService->createComment($commentModel);
             }
         }
 //

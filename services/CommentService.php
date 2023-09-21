@@ -10,8 +10,17 @@ class CommentService extends AbstractService
 {
     private Db $db;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = Db::getInstance();
+    }
+
+    public function findOne(int $id)
+    {
+        $sql = "SELECT * FROM comments WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
     }
 
     public function findBy(array $arr)
@@ -38,6 +47,24 @@ class CommentService extends AbstractService
         return $stmt->fetchAll();
     }
 
+    public function validateComment($commentModel){
+//        UtilService::beautifulArray($commentModel);
+        $sql = "UPDATE comments SET content = ?, published = ?, articleId = ?, userId = ? WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$commentModel->getContent(), $commentModel->getPublished(), $commentModel->getArticleId(), $commentModel->getUserId(), $commentModel->getId()]);
+    }
+
+    /**
+     * D of CRUD for Delete
+     */
+    public function deleteComment($id)
+    {
+        $sql = "DELETE FROM comments WHERE id = ?";
+//        UtilService::beautifulArray([$id]);
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$id]);
+    }
+
 //  public static function findUserAndArticle(array $arr)
 //  {
 //    $commentModel = new CommentModel();
@@ -46,21 +73,27 @@ class CommentService extends AbstractService
 //    return $comment;
 //  }
 
-    public static function createComment(int $id, string $comment)
+    public function createComment($commentModel)
     {
-//    $isAdmin = AuthService::isAdmin();
-        $content = \htmlspecialchars($comment);
-        $commentModel = new CommentModel();
-        $comment = $commentModel->setContent($content)
-            ->setArticleId($id)
-            // if is admin, comment is directly published
-            ->setPublished($isAdmin ? 1 : 0)
-            ->setUserId($_SESSION["user"]["id"]);
+        $sql = "INSERT INTO comments(`content`, `articleId`, `userId`, `published`) VALUES(?, ?, ?, ?)";
 
-        $_SESSION["comment"]["message"] = "Commentaire soumis avec succès.";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$commentModel->getContent(), $commentModel->getArticleId(), $commentModel->getUserId(), $commentModel->getPublished()]);
 
-        $comment->create();
-        \header("location: /article/$id");
+//        $isAdmin = AuthService::isAdmin();
+//        $content = \htmlspecialchars($comment);
+//        $commentModel = new CommentModel();
+//        $comment = $commentModel->setContent($content)
+//            ->setArticleId($id)
+//            // if is admin, comment is directly published
+//            ->setPublished($isAdmin ? True : False)
+//            ->setUserId($_SESSION["user"]["id"]);
+//
+//        $_SESSION["comment"]["message"] = "Commentaire soumis avec succès.";
+//
+//        $commentService = new CommentService();
+//        $commentService->cr
+        \header("location: /article/{$commentModel->getArticleId()}");
         return;
     }
 
