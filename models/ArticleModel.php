@@ -2,16 +2,38 @@
 
 namespace App\models;
 
+use App\services\AbstractService;
 use DateTime;
 
-class ArticleModel extends AbstractModel
+class ArticleModel extends AbstractService
 {
-  protected string $title;
-  protected string $content;
-  protected string $author;
-  protected DateTime $created_at;
-  protected DateTime $updated_at;
-  protected int $user_id;
+    private int $id;
+
+  private string $title;
+  private string $content;
+  private string $author;
+  private string $createdAt;
+  private string $updatedAt;
+  private int $userId;
+  private $user;
+
+  private $comment = [];
+
+
+
+
+
+
+
+    // Hydratation de l'objet à partir d'un tableau associatif
+    public function hydrate($donnees) {
+        foreach ($donnees as $cle => $valeur) {
+            $methode = 'set' . ucfirst($cle);
+            if (method_exists($this, $methode)) {
+                $this->$methode($valeur);
+            }
+        }
+    }
 
   public function __construct()
   {
@@ -62,7 +84,7 @@ class ArticleModel extends AbstractModel
    */
   public function getUpdatedAt()
   {
-    return $this->updated_at;
+    return $this->updatedAt;
   }
 
   /**
@@ -70,9 +92,9 @@ class ArticleModel extends AbstractModel
    *
    * @return  self
    */
-  public function setUpdatedAt($updated_at)
+  public function setUpdatedAt($updatedAt)
   {
-    $this->updated_at = $updated_at;
+    $this->updatedAt = $updatedAt;
 
     return $this;
   }
@@ -82,7 +104,7 @@ class ArticleModel extends AbstractModel
    */
   public function getCreatedAt()
   {
-    return $this->created_at;
+    return $this->createdAt;
   }
 
   /**
@@ -90,9 +112,9 @@ class ArticleModel extends AbstractModel
    *
    * @return  self
    */
-  public function setCreatedAt($created_at)
+  public function setCreatedAt($createdAt)
   {
-    $this->created_at = $created_at;
+    $this->createdAt = $createdAt;
 
     return $this;
   }
@@ -122,7 +144,7 @@ class ArticleModel extends AbstractModel
    */
   public function getUserId()
   {
-    return $this->user_id;
+    return $this->userId;
   }
 
   /**
@@ -130,10 +152,50 @@ class ArticleModel extends AbstractModel
    *
    * @return  self
    */
-  public function setUserId($user_id)
+  public function setUserId($userId)
   {
-    $this->user_id = $user_id;
+    $this->userId = $userId;
 
     return $this;
   }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    public function setComment( $comment): void
+    {
+
+        $this->comment[] = $comment;
+//        print_r($this->comment);
+    }
+
+
 }

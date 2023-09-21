@@ -4,7 +4,7 @@ namespace App\controllers;
 
 use App\models\CommentModel;
 use App\services\ArticleService;
-use App\services\AuthService;
+//use App\services\AuthService;
 use App\services\UserService;
 
 class CommentController extends AbstractController
@@ -14,7 +14,7 @@ class CommentController extends AbstractController
    */
   public function validate($id)
   {
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+//    AuthService::checkAdmin(pathToRedirect: "/articles");
 
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
@@ -30,7 +30,7 @@ class CommentController extends AbstractController
    */
   public function validateFromComments($id)
   {
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+//    AuthService::checkAdmin(pathToRedirect: "/articles");
 
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
@@ -46,7 +46,7 @@ class CommentController extends AbstractController
    */
   public function delete($id)
   {
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+//    AuthService::checkAdmin(pathToRedirect: "/articles");
 
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
@@ -61,7 +61,7 @@ class CommentController extends AbstractController
    */
   public function deleteFromComments($id)
   {
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+//    AuthService::checkAdmin(pathToRedirect: "/articles");
 
     $commentModel = new CommentModel();
     $comment = $commentModel->findOne($id);
@@ -76,7 +76,7 @@ class CommentController extends AbstractController
    */
   public function checkAllComments()
   {
-    AuthService::checkAdmin("/articles");
+//    AuthService::checkAdmin("/articles");
 
     $commentModel = new CommentModel();
 

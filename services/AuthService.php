@@ -31,9 +31,14 @@ class AuthService
     if (empty($_SESSION["user"]["id"])) {
       return false;
     }
+    $userService = new UserService();
+    $currentUser = $userService->findOne($_SESSION["user"]["id"]) ?? "";
     $userModel = new UserModel();
-    $currentUser = $userModel->findOne($_SESSION["user"]["id"]) ?? "dd";
-    $userRole = json_decode($currentUser["role"]);
+    $userModel->hydrate($currentUser);
+
+    $userRole = json_decode($userModel->getRole());
+//      UtilService::beautifulArray($userRole);
+
 
     if (\in_array("ROLE_ADMIN", $userRole)) {
       return true;

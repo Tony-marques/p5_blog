@@ -2,18 +2,48 @@
 
 namespace App\services;
 
+use App\app\Db;
 use App\app\FormBuilder;
 use App\models\UserModel;
 
 class UserService
 {
-  public static function findOne(int $id)
-  {
-    $userModel = new UserModel();
-    $user = $userModel->findOne($id);
+    private $db;
 
-    return $user;
+    public function __construct(){
+        $this->db = Db::getInstance();
+    }
+
+    public function findOne(int $id)
+  {
+      $sql = "SELECT * FROM users WHERE id = ?";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute([$id]);
+
+      return $stmt->fetch();
   }
+
+    public function findBy(array $arr)
+    {
+
+        $keys = [];
+        $values = [];
+
+        foreach ($arr as $key => $value) {
+            $keys[] = "$key = ?";
+            $values[] = $value;
+        }
+
+        $list_keys = implode(" AND ", $keys);
+
+        $sql = "SELECT * FROM users WHERE $list_keys";
+
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($values);
+
+        return $stmt->fetchAll();
+    }
 
   public static function checkFields($post)
   {

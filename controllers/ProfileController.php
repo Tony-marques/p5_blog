@@ -23,14 +23,14 @@ class ProfileController extends AbstractController
       return;
     }
 
-    AuthService::checkUserLogOut();
-    $isAdmin = AuthService::isAdmin();
+//    AuthService::checkUserLogOut();
+//    $isAdmin = AuthService::isAdmin();
 
     // not current user profile
-    if ($user["id"] != $_SESSION["user"]["id"] && !$isAdmin) {
-      \header("location: /profil/edition/{$_SESSION["user"]["id"]}");
-      return;
-    }
+//    if ($user["id"] != $_SESSION["user"]["id"] && !$isAdmin) {
+//      \header("location: /profil/edition/{$_SESSION["user"]["id"]}");
+//      return;
+//    }
 
     // Check image
     if (!empty($_FILES["profil_picture"]["name"])) {
@@ -104,7 +104,7 @@ class ProfileController extends AbstractController
    */
   public function delete($id)
   {
-    AuthService::checkAdmin(pathToRedirect: "/");
+//    AuthService::checkAdmin(pathToRedirect: "/");
 
     $id = (int)$id;
     $userModel = new UserModel();

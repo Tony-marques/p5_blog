@@ -1,9 +1,9 @@
 <?php
 
-use App\models\CommentModel;
+use App\services\CommentService;
 
-$commentModel = new CommentModel();
-$allComments = $commentModel->findBy(["published" => 0]);
+$commentService = new CommentService();
+$allComments = $commentService->findBy(["published" => 0]);
 
 ?>
 
