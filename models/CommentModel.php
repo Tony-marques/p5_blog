@@ -12,7 +12,7 @@ class CommentModel extends AbstractService
     private int $articleId;
     private int $userId;
     private $createdAt;
-    private $user = [];
+    private UserModel $user;
     private $article = [];
 
 
@@ -124,7 +124,7 @@ class CommentModel extends AbstractService
      */
     public function setUser($user)
     {
-        $this->user[] = $user;
+        $this->user = $user;
 
         return $this;
     }

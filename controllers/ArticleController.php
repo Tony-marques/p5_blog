@@ -49,7 +49,8 @@ class ArticleController extends AbstractController
         }
 
         return $this->render("articles/index", "articles", [
-            "allArticles" => $articlesPerPage,
+            "articlesPerPage" => $articlesPerPage,
+            "allArticles" => $articlesObj,
             "totalPages" => $totalPages
         ]);
     }
@@ -63,7 +64,6 @@ class ArticleController extends AbstractController
 
         $articleRepository = new Article();
         $article = $articleRepository->findOne($id);
-//        Utilservice::beautifulArray($article);
 
 
         if (!$article) {
@@ -72,79 +72,24 @@ class ArticleController extends AbstractController
         }
         $userRepository = new User();
         $user = $userRepository->findOne($article->getUserId());
+        $article->setUser($user);
 
-        $userModel = new UserModel();
-        $userModel->hydrate($user);
+        $commentRepository = new Comment();
+        $validateComments = $commentRepository->findBy(["articleId" => $article->getId(), "published" => true]);
+        $allComments = $commentRepository->findBy(["articleId" => $article->getId()]);
 
-        $article->setUser($userModel);
-
-        $commentService = new CommentService();
-//        $commentService->findBy(["article_id" => $id, "published" => true]);
-        $validateComments = $commentService->findBy(["articleId" => $article->getId(), "published" => true]);
-        $allComments = $commentService->findBy(["articleId" => $article->getId()]);
-
-
-        foreach ($validateComments as $comment) {
-            $commentModel = new CommentModel();
-            $commentModel->hydrate($comment);
-
-            $userRepository = new User();
-            $user = $userRepository->findOne($commentModel->getUserId());
-
-            $commentModel->setUser($user);
-
-
-//            $user = $userService->findOne($commentModel->getUser()->getId());
-            $userModel = new UserModel();
-            $userModel->hydrate($user);
-
-            $commentModel->setUser($userModel);
-//            Utilservice::beautifulArray($commentModel);
-
-            $article->setComment($commentModel);
-        }
-
-        $commentsModel = [];
+        $commentsResults = [];
         foreach ($allComments as $comment) {
-            $commentModel = new CommentModel();
-            $commentModel->hydrate($comment);
 
             $userRepository = new User();
-            $user = $userRepository->findOne($commentModel->getUserId());
+            $user = $userRepository->findOne($comment->getUserId());
 
-            $commentModel->setUser($user);
+            $comment->setUser($user);
 
-
-//            $user = $userService->findOne($commentModel->getUser()->getId());
-            $userModel = new UserModel();
-            $userModel->hydrate($user);
-
-            $commentModel->setUser($userModel);
-//            Utilservice::beautifulArray($commentModel);
-
-            $article->setComment($commentModel);
-
-            $commentsModel[] = $commentModel;
+            $commentsResults[] = $comment;
         }
-//Utilservice::beautifulArray($commentsModel);
 
 
-//        $validateComments = CommentService::findBy(["article_id" => $id, "published" => true], "articles", "article_id", "id");
-//        $allComments = CommentService::findBy(["article_id" => $id]);
-//
-//        foreach ($allComments as &$comment) {
-//            $user = UserService::findOne($comment["user_id"]);
-//            $article_ = ArticleService::findOne($comment["article_id"]);
-//            $comment["user"] = $user;
-//            $comment["article"] = $article_;
-//        }
-//        foreach ($validateComments as &$comment) {
-//            $user = UserService::findOne($comment["user_id"]);
-//            $article_ = ArticleService::findOne($comment["article_id"]);
-//            $comment["user"] = $user;
-//            $comment["article"] = $article_;
-//        }
-//
         // Check if user is login
         if (isset($_SESSION["user"])) {
             $isAdmin = AuthService::isAdmin();
@@ -152,7 +97,7 @@ class ArticleController extends AbstractController
             $isAdmin = false;
             $currentUser = null;
         }
-//
+
 //        // Create form for comments
         $commentForm = CommentService::createForm();
 //
@@ -165,18 +110,12 @@ class ArticleController extends AbstractController
                 $commentRepository->createComment($_POST, $id, $isAdmin);
             }
         }
-//
-//        // Sort all comments by asc created at
-//        $allComments = CommentService::sortCommentAsc($allComments);
-//        // Sort validate comments by asc created at
-//        $validateComments = CommentService::sortCommentAsc($validateComments);
 
         return $this->render("articles/show_one", "article $id", [
             "article" => $article,
             "commentForm" => $commentForm->create(),
-//            "validateComments" => $validateComments,
-            "allComments" => $commentsModel,
-////      "isAdmin" => $isAdmin,
+            "validateComments" => $validateComments,
+            "allComments" => $commentsResults,
         ]);
     }
 
@@ -199,11 +138,11 @@ class ArticleController extends AbstractController
             $content = htmlspecialchars($_POST["content"]);
             $title = htmlspecialchars($_POST["title"]);
 
-            $articleRepository = new Article();
-            if(!ArticleService::checkCreateArticle($title,$content)){
+            if (!ArticleService::checkCreateArticle($title, $content)) {
                 header("location: /article/nouveau");
                 return;
             }
+            $articleRepository = new Article();
             $articleRepository->create($_POST);
 
         }
@@ -245,7 +184,7 @@ class ArticleController extends AbstractController
             $article = $articleRepository->findOne($id);
 
             $articleService = new ArticleService();
-            if(!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $article->getId())){
+            if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $article->getId())) {
                 header("location: /article/edition/{$article->getId()}");
                 return;
             }

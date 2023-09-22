@@ -8,13 +8,6 @@ use App\models\CommentModel;
 
 class CommentService
 {
-    private Db $db;
-
-    public function __construct()
-    {
-        $this->db = Db::getInstance();
-    }
-
     public static function createForm()
     {
         // Create form for comments
@@ -50,26 +43,4 @@ class CommentService
 
         return $form;
     }
-    public function findBy(array $arr)
-    {
-
-        $keys = [];
-        $values = [];
-
-        foreach ($arr as $key => $value) {
-            $keys[] = "$key = ?";
-            $values[] = $value;
-        }
-
-        $list_keys = implode(" AND ", $keys);
-
-        $sql = "SELECT * FROM comments WHERE $list_keys";
-
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($values);
-
-        return $stmt->fetchAll();
-    }
-
 }

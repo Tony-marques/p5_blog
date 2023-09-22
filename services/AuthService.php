@@ -38,8 +38,6 @@ class AuthService
     $userModel->hydrate($currentUser);
 
     $userRole = json_decode($userModel->getRole());
-//      UtilService::beautifulArray($userRole);
-
 
     if (\in_array("ROLE_ADMIN", $userRole)) {
       return true;

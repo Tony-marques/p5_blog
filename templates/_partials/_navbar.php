@@ -1,9 +1,9 @@
 <?php
 
-use App\services\CommentService;
+use App\Repositories\Comment;
 
-$commentService = new CommentService();
-$allComments = $commentService->findBy(["published" => 0]);
+$commentRepository = new Comment();
+$allComments = $commentRepository->findBy(["published" => 0]);
 
 ?>
 

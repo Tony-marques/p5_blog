@@ -1,6 +1,6 @@
 <div class="main-container articles">
   <h3>Articles: <?= count($allArticles) ?></h3>
-  <?php foreach ($allArticles as $article) : ?>
+  <?php foreach ($articlesPerPage as $article) : ?>
     <a href="/article/<?= $article->getId() ?>" class="article">
       <div class="main-article">
         <h2><?= htmlspecialchars($article->getTitle())  ?></h2>

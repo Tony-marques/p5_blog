@@ -17,8 +17,8 @@ class UserModel extends AbstractService
     private string $password;
     private string $createdAt;
     private string $updatedAt;
-    private $comments = [];
-    private $articles = [];
+    private CommentModel $comments;
+    private ArticleModel $articles;
 
 
     public function __construct()

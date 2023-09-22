@@ -4,7 +4,6 @@ namespace App\services;
 
 class Pagination
 {
-
     public static function paginate($page,$service, $redirect, $limit)
     {
         $limit = $limit;

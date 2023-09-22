@@ -7,24 +7,8 @@ use App\app\FormBuilder;
 use App\models\ArticleModel;
 use App\services\UtilService;
 
-class ArticleService extends AbstractService
+class ArticleService
 {
-    private Db $db;
-
-    public function __construct()
-    {
-        $this->db = Db::getInstance();
-    }
-
-//    public function createArticle(ArticleModel $article)
-//    {
-//        $this->checkCreateArticle($article->getTitle(), $article->getContent());
-//
-//        $sql = "INSERT INTO articles(`title`, `content`, `userId`) VALUES(?, ?, ?)";
-//        $statement = $this->db->prepare($sql);
-//        $statement->execute([$article->getTitle(), $article->getContent(), $article->getUserId()]);
-////        return $statement;
-//    }
 
     public static function checkCreateArticle(string $title, string $content)
     {
@@ -49,14 +33,6 @@ class ArticleService extends AbstractService
 
         \header("location: /articles");
         return true;
-    }
-
-    public function findOne(int $id){
-        $sql = "SELECT * FROM articles WHERE id = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-
-        return $stmt->fetch();
     }
 
     public function checkEditArticle(string $title, string $content, int $id)
@@ -147,31 +123,6 @@ class ArticleService extends AbstractService
         return $form;
     }
 
-
-    public function findAllArticles($limit = null, $offset = 0)
-    {
-        if ($limit !== null) {
-            $articles = $this->findAll($limit, $offset);
-        } else {
-            $articles = $this->findAll();
-        }
-
-        return $articles;
-    }
-
-    public function findAll($limit = null, $offset = 0, $orderBy = "DESC")
-    {
-        if ($limit !== null && $offset !== null) {
-            $sql = "SELECT * FROM articles LIMIT $limit OFFSET $offset ORDER BY createdAt $orderBy";
-        } else {
-
-            $sql = "SELECT * FROM articles ORDER BY createdAt $orderBy";
-//            Utilservice::beautifulArray($sql);
-        }
-        $stmt = $this->db->query($sql);
-        return $stmt->fetchAll();
-    }
-
     public static function sortArticlesAsc(array $articles)
     {
         // sort article by created_at (asc)
@@ -180,48 +131,5 @@ class ArticleService extends AbstractService
         });
         return $articles;
     }
-
-//    public function editArticle(ArticleModel $article){
-//        $this->checkEditArticle($article->getTitle(), $article->getContent(), $article->getId());
-//
-//        $sql = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
-////        UtilService::beautifulArray($article);
-//        $statement = $this->db->prepare($sql);
-//        $statement->execute([$article->getTitle(), $article->getContent(), $article->getId()]);
-//
-//        header("Location: /article/{$article->getId()}");
-//        return;
-//    }
-
-
-//    public function deleteArticle(int $id)
-//    {
-//        $article = $this->findOne($id) ;
-//        $articleModel = new ArticleModel();
-//        $articleModel->hydrate($article);
-////        UtilService::beautifulArray($articleModel);
-//
-////         If not the same user, redirect
-//        if ($articleModel->getUserId() != $_SESSION["user"]["id"]) {
-//            \header("location: /article/$id");
-//            return;
-//        }
-//
-//        $sql = "DELETE FROM articles where id = ?";
-//        $statement = $this->db->prepare($sql);
-//        $statement->execute([$id]);
-////        $articleModel = new ArticleModel();
-//        // Find one article
-////        $article = self::findOne($id);
-//
-//
-//
-//        // Delete article
-////        $articleModel->delete($id);
-//
-//        // Redirect after deleted article
-//        \header("location: /articles");
-//        return;
-//    }
 
 }

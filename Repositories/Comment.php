@@ -47,9 +47,10 @@ class Comment
         $commentModel = new CommentModel();
         $commentModel->setContent($comment)
             ->setArticleId($articleId)
+            ->setUserId($_SESSION["user"]["id"])
             ->setUser($user)
             ->setPublished($isAdmin ? true : 0);
-        UtilService::beautifulArray($commentModel);
+//        UtilService::beautifulArray($commentModel);
 
         $statement = $this->db->prepare($sql);
         $statement->execute([$commentModel->getContent(), $commentModel->getArticleId(), $commentModel->getUserId(), $commentModel->getPublished()]);
@@ -60,7 +61,6 @@ class Comment
 
     public function findBy(array $arr)
     {
-
         $keys = [];
         $values = [];
 
@@ -76,7 +76,14 @@ class Comment
         $stmt = $this->db->prepare($sql);
         $stmt->execute($values);
 
-        return $stmt->fetchAll();
+        $result = [];
+        foreach ($stmt->fetchall() as $comment) {
+            $commentModel = new CommentModel();
+            $this->hydrate($commentModel, $comment);
+            $result[] =  $commentModel;
+        }
+
+        return $result;
     }
 
     public function save($commentModel) // OK
