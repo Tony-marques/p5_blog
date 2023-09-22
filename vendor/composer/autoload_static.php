@@ -69,6 +69,9 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
     );
 
     public static $classMap = array (
+        'App\\Repositories\\Article' => __DIR__ . '/../..' . '/Repositories/Article.php',
+        'App\\Repositories\\Comment' => __DIR__ . '/../..' . '/Repositories/Comment.php',
+        'App\\Repositories\\User' => __DIR__ . '/../..' . '/Repositories/User.php',
         'App\\app\\Db' => __DIR__ . '/../..' . '/app/Db.php',
         'App\\app\\FormBuilder' => __DIR__ . '/../..' . '/app/FormBuilder.php',
         'App\\app\\exceptions\\ArticleException' => __DIR__ . '/../..' . '/app/exceptions/ArticleException.php',

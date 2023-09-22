@@ -8,25 +8,19 @@ use DateTime;
 class ArticleModel extends AbstractService
 {
     private int $id;
-
-  private string $title;
-  private string $content;
-  private string $author;
-  private string $createdAt;
-  private string|\DateTimeImmutable $updatedAt;
-  private int $userId;
-  private $user;
-
-  private $comment = [];
-
-
-
-
-
+    private string $title;
+    private string $content;
+    private ?string $author = null;
+    private string $createdAt;
+    private string|\DateTimeImmutable $updatedAt;
+    private int $userId;
+    private $user;
+    private $comment = [];
 
 
     // Hydratation de l'objet à partir d'un tableau associatif
-    public function hydrate($donnees) {
+    public function hydrate($donnees)
+    {
         foreach ($donnees as $cle => $valeur) {
             $methode = 'set' . ucfirst($cle);
             if (method_exists($this, $methode)) {
@@ -35,129 +29,130 @@ class ArticleModel extends AbstractService
         }
     }
 
-  public function __construct()
-  {
-    $this->table = "articles";
-  }
-  /**
-   * Get the value of content
-   */
-  public function getContent()
-  {
-    return $this->content;
-  }
+    public function __construct()
+    {
+        $this->table = "articles";
+    }
 
-  /**
-   * Set the value of content
-   *
-   * @return  self
-   */
-  public function setContent($content)
-  {
-    $this->content = $content;
+    /**
+     * Get the value of content
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of content
+     *
+     * @return  self
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
 
-  /**
-   * Get the value of title
-   */
-  public function getTitle()
-  {
-    return $this->title;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the value of title
-   *
-   * @return  self
-   */
-  public function setTitle($title)
-  {
-    $this->title = $title;
+    /**
+     * Get the value of title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of title
+     *
+     * @return  self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
-  /**
-   * Get the value of updated_at
-   */
-  public function getUpdatedAt()
-  {
-    return $this->updatedAt;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the value of updated_at
-   *
-   * @return  self
-   */
-  public function setUpdatedAt($updatedAt)
-  {
-    $this->updatedAt = $updatedAt;
+    /**
+     * Get the value of updated_at
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
-  /**
-   * Get the value of created_at
-   */
-  public function getCreatedAt()
-  {
-    return $this->createdAt;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the value of created_at
-   *
-   * @return  self
-   */
-  public function setCreatedAt($createdAt)
-  {
-    $this->createdAt = $createdAt;
+    /**
+     * Get the value of created_at
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
-  /**
-   * Get the value of author
-   */
-  public function getAuthor()
-  {
-    return $this->author;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the value of author
-   *
-   * @return  self
-   */
-  public function setAuthor($author)
-  {
-    $this->author = $author;
+    /**
+     * Get the value of author
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of author
+     *
+     * @return  self
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
-  /**
-   * Get the value of user_id
-   */
-  public function getUserId()
-  {
-    return $this->userId;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the value of user_id
-   *
-   * @return  self
-   */
-  public function setUserId($userId)
-  {
-    $this->userId = $userId;
+    /**
+     * Get the value of user_id
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -190,12 +185,9 @@ class ArticleModel extends AbstractService
         return $this->comment;
     }
 
-    public function setComment( $comment): void
+    public function setComment($comment): void
     {
 
         $this->comment[] = $comment;
-//        print_r($this->comment);
     }
-
-
 }

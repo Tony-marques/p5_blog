@@ -16,17 +16,17 @@ class ArticleService extends AbstractService
         $this->db = Db::getInstance();
     }
 
-    public function createArticle(ArticleModel $article)
-    {
-        $this->checkCreateArticle($article->getTitle(), $article->getContent());
+//    public function createArticle(ArticleModel $article)
+//    {
+//        $this->checkCreateArticle($article->getTitle(), $article->getContent());
+//
+//        $sql = "INSERT INTO articles(`title`, `content`, `userId`) VALUES(?, ?, ?)";
+//        $statement = $this->db->prepare($sql);
+//        $statement->execute([$article->getTitle(), $article->getContent(), $article->getUserId()]);
+////        return $statement;
+//    }
 
-        $sql = "INSERT INTO articles(`title`, `content`, `author`, `userId`) VALUES(?, ?, ?, ?)";
-        $statement = $this->db->prepare($sql);
-        $statement->execute([$article->getTitle(), $article->getContent(), $article->getAuthor(), $article->getUserId()]);
-//        return $statement;
-    }
-
-    public function checkCreateArticle(string $title, string $content)
+    public static function checkCreateArticle(string $title, string $content)
     {
 
         // Form validation
@@ -43,12 +43,12 @@ class ArticleService extends AbstractService
                 "content" => $content
             ];
 
-            return;
+            return false;
         }
 
 
         \header("location: /articles");
-        return;
+        return true;
     }
 
     public function findOne(int $id){
@@ -59,10 +59,34 @@ class ArticleService extends AbstractService
         return $stmt->fetch();
     }
 
+    public function checkEditArticle(string $title, string $content, int $id)
+    {
+        $title = \htmlspecialchars($title);
+        $content = \htmlspecialchars($content);
 
+        // Form validation
+        if (\strlen($title) < 5 || \strlen($content) < 20) {
+            $_SESSION["error"] = [
+                "article" => [
+                    "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
+                    "content" => \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
+                ]
+            ];
+
+            $_SESSION["tmp_article"] = [
+                "title" => $title,
+                "content" => $content
+            ];
+
+            \header("location: /article/edition/$id");
+            return false;
+        }
+        return true;
+    }
 
     public static function createForm(mixed $subject = null)
     {
+//        UtilService::beautifulArray($subject);
         $CSRFToken = bin2hex(random_bytes(32));
         $_SESSION["csrf_token"] = $CSRFToken;
 
@@ -80,7 +104,7 @@ class ArticleService extends AbstractService
             ->setInput("text", "title", [
                 "value" => (!empty($_SESSION["tmp_article"]["title"])) ?
                     ($_SESSION["tmp_article"]["title"])
-                    : (!empty($subject->getTitle()) ? $subject->getTitle() : ""),
+                    : (!empty($subject) ? $subject->getTitle() : ""),
                 "placeholder" => !empty($subject) ? "" : "Titre"
             ])
             ->startDiv(attributs: [
@@ -96,7 +120,7 @@ class ArticleService extends AbstractService
                 "content",
                 (!empty($_SESSION["tmp_article"]["content"])) ?
                     ($_SESSION["tmp_article"]["content"])
-                    : (!empty($subject->getContent()) ? $subject->getContent() : ""),
+                    : (!empty($subject) ? $subject->getContent() : ""),
                 [
                     "rows" => 15,
                     "placeholder" => !empty($subject) ? "" : "Contenu"
@@ -157,78 +181,47 @@ class ArticleService extends AbstractService
         return $articles;
     }
 
-    public function editArticle(ArticleModel $article){
-        $this->checkEditArticle($article->getTitle(), $article->getContent(), $article->getId());
-
-        $sql = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
-//        UtilService::beautifulArray($article);
-        $statement = $this->db->prepare($sql);
-        $statement->execute([$article->getTitle(), $article->getContent(), $article->getId()]);
-
-        header("Location: /article/{$article->getId()}");
-        return;
-    }
-
-    public function checkEditArticle(string $title, string $content, int $id)
-    {
-        $title = \htmlspecialchars($title);
-        $content = \htmlspecialchars($content);
-
-        // Form validation
-        if (\strlen($title) < 5 || \strlen($content) < 20) {
-            $_SESSION["error"] = [
-                "article" => [
-                    "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
-                    "content" => \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
-                ]
-            ];
-
-            $_SESSION["tmp_article"] = [
-                "title" => $title,
-                "content" => $content
-            ];
-
-//            \header("location: /article/edition/$id");
-            return;
-        }
-
-//        $article = new ArticleModel();
-//        $article->setTitle($title)
-//            ->setContent($content);
+//    public function editArticle(ArticleModel $article){
+//        $this->checkEditArticle($article->getTitle(), $article->getContent(), $article->getId());
 //
-//        $article->update($id);
-//        \header("location: /articles");
-        return;
-    }
+//        $sql = "UPDATE articles SET title = ?, content = ? WHERE id = ?";
+////        UtilService::beautifulArray($article);
+//        $statement = $this->db->prepare($sql);
+//        $statement->execute([$article->getTitle(), $article->getContent(), $article->getId()]);
+//
+//        header("Location: /article/{$article->getId()}");
+//        return;
+//    }
 
-    public function deleteArticle(int $id)
-    {
-        $article = $this->findOne($id) ;
-        $articleModel = new ArticleModel();
-        $articleModel->hydrate($article);
-//        UtilService::beautifulArray($articleModel);
 
-//         If not the same user, redirect
-        if ($articleModel->getUserId() != $_SESSION["user"]["id"]) {
-            \header("location: /article/$id");
-            return;
-        }
-
-        $sql = "DELETE FROM articles where id = ?";
-        $statement = $this->db->prepare($sql);
-        $statement->execute([$id]);
+//    public function deleteArticle(int $id)
+//    {
+//        $article = $this->findOne($id) ;
 //        $articleModel = new ArticleModel();
-        // Find one article
-//        $article = self::findOne($id);
-
-
-
-        // Delete article
-//        $articleModel->delete($id);
-
-        // Redirect after deleted article
-        \header("location: /articles");
-        return;
-    }
+//        $articleModel->hydrate($article);
+////        UtilService::beautifulArray($articleModel);
+//
+////         If not the same user, redirect
+//        if ($articleModel->getUserId() != $_SESSION["user"]["id"]) {
+//            \header("location: /article/$id");
+//            return;
+//        }
+//
+//        $sql = "DELETE FROM articles where id = ?";
+//        $statement = $this->db->prepare($sql);
+//        $statement->execute([$id]);
+////        $articleModel = new ArticleModel();
+//        // Find one article
+////        $article = self::findOne($id);
+//
+//
+//
+//        // Delete article
+////        $articleModel->delete($id);
+//
+//        // Redirect after deleted article
+//        \header("location: /articles");
+//        return;
+//    }
 
 }

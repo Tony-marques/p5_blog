@@ -3,6 +3,7 @@
 namespace App\services;
 
 use App\models\UserModel;
+use App\Repositories\User;
 
 class AuthService
 {
@@ -31,8 +32,8 @@ class AuthService
     if (empty($_SESSION["user"]["id"])) {
       return false;
     }
-    $userService = new UserService();
-    $currentUser = $userService->findOne($_SESSION["user"]["id"]) ?? "";
+    $userRepository = new User();
+    $currentUser = $userRepository->findOne($_SESSION["user"]["id"]) ?? "";
     $userModel = new UserModel();
     $userModel->hydrate($currentUser);
 

@@ -49,55 +49,55 @@
     <?php else : ?>
       <p>Veuillez vous connecter pour écrire un commentaire</p>
     <?php endif; ?>
-    <div class="comment-container">
-<!--        remplacer true par !$isAdmin -->
-      <?php if (!$isAdmin   ) : ?>
-<!--          --><?php //= print_r($article->getComment()); exit; ?>
-
-        <p> <?= count($article->getComment()) ?> commentaire<?= count($article->getComment()) > 1 ? "s" : "" ?></p>
-        <?php foreach ($article->getComment() as $comment) : ?>
-<!--        --><?php //= $comment->getContent(); exit; ?>
-          <div class="comment">
-            <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
-            <div class="separator"></div>
-            <div class="informations">
-              <div class="people">
-<!--                  --><?php //print_r($comment->getUser()); exit ?>
-                <span><?= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?></span>
-                <span><?= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?></span>
-                <span>le <?= date("d/m/Y", strtotime($comment->getCreatedAt())) ?></span>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      <?php else : ?>
-        <p> <?= count($allComments) ?> commentaire<?= count($allComments) > 1 ? "s" : "" ?></p>
-
-        <?php foreach ($allComments as $comment) : ?>
-          <div class="comment">
-            <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
-            <div class="separator"></div>
-            <div class="informations">
-            <div class="people">
-                <span><?= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?></span>
-                <span><?= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?></span>
-                <span>le <?= date("d/m/Y", strtotime($comment->getCreatedAt())) ?></span>
-              </div>
-              <div class="buttons">
-
-                <a href="/commentaire/suppression/<?= $comment->getId() ?>" class="button button-danger">
-                  <i class="fa-solid fa-trash"></i>
-                </a>
-                <?php if ($comment->getPublished() == 0) : ?>
-                  <a href="/commentaire/validation/<?= $comment->getId() ?>" class="button button-primary ml-10">
-                    <i class="fa-solid fa-check"></i>
-                  </a>
-                <?php endif; ?>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      <?php endif; ?>
-    </div>
+<!--    <div class="comment-container">-->
+<!--<!--        remplacer true par !$isAdmin -->-->
+<!--      --><?php //if (!$isAdmin   ) : ?>
+<!--<!--          -->--><?php ////= print_r($article->getComment()); exit; ?>
+<!---->
+<!--        <p> --><?php //= count($article->getComment()) ?><!-- commentaire--><?php //= count($article->getComment()) > 1 ? "s" : "" ?><!--</p>-->
+<!--        --><?php //foreach ($article->getComment() as $comment) : ?>
+<!--<!--        -->--><?php ////= $comment->getContent(); exit; ?>
+<!--          <div class="comment">-->
+<!--            <p>--><?php //= nl2br(htmlspecialchars($comment->getContent())) ?><!--</p>-->
+<!--            <div class="separator"></div>-->
+<!--            <div class="informations">-->
+<!--              <div class="people">-->
+<!--<!--                  -->--><?php ////print_r($comment->getUser()); exit ?>
+<!--                <span>--><?php //= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?><!--</span>-->
+<!--                <span>--><?php //= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?><!--</span>-->
+<!--                <span>le --><?php //= date("d/m/Y", strtotime($comment->getCreatedAt())) ?><!--</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        --><?php //endforeach; ?>
+<!--      --><?php //else : ?>
+<!--        <p> --><?php //= count($allComments) ?><!-- commentaire--><?php //= count($allComments) > 1 ? "s" : "" ?><!--</p>-->
+<!---->
+<!--        --><?php //foreach ($allComments as $comment) : ?>
+<!--          <div class="comment">-->
+<!--            <p>--><?php //= nl2br(htmlspecialchars($comment->getContent())) ?><!--</p>-->
+<!--            <div class="separator"></div>-->
+<!--            <div class="informations">-->
+<!--            <div class="people">-->
+<!--<!--                <span>-->--><?php ////= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?><!--<!--</span>-->-->
+<!--                <span>--><?php //= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?><!--</span>-->
+<!--                <span>le --><?php //= date("d/m/Y", strtotime($comment->getCreatedAt())) ?><!--</span>-->
+<!--              </div>-->
+<!--              <div class="buttons">-->
+<!---->
+<!--                <a href="/commentaire/suppression/--><?php //= $comment->getId() ?><!--" class="button button-danger">-->
+<!--                  <i class="fa-solid fa-trash"></i>-->
+<!--                </a>-->
+<!--                --><?php //if ($comment->getPublished() == 0) : ?>
+<!--                  <a href="/commentaire/validation/--><?php //= $comment->getId() ?><!--" class="button button-primary ml-10">-->
+<!--                    <i class="fa-solid fa-check"></i>-->
+<!--                  </a>-->
+<!--                --><?php //endif; ?>
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        --><?php //endforeach; ?>
+<!--      --><?php //endif; ?>
+<!--    </div>-->
   </div>
 </div>

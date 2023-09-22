@@ -7,22 +7,14 @@ use App\services\AbstractService;
 class CommentModel extends AbstractService
 {
     private $id;
-
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    public string $content;
-    public string $published;
-    public int $articleId;
-    public int $userId;
-
+    private string $content;
+    private string $published;
+    private int $articleId;
+    private int $userId;
     private $createdAt;
+    private $user = [];
+    private $article = [];
 
-
-    private $user;
 
     public function hydrate($donnees)
     {
@@ -38,30 +30,6 @@ class CommentModel extends AbstractService
     {
         $this->table = "comments";
     }
-
-
-//  public function findUserCommentArticle(array $arr)
-//  {
-//    $keys = [];
-//    $values = [];
-//
-//    foreach ($arr as $key => $value) {
-//      $keys[] = "$key = ?";
-//      $values[] = $value;
-//    }
-//
-//    $list_keys = implode(" AND ", $keys);
-//
-//    $sql = "SELECT '' as article, a.*, '' as user, u.* FROM $this->table AS {$this->table[0]}
-//      INNER JOIN articles AS a
-//      ON c.article_id = a.id
-//      INNER JOIN users AS u
-//      ON c.user_id = u.id
-//      WHERE $list_keys";
-//
-//    $stmt = $this->request($sql, $values);
-//    return $stmt->fetchAll();
-//  }
 
     /**
      * Get the value of user_id
@@ -154,9 +122,11 @@ class CommentModel extends AbstractService
     /**
      * @param mixed $user
      */
-    public function setUser($user): void
+    public function setUser($user)
     {
-        $this->user = $user;
+        $this->user[] = $user;
+
+        return $this;
     }
 
     /**
@@ -186,4 +156,21 @@ class CommentModel extends AbstractService
     /**
      * @param mixed $id
      */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
+    public function getArticle(): array
+    {
+        return $this->article;
+    }
+
+    public function setArticle(array $article)
+    {
+        $this->article = $article;
+        return $this;
+    }
 }

@@ -14,14 +14,6 @@ class UserService
         $this->db = Db::getInstance();
     }
 
-    public function findOne(int $id)
-  {
-      $sql = "SELECT * FROM users WHERE id = ?";
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute([$id]);
-
-      return $stmt->fetch();
-  }
 
     public function findBy(array $arr)
     {

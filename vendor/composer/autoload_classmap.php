@@ -6,6 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Repositories\\Article' => $baseDir . '/Repositories/Article.php',
+    'App\\Repositories\\Comment' => $baseDir . '/Repositories/Comment.php',
+    'App\\Repositories\\User' => $baseDir . '/Repositories/User.php',
     'App\\app\\Db' => $baseDir . '/app/Db.php',
     'App\\app\\FormBuilder' => $baseDir . '/app/FormBuilder.php',
     'App\\app\\exceptions\\ArticleException' => $baseDir . '/app/exceptions/ArticleException.php',

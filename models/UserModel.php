@@ -7,17 +7,19 @@ use App\services\UtilService;
 
 class UserModel extends AbstractService
 {
-    public int $id;
+    private int $id;
+    private string $firstname;
+    private string $lastname;
+    private ?int $age;
+    private ?string $avatar;
+    private string $email;
+    private string $role;
+    private string $password;
+    private string $createdAt;
+    private string $updatedAt;
+    private $comments = [];
+    private $articles = [];
 
-    public string $firstname;
-    public string $lastname;
-    public ?int $age;
-    public ?string $avatar;
-    public string $email;
-    public string $role;
-    public string $password;
-    public string $createdAt;
-    public string $updatedAt;
 
     public function __construct()
     {
@@ -223,5 +225,27 @@ class UserModel extends AbstractService
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    public function setComments(array $comments)
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    public function getArticles(): array
+    {
+        return $this->articles;
+    }
+
+    public function setArticles(array $articles)
+    {
+        $this->articles = $articles;
+        return $this;
     }
 }
