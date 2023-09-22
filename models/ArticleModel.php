@@ -13,7 +13,7 @@ class ArticleModel extends AbstractService
   private string $content;
   private string $author;
   private string $createdAt;
-  private string $updatedAt;
+  private string|\DateTimeImmutable $updatedAt;
   private int $userId;
   private $user;
 

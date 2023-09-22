@@ -75,7 +75,7 @@ class ArticleController extends AbstractController
         $id = (int)$id;
 
         $articleService = new ArticleService();
-        $article = $articleService->showOne($id);
+        $article = $articleService->findOne($id);
 //        Utilservice::beautifulArray($article);
         $articleModel = new ArticleModel();
         $articleModel->hydrate($article);
@@ -232,10 +232,15 @@ class ArticleController extends AbstractController
 //    AuthService::checkUserLogOut();
 
         // Find one article with $id params
-        $article = ArticleService::findOne($id);
+        $articleService = new ArticleService();
+        $article = $articleService->findOne($id);
+
+        $articleModel = new ArticleModel();
+        $articleModel->hydrate($article);
+
 
         // If not the same user, redirect this
-        if ($article["user_id"] != $_SESSION["user"]["id"]) {
+        if ($articleModel->getUserId() != $_SESSION["user"]["id"]) {
             \header("location: /articles");
             return;
         }
@@ -249,11 +254,22 @@ class ArticleController extends AbstractController
                 \header("location: /article/edition/$id");
                 return;
             }
-            ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
+            $articleService = new ArticleService();
+            $article = $articleService->findOne($id);
+//
+//
+//            UtilService::beautifulArray($articleModel);
+//            ArticleService::editArticle($_POST["title"], $_POST["content"], $id);
+            $articleModel = new ArticleModel();
+            $articleModel->hydrate($article);
+            $articleModel->setTitle($_POST["title"])
+            ->setContent($_POST["content"]);
+            $articleService = new ArticleService();
+            $articleService->editArticle($articleModel);
         }
 
         // Create form
-        $form = ArticleService::createForm($article);
+        $form = ArticleService::createForm($articleModel);
 
         return $this->render("articles/edition", "édition article $id", [
             "article" => $article,
@@ -267,6 +283,7 @@ class ArticleController extends AbstractController
     public function delete($id)
     {
 //    AuthService::checkUserLogOut();
-        ArticleService::deleteArticle($id);
+        $articleService = new ArticleService();
+        $articleService->deleteArticle($id);
     }
 }
