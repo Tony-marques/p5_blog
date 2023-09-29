@@ -4,7 +4,6 @@
 namespace App\Controllers;
 
 use App\App\FormBuilder;
-use App\Controllers\AbstractController;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Services\AuthService;
@@ -34,7 +33,7 @@ class SecurityController extends AbstractController
      */
     public function login()
     {
-    AuthService::checkUserLogged();
+        AuthService::checkUserLogged();
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
@@ -65,10 +64,8 @@ class SecurityController extends AbstractController
             $userRepository = new UserRepository();
             $user = $userRepository->findBy(["email" => $_POST["email"]]);
             $userModel = new User();
-//        UtilService::beautifulArray($user[0]);
 
             $userModel->hydrate($user[0]);
-//            UtilService::beautifulArray($userModel);
 
             if (!$user) {
                 $_SESSION["error"] = [
@@ -161,7 +158,7 @@ class SecurityController extends AbstractController
      */
     public function register()
     {
-    AuthService::checkUserLogged();
+        AuthService::checkUserLogged();
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
@@ -327,9 +324,8 @@ class SecurityController extends AbstractController
      */
     public function allUsers()
     {
-    AuthService::checkAdmin(pathToRedirect: "/");
+        AuthService::checkAdmin(pathToRedirect: "/");
 
-        $userModel = new User();
         $userRepository = new UserRepository();
 
         $users = $userRepository->findBy(["role" => "[\"ROLE_USER\"]"]);
