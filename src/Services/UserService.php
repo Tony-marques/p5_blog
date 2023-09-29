@@ -7,35 +7,6 @@ use App\App\FormBuilder;
 
 class UserService
 {
-    private $db;
-
-    public function __construct(){
-        $this->db = Db::getInstance();
-    }
-
-
-    public function findBy(array $arr)
-    {
-
-        $keys = [];
-        $values = [];
-
-        foreach ($arr as $key => $value) {
-            $keys[] = "$key = ?";
-            $values[] = $value;
-        }
-
-        $list_keys = implode(" AND ", $keys);
-
-        $sql = "SELECT * FROM users WHERE $list_keys";
-
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($values);
-
-        return $stmt->fetchAll();
-    }
-
   public static function checkFields($post)
   {
     if (
