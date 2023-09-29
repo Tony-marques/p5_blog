@@ -3,9 +3,14 @@
 namespace App\controllers;
 
 use App\models\CommentModel;
+use App\models\UserModel;
+use App\Repositories\Article;
 use App\Repositories\Comment;
+use App\Repositories\User;
 use App\services\ArticleService;
+use App\services\AuthService;
 use App\services\UserService;
+use App\services\UtilService;
 
 class CommentController extends AbstractController
 {
@@ -14,7 +19,7 @@ class CommentController extends AbstractController
      */
     public function validate($id) // OK
     {
-//    AuthService::checkAdmin(pathToRedirect: "/articles");
+    AuthService::checkAdmin(pathToRedirect: "/articles");
 
         $commentRepository = new Comment();
         $comment = $commentRepository->findOne($id);
@@ -30,7 +35,7 @@ class CommentController extends AbstractController
      */
     public function validateFromComments($id) // OK
     {
-//    AuthService::checkAdmin(pathToRedirect: "/articles");
+    AuthService::checkAdmin(pathToRedirect: "/articles");
 
         $commentRepository = new Comment();
         $comment = $commentRepository->findOne($id);
@@ -46,7 +51,7 @@ class CommentController extends AbstractController
      */
     public function delete($id) // OK
     {
-//    AuthService::checkAdmin(pathToRedirect: "/articles");
+    AuthService::checkAdmin(pathToRedirect: "/articles");
         $commentRepository = new Comment();
         $comment = $commentRepository->findOne($id);
         $commentRepository->deleteComment($id);
@@ -60,7 +65,7 @@ class CommentController extends AbstractController
      */
     public function deleteFromComments($id) // OK
     {
-//    AuthService::checkAdmin(pathToRedirect: "/articles");
+    AuthService::checkAdmin(pathToRedirect: "/articles");
         $commentRepository = new Comment();
         $commentRepository->deleteComment($id);
 
@@ -73,19 +78,28 @@ class CommentController extends AbstractController
      */
     public function checkAllComments()
     {
-//    AuthService::checkAdmin("/articles");
+    AuthService::checkAdmin("/articles");
 
-        $commentModel = new CommentModel();
+        $commentRepository = new Comment();
+        $allComments = $commentRepository->findBy(["published" => 0]);
 
-        $allComments = $commentModel->findBy(["published" => 0]);
-        foreach ($allComments as &$comment) {
-            $comment["article"] = ArticleService::findOne($comment["article_id"]);
-            $comment["user_comment"] = UserService::findOne($comment["user_id"]);
-            $comment["user_article"] = UserService::findOne($comment["article"]["user_id"]);
-        };
+        $result = [];
+        foreach ($allComments as $comment) {
+            $userRepository = new User();
+            $user = $userRepository->findOne($comment->getUserId());
+
+            $articleRepository = new Article();
+            $article = $articleRepository->findOne($comment->getArticleId());
+
+            $comment->setUser($user);
+            $comment->setArticle($article);
+
+            $result[] = $comment;
+        }
+
 
         return $this->render("comments/all", "commentaires", [
-            "comments" => $allComments
+            "comments" => $result
         ]);
     }
 }

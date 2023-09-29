@@ -232,7 +232,7 @@ class UserModel extends AbstractService
         return $this->comments;
     }
 
-    public function setComments(array $comments)
+    public function setComments($comments)
     {
         $this->comments = $comments;
         return $this;
@@ -243,7 +243,7 @@ class UserModel extends AbstractService
         return $this->articles;
     }
 
-    public function setArticles(array $articles)
+    public function setArticles($articles)
     {
         $this->articles = $articles;
         return $this;

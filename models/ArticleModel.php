@@ -11,27 +11,16 @@ class ArticleModel extends AbstractService
     private string $title;
     private string $content;
     private ?string $author = null;
-    private string $createdAt;
+    private string|\DateTimeImmutable $createdAt;
     private string|\DateTimeImmutable $updatedAt;
     private int $userId;
     private $user;
-    private $comment = [];
+    private CommentModel $comment;
 
-
-    // Hydratation de l'objet à partir d'un tableau associatif
-    public function hydrate($donnees)
-    {
-        foreach ($donnees as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($this, $methode)) {
-                $this->$methode($valeur);
-            }
-        }
-    }
 
     public function __construct()
     {
-        $this->table = "articles";
+//        $this->table = "articles";
     }
 
     /**
@@ -185,9 +174,10 @@ class ArticleModel extends AbstractService
         return $this->comment;
     }
 
-    public function setComment($comment): void
+    public function setComment($comment)
     {
 
-        $this->comment[] = $comment;
+        $this->comment = $comment;
+        return $this;
     }
 }

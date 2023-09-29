@@ -13,7 +13,7 @@ class CommentModel extends AbstractService
     private int $userId;
     private $createdAt;
     private UserModel $user;
-    private $article = [];
+    private ArticleModel $article;
 
 
     public function hydrate($donnees)
@@ -28,7 +28,7 @@ class CommentModel extends AbstractService
 
     public function __construct()
     {
-        $this->table = "comments";
+//        $this->table = "comments";
     }
 
     /**
@@ -129,6 +129,17 @@ class CommentModel extends AbstractService
         return $this;
     }
 
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    public function setArticle($article)
+    {
+        $this->article = $article;
+        return $this;
+    }
+
     /**
      * @return mixed
      */
@@ -163,14 +174,5 @@ class CommentModel extends AbstractService
     }
 
 
-    public function getArticle(): array
-    {
-        return $this->article;
-    }
 
-    public function setArticle(array $article)
-    {
-        $this->article = $article;
-        return $this;
-    }
 }

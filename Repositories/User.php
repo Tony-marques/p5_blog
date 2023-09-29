@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\app\Db;
+use App\models\CommentModel;
 use App\models\UserModel;
+use App\services\UtilService;
 
 class User
 {
@@ -22,8 +24,35 @@ class User
                 $comment->$methode($valeur);
             }
         }
-
     }
+
+    public function findBy(array $arr)
+    {
+        $keys = [];
+        $values = [];
+
+        foreach ($arr as $key => $value) {
+            $keys[] = "$key = ?";
+            $values[] = $value;
+        }
+
+        $list_keys = implode(" AND ", $keys);
+
+        $sql = "SELECT * FROM users WHERE $list_keys";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($values);
+
+        $result = [];
+        foreach ($stmt->fetchall() as $comment) {
+            $userModel = new UserModel();
+            $this->hydrate($userModel, $comment);
+            $result[] = $userModel;
+        }
+
+        return $result;
+    }
+
 
     public function findOne(int $id) // OK
     {
@@ -34,5 +63,18 @@ class User
         $userModel = new userModel();
         $this->hydrate($userModel, $stmt->fetch());
         return $userModel;
+    }
+
+    public function update($post, $files, $user)
+    {
+//        UtilService::beautifulArray($user);
+        $firstname = htmlspecialchars($post["firstname"]);
+        $lastname = htmlspecialchars($post["lastname"]);
+        $age = htmlspecialchars($post["age"]);
+        $avatar = htmlspecialchars($files["avatar"]);
+
+        $sql = "UPDATE users SET firstname = ?, lastname = ?, age = ?, avatar = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$firstname, $lastname, $age, $user->getAvatar(), $user->getId()]);
     }
 }

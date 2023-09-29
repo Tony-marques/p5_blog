@@ -17,7 +17,6 @@ use App\services\ArticleService;
 use App\services\AuthService;
 use App\services\CommentService;
 use App\services\Pagination;
-use App\services\UserService;
 use App\services\UtilService;
 
 class ArticleController extends AbstractController
@@ -66,17 +65,14 @@ class ArticleController extends AbstractController
         $article = $articleRepository->findOne($id);
 
 
-        if (!$article) {
-            \header("location: /articles");
-            return;
-        }
         $userRepository = new User();
         $user = $userRepository->findOne($article->getUserId());
         $article->setUser($user);
 
         $commentRepository = new Comment();
-        $validateComments = $commentRepository->findBy(["articleId" => $article->getId(), "published" => true]);
+
         $allComments = $commentRepository->findBy(["articleId" => $article->getId()]);
+        $validateComments = $commentRepository->findBy(["articleId" => $article->getId(), "published" => true]);
 
         $commentsResults = [];
         foreach ($allComments as $comment) {
@@ -87,6 +83,17 @@ class ArticleController extends AbstractController
             $comment->setUser($user);
 
             $commentsResults[] = $comment;
+        }
+
+        $commentsValidateResults = [];
+        foreach ($validateComments as $comment) {
+
+            $userRepository = new User();
+            $user = $userRepository->findOne($comment->getUserId());
+
+            $comment->setUser($user);
+
+            $commentsValidateResults[] = $comment;
         }
 
 
@@ -105,7 +112,8 @@ class ArticleController extends AbstractController
         if (isset($_POST["submit"])) {
             // If form validation is ok
             if (FormBuilder::validate($_POST, ["comment"])) {
-
+            echo "test";
+            AuthService::checkUserLogged();
                 $commentRepository = new Comment();
                 $commentRepository->createComment($_POST, $id, $isAdmin);
             }
@@ -114,7 +122,7 @@ class ArticleController extends AbstractController
         return $this->render("articles/show_one", "article $id", [
             "article" => $article,
             "commentForm" => $commentForm->create(),
-            "validateComments" => $validateComments,
+            "validateComments" => $commentsValidateResults,
             "allComments" => $commentsResults,
         ]);
     }
@@ -124,8 +132,8 @@ class ArticleController extends AbstractController
      */
     public function new()
     {
-//    AuthService::checkUserLogOut();
-//    AuthService::checkAdmin(pathToRedirect: "/articles");
+    AuthService::checkUserLogOut();
+    AuthService::checkAdmin(pathToRedirect: "/articles");
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
@@ -157,16 +165,14 @@ class ArticleController extends AbstractController
      */
     public function edit($id)
     {
-//    AuthService::checkUserLogOut();
+    AuthService::checkAdmin();
 
         // Find one article with $id params
         $articleRepository = new Article();
         $article = $articleRepository->findOne($id);
-//UtilService::beautifulArray($article->getTitle());
-
 
         // If not the same user, redirect this
-        if ($article->getUserId() != $_SESSION["user"]["id"]) {
+        if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /articles");
             return;
         }
@@ -205,7 +211,18 @@ class ArticleController extends AbstractController
      */
     public function delete($id)
     {
-//    AuthService::checkUserLogOut();
+        AuthService::checkAdmin();
+
+        // Find one article with $id params
+        $articleRepository = new Article();
+        $article = $articleRepository->findOne($id);
+
+        // If not the same user, redirect this
+        if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
+            \header("location: /articles");
+            return;
+        }
+
         $articleRepository = new Article();
         $articleRepository->deleteArticle($id);
     }

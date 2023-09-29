@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add .env, .env.dev and uploads" />
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add .env, .env.dev and uploads">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ArticleModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/ArticleModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/CommentModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/CommentModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/09611dd44cb6580bf8bd0b5f5c5f829d.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/0b5ae0458f44f558f0c5eacde78195ae.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/1562e4177bd6bc33b9cdb7e6352cfdb8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/49a484a4a426ee156ce8e10935c9c28c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/5b25d40f9b161249b21c932628f88dd2.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/5bc941e41389136486e29748d013e3cb.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/6d4d8394d3d2811b90bb299368196a95.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/a3daf4d2c60df2811d8936af4b5c13eb.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/b491f593d73a7e9d6d6b05bcade6d9e6.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/profile/eef2c23dbd130ff2297055740df103c5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/UserService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/articles/show_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/articles/show_one.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comments/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comments/all.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/allUsers.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/allUsers.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +42,32 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main-copy" />
+                    <option name="lastUsedInstant" value="1695380751" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1695380604" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -31,9 +83,12 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2VYmfuQoUeWv387x2g8K3ro7tJK" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -47,14 +102,20 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "main-copy",
     "last_opened_file_path": "C:/laragon/www/p5",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -66,6 +127,8 @@
       <option name="presentableId" value="Default" />
       <updated>1695021494767</updated>
       <workItem from="1695021496013" duration="6233000" />
+      <workItem from="1695291406291" duration="75124000" />
+      <workItem from="1695988485255" duration="14797000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />

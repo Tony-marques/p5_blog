@@ -97,7 +97,7 @@ class UserService
       ])
       ->setLabel("firstname", "Prénom")
       ->setInput(type: "text", name: "firstname", attributs: [
-        "value" => !empty($session["error"]["profile"]["firstname"]) ? ($session["tmp_profile"]["firstname"]) : $user["firstname"]
+        "value" => !empty($session["error"]["profile"]["firstname"]) ? ($session["tmp_profile"]["firstname"]) : $user->getFirstname()
       ])
       ->startDiv(attributs: [
         "class" => !empty($session["error"]["profile"]["firstname"]) ? "error mt-10" : ""
@@ -109,7 +109,7 @@ class UserService
       ])
       ->setLabel("lastname", "Nom")
       ->setInput(type: "text", name: "lastname", attributs: [
-        "value" => !empty($session["error"]["profile"]["lastname"]) ? ($session["tmp_profile"]["lastname"]) : $user["lastname"]
+        "value" => !empty($session["error"]["profile"]["lastname"]) ? ($session["tmp_profile"]["lastname"]) : $user->getLastname()
       ])
       ->startDiv(attributs: [
         "class" => !empty($session["error"]["profile"]["lastname"]) ? "error mt-10" : ""
@@ -121,7 +121,7 @@ class UserService
       ])
       ->setLabel("age", "Age")
       ->setInput(type: "number", name: "age", attributs: [
-        "value" => !empty($session["error"]["profile"]["age"]) ? ($session["tmp_profile"]["age"]) : $user["age"]
+        "value" => !empty($session["error"]["profile"]["age"]) ? ($session["tmp_profile"]["age"]) : $user->getAge()
       ])
       ->startDiv(attributs: [
         "class" => !empty($session["error"]["profile"]["age"]) ? "error mt-10" : ""

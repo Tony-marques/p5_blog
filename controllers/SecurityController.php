@@ -5,6 +5,8 @@ namespace App\controllers;
 
 use App\app\FormBuilder;
 use App\models\UserModel;
+use App\Repositories\User;
+use App\services\AuthService;
 use App\services\UserService;
 use App\services\UtilService;
 
@@ -32,7 +34,7 @@ class SecurityController extends AbstractController
      */
     public function login()
     {
-//    AuthService::checkUserLogged();
+    AuthService::checkUserLogged();
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
@@ -60,7 +62,8 @@ class SecurityController extends AbstractController
             ]);
 
             $userService = new UserService();
-            $user = $userService->findBy(["email" => $_POST["email"]]);
+            $userRepository = new User();
+            $user = $userRepository->findBy(["email" => $_POST["email"]]);
             $userModel = new UserModel();
 //        UtilService::beautifulArray($user[0]);
 
@@ -158,7 +161,7 @@ class SecurityController extends AbstractController
      */
     public function register()
     {
-//    AuthService::checkUserLogged();
+    AuthService::checkUserLogged();
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
@@ -324,11 +327,12 @@ class SecurityController extends AbstractController
      */
     public function allUsers()
     {
-//    AuthService::checkAdmin(pathToRedirect: "/");
+    AuthService::checkAdmin(pathToRedirect: "/");
 
         $userModel = new UserModel();
+        $userRepository = new User();
 
-        $users = $userModel->findBy(["role" => "[\"ROLE_USER\"]"]);
+        $users = $userRepository->findBy(["role" => "[\"ROLE_USER\"]"]);
 
         return $this->render(path: "security/allUsers", title: "gestion utilisateurs", data: [
             "users" => $users

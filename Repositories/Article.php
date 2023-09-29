@@ -17,7 +17,7 @@ class Article
         $this->db = Db::getInstance();
     }
 
-    private function hydrate($article, $data) // OK
+    private function hydrate($article,$data) // OK
     {
         foreach ($data as $cle => $valeur) {
             $methode = 'set' . ucfirst($cle);
@@ -28,14 +28,14 @@ class Article
         return $article;
     }
 
-    public function findOne(int $id) // OK
+    public function findOne(int $id = null) // OK
     {
         $sql = "SELECT * FROM articles WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
 
         $articleModel = new ArticleModel();
-        $this->hydrate($articleModel, $stmt->fetch());
+        $this->hydrate($articleModel, (array)$stmt->fetch());
         return $articleModel;
     }
 
@@ -51,7 +51,6 @@ class Article
             $this->hydrate($articleModel, $article);
             $articlesObj[] = $articleModel;
         }
-//UtilService::beautifulArray($articlesObj);
         return $articlesObj;
     }
 
@@ -62,7 +61,6 @@ class Article
         $sql = "INSERT INTO articles(`title`, `content`, `userId`) VALUES(?, ?, ?)";
         $statement = $this->db->prepare($sql);
         $statement->execute([$title, $content, $_SESSION["user"]["id"]]);
-
     }
 
     public function update($post, $article) // OK

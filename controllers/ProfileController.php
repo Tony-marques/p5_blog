@@ -2,10 +2,12 @@
 
 namespace App\controllers;
 
+use App\Repositories\User;
 use App\services\AuthService;
 use App\models\UserModel;
 use App\services\ImageService;
 use App\services\UserService;
+use App\services\UtilService;
 
 class ProfileController extends AbstractController
 {
@@ -15,15 +17,21 @@ class ProfileController extends AbstractController
   public function edit($id)
   {
     $id = (int)$id;
+    $userRepository = new User();
+    $user = $userRepository->findOne($id);
     $userModel = new UserModel();
-    $user = $userModel->findOne($id);
 
     if (!$user) {
       \header("location: /utilisateurs");
       return;
     }
 
-//    AuthService::checkUserLogOut();
+    if($user->getId() !== $_SESSION["user"]["id"] && !AuthService::isAdmin()){
+        \header("location: /utilisateurs");
+        return;
+    }
+
+    AuthService::checkUserLogOut();
 //    $isAdmin = AuthService::isAdmin();
 
     // not current user profile
@@ -53,7 +61,7 @@ class ProfileController extends AbstractController
         return;
       }
 
-      $newUser = $userModel->setAge($_POST["age"])
+      $user->setAge($_POST["age"])
         ->setFirstname($_POST["firstname"])
         ->setLastname($_POST["lastname"]);
 
@@ -62,31 +70,37 @@ class ProfileController extends AbstractController
       $_SESSION["user"]["age"] = $_POST["age"];
 
       // 1. The user already has an image but does not submit a new one
-      if (!empty($user["avatar"]) && empty($_FILES["profil_picture"]["name"])) {
-        $userModel->setAvatar($user["avatar"]);
+      if (!empty($user->getAvatar()) && empty($_FILES["profil_picture"]["name"])) {
+          $user->setAvatar($user->getAvatar());
 
-        $_SESSION["user"]["avatar"] = "{$user['avatar']}";
+        $_SESSION["user"]["avatar"] = "{$user->getAvatar()}";
       }
 
       // 2. The user already has image and adds one
-      if (!empty($user["avatar"]) && !empty($_FILES["profil_picture"]["name"])) {
-        $userModel->setAvatar($path);
+      if (!empty($user->getAvatar()) && !empty($_FILES["profil_picture"]["name"])) {
+          if (\file_exists("uploads/profile/{$user->getAvatar()}")) {
+              \unlink("uploads/profile/{$user->getAvatar()}");
+          }
+//          UtilService::beautifulArray($user->getAvatar());
+          $user->setAvatar($path);
+//          UtilService::beautifulArray($user->getAvatar());
 
-        if (\file_exists("uploads/profile/{$user["avatar"]}")) {
-          \unlink("uploads/profile/{$user["avatar"]}");
-        }
+
+
         $_SESSION["user"]["avatar"] = "$path";
       }
 
       // 3. The user don't have image and adds one
-      if (empty($user["avatar"]) && !empty($_FILES["profil_picture"]["name"])) {
-        $userModel->setAvatar($path);
+      if (empty($user->getAvatar()) && !empty($_FILES["profil_picture"]["name"])) {
+
+          $user->setAvatar($path);
         $_SESSION["user"]["avatar"] = "$path";
       }
 
       $_SESSION["profile"]["message"] =  "Profil mis à jour avec succès.";
 
-      $newUser->update($id);
+//      $newUser->update($id);
+        $userRepository->update($_POST, $_FILES, $user);
       \header("location: /profil/edition/{$_SESSION['user']['id']}");
       return;
     }
@@ -104,11 +118,12 @@ class ProfileController extends AbstractController
    */
   public function delete($id)
   {
-//    AuthService::checkAdmin(pathToRedirect: "/");
+    AuthService::checkAdmin(pathToRedirect: "/");
 
     $id = (int)$id;
     $userModel = new UserModel();
-    $user = $userModel->findOne($id);
+    $userRepository = new User();
+    $user = $userRepository->findOne($id);
 
     if (!$user) {
       \header("location: /utilisateurs");

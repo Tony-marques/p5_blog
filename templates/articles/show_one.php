@@ -25,7 +25,7 @@
       </div>
     </div>
     <?php if ($article->getUserId() == $_SESSION["user"]["id"]
-//        || $isAdmin
+        || $isAdmin
     ) : ?>
       <a href="/article/edition/<?= $article->getId() ?>" class="button button-primary">
         <i class="fa-solid fa-pen-to-square"></i>
@@ -54,8 +54,8 @@
       <?php if (!$isAdmin   ) : ?>
 <!--          --><?php //= print_r($article->getComment()); exit; ?>
 
-        <p> <?= count($article->getComment()) ?> commentaire<?= count($article->getComment()) > 1 ? "s" : "" ?></p>
-        <?php foreach ($article->getComment() as $comment) : ?>
+        <p> <?= count($validateComments) ?> commentaire<?= count($validateComments) > 1 ? "s" : "" ?></p>
+        <?php foreach ($validateComments as $comment) : ?>
 <!--        --><?php //= $comment->getContent(); exit; ?>
           <div class="comment">
             <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
