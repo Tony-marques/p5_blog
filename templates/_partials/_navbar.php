@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\Comment;
+use Repositories\Comment;
 
 $commentRepository = new Comment();
 $allComments = $commentRepository->findBy(["published" => 0]);
