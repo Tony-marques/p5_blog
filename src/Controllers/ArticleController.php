@@ -10,8 +10,7 @@ use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\CommentService;
 use App\Services\Pagination;
-
-//use App\services\AuthService;
+use App\Services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -26,20 +25,16 @@ class ArticleController extends AbstractController
         [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articleRepository->findAll(), redirect: "/articles", limit: 3);
         $userRepository = new UserRepository();
 
-        $articles = [];
         foreach ($articlesObj as $article) {
             $user = $userRepository->findOne($article->getUserId());
             $article->setUser($user);
-            $articles[] = $article;
         }
 
-
-        $articlesPage = [];
         foreach ($articlesPerPage as $article) {
             $user = $userRepository->findOne($article->getUserId());
             $article->setUser($user);
-            $articlesPage[] = $article;
         }
+
 
         return $this->render("articles/index", "articles", [
             "articlesPerPage" => $articlesPerPage,
@@ -99,15 +94,15 @@ class ArticleController extends AbstractController
             $currentUser = null;
         }
 
-//        // Create form for comments
+        // Create form for comments
         $commentForm = CommentService::createForm();
-//
+
         // If form is submited
         if (isset($_POST["submit"])) {
             // If form validation is ok
             if (FormBuilder::validate($_POST, ["comment"])) {
-            echo "test";
-            AuthService::checkUserLogged();
+                echo "test";
+                AuthService::checkUserLogged();
                 $commentRepository = new CommentRepository();
                 $commentRepository->createComment($_POST, $id, $isAdmin);
             }
@@ -126,8 +121,8 @@ class ArticleController extends AbstractController
      */
     public function new()
     {
-    AuthService::checkUserLogOut();
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+        AuthService::checkUserLogOut();
+        AuthService::checkAdmin(pathToRedirect: "/articles");
 
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
@@ -159,7 +154,7 @@ class ArticleController extends AbstractController
      */
     public function edit($id)
     {
-    AuthService::checkAdmin();
+        AuthService::checkAdmin();
 
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
