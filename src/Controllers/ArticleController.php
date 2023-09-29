@@ -149,8 +149,11 @@ class ArticleController extends AbstractController
         return $this->render("articles/new", "création article", ["form" => $form->create()]);
     }
 
+
     /**
-     * Edit this article
+     * edit one article
+     * @param $id
+     * @return void|null
      */
     public function edit($id)
     {

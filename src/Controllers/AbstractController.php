@@ -6,6 +6,9 @@ namespace App\Controllers;
 
 use App\Services\AuthService;
 
+/**
+ *
+ */
 class AbstractController
 {
     public function render($path, $title, $data = [], $template = "default")

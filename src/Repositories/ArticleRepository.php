@@ -14,7 +14,7 @@ class ArticleRepository
         $this->db = Db::getInstance();
     }
 
-    private function hydrate($article,$data) // OK
+    private function hydrate($article, $data): Article
     {
         foreach ($data as $cle => $valeur) {
             $methode = 'set' . ucfirst($cle);
@@ -25,7 +25,7 @@ class ArticleRepository
         return $article;
     }
 
-    public function findOne(int $id = null) // OK
+    public function findOne(int $id = null): Article
     {
         $sql = "SELECT * FROM articles WHERE id = ?";
         $stmt = $this->db->prepare($sql);
@@ -36,7 +36,7 @@ class ArticleRepository
         return $articleModel;
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         $sql = "SELECT * FROM articles ORDER BY createdAt DESC";
         $stmt = $this->db->query($sql);
@@ -51,7 +51,8 @@ class ArticleRepository
         return $articlesObj;
     }
 
-    public function create($post){
+    public function create($post): void
+    {
         $title = htmlspecialchars($post["title"]);
         $content = htmlspecialchars($post["content"]);
 
@@ -60,7 +61,7 @@ class ArticleRepository
         $statement->execute([$title, $content, $_SESSION["user"]["id"]]);
     }
 
-    public function update($post, $article) // OK
+    public function update($post, $article): void
     {
         $content = htmlspecialchars($post["content"]);
         $title = htmlspecialchars($post["title"]);
@@ -73,7 +74,7 @@ class ArticleRepository
         return;
     }
 
-    public function deleteArticle($id) // OK
+    public function deleteArticle($id): void
     {
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
