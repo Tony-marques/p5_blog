@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\AbstractController;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CommentRepository;
 use App\Repositories\UserRepository;
@@ -13,7 +12,7 @@ class CommentController extends AbstractController
     /**
      * Validate the comment from article page
      */
-    public function validate($id) // OK
+    public function validate($id)
     {
     AuthService::checkAdmin(pathToRedirect: "/articles");
 
@@ -29,7 +28,7 @@ class CommentController extends AbstractController
     /**
      * Validate the comment from comments page
      */
-    public function validateFromComments($id) // OK
+    public function validateFromComments($id)
     {
     AuthService::checkAdmin(pathToRedirect: "/articles");
 
