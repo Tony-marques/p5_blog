@@ -1,8 +1,8 @@
 <?php
 
-use models\CommentModel;
+use App\Models\Comment;
 
-$commentModel = new CommentModel();
+$commentModel = new Comment();
 $comments = $commentModel->findBy(["published" => false]);
 
 ?>

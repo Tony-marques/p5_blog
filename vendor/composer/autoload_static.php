@@ -33,7 +33,7 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
         ),
         'A' => 
         array (
-            'App\\controllers\\' => 16,
+            'App\\' => 4,
         ),
     );
 
@@ -62,45 +62,45 @@ class ComposerStaticInitfd8508600b50fe46b75e49351a91a761
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'App\\controllers\\' => 
+        'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/controllers',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
-        'App\\controllers\\AbstractController' => __DIR__ . '/../..' . '/src/controllers/AbstractController.php',
-        'App\\controllers\\ArticleController' => __DIR__ . '/../..' . '/src/controllers/ArticleController.php',
-        'App\\controllers\\CommentController' => __DIR__ . '/../..' . '/src/controllers/CommentController.php',
-        'App\\controllers\\HomeController' => __DIR__ . '/../..' . '/src/controllers/HomeController.php',
-        'App\\controllers\\ProfileController' => __DIR__ . '/../..' . '/src/controllers/ProfileController.php',
-        'App\\controllers\\SecurityController' => __DIR__ . '/../..' . '/src/controllers/SecurityController.php',
+        'App\\App\\App\\router\\Route' => __DIR__ . '/../..' . '/src/App/Router/Route.php',
+        'App\\App\\App\\router\\Router' => __DIR__ . '/../..' . '/src/App/Router/Router.php',
+        'App\\App\\App\\router\\RouterException' => __DIR__ . '/../..' . '/src/App/Router/RouterException.php',
+        'App\\App\\Db' => __DIR__ . '/../..' . '/src/App/Db.php',
+        'App\\App\\Exceptions\\ArticleException' => __DIR__ . '/../..' . '/src/App/Exceptions/ArticleException.php',
+        'App\\App\\FormBuilder' => __DIR__ . '/../..' . '/src/App/FormBuilder.php',
+        'App\\Controllers\\AbstractController' => __DIR__ . '/../..' . '/src/Controllers/AbstractController.php',
+        'App\\Controllers\\ArticleController' => __DIR__ . '/../..' . '/src/Controllers/ArticleController.php',
+        'App\\Controllers\\CommentController' => __DIR__ . '/../..' . '/src/Controllers/CommentController.php',
+        'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/src/Controllers/HomeController.php',
+        'App\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/src/Controllers/ProfileController.php',
+        'App\\Controllers\\SecurityController' => __DIR__ . '/../..' . '/src/Controllers/SecurityController.php',
+        'App\\Models\\ArticleModel' => __DIR__ . '/../..' . '/src/Models/ArticleModel.php',
+        'App\\Models\\CommentModel' => __DIR__ . '/../..' . '/src/Models/CommentModel.php',
+        'App\\Models\\UserModel' => __DIR__ . '/../..' . '/src/Models/UserModel.php',
+        'App\\Repositories\\Article' => __DIR__ . '/../..' . '/src/Repositories/Article.php',
+        'App\\Repositories\\Comment' => __DIR__ . '/../..' . '/src/Repositories/Comment.php',
+        'App\\Repositories\\User' => __DIR__ . '/../..' . '/src/Repositories/User.php',
+        'App\\Services\\AbstractService' => __DIR__ . '/../..' . '/src/Services/AbstractService.php',
+        'App\\Services\\ArticleService' => __DIR__ . '/../..' . '/src/Services/ArticleService.php',
+        'App\\Services\\AuthService' => __DIR__ . '/../..' . '/src/Services/AuthService.php',
+        'App\\Services\\CommentService' => __DIR__ . '/../..' . '/src/Services/CommentService.php',
+        'App\\Services\\ImageService' => __DIR__ . '/../..' . '/src/Services/ImageService.php',
+        'App\\Services\\Pagination' => __DIR__ . '/../..' . '/src/Services/Pagination.php',
+        'App\\Services\\UserService' => __DIR__ . '/../..' . '/src/Services/UserService.php',
+        'App\\Services\\UtilService' => __DIR__ . '/../..' . '/src/Services/UtilService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
-        'Repositories\\Article' => __DIR__ . '/../..' . '/src/Repositories/Article.php',
-        'Repositories\\Comment' => __DIR__ . '/../..' . '/src/Repositories/Comment.php',
-        'Repositories\\User' => __DIR__ . '/../..' . '/src/Repositories/User.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'app\\Db' => __DIR__ . '/../..' . '/src/app/Db.php',
-        'app\\FormBuilder' => __DIR__ . '/../..' . '/src/app/FormBuilder.php',
-        'app\\exceptions\\ArticleException' => __DIR__ . '/../..' . '/src/app/exceptions/ArticleException.php',
-        'app\\router\\Route' => __DIR__ . '/../..' . '/src/app/router/Route.php',
-        'app\\router\\Router' => __DIR__ . '/../..' . '/src/app/router/Router.php',
-        'app\\router\\RouterException' => __DIR__ . '/../..' . '/src/app/router/RouterException.php',
-        'models\\ArticleModel' => __DIR__ . '/../..' . '/src/models/ArticleModel.php',
-        'models\\CommentModel' => __DIR__ . '/../..' . '/src/models/CommentModel.php',
-        'models\\UserModel' => __DIR__ . '/../..' . '/src/models/UserModel.php',
-        'services\\AbstractService' => __DIR__ . '/../..' . '/src/services/AbstractService.php',
-        'services\\ArticleService' => __DIR__ . '/../..' . '/src/services/ArticleService.php',
-        'services\\AuthService' => __DIR__ . '/../..' . '/src/services/AuthService.php',
-        'services\\CommentService' => __DIR__ . '/../..' . '/src/services/CommentService.php',
-        'services\\ImageService' => __DIR__ . '/../..' . '/src/services/ImageService.php',
-        'services\\Pagination' => __DIR__ . '/../..' . '/src/services/Pagination.php',
-        'services\\UserService' => __DIR__ . '/../..' . '/src/services/UserService.php',
-        'services\\UtilService' => __DIR__ . '/../..' . '/src/services/UtilService.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
