@@ -7,21 +7,22 @@ use App\App\FormBuilder;
 class ArticleService
 {
 
-    public static function checkCreateArticle(string $title, string $content)
+    public static function checkCreateArticle(string $title, string $content, string $chapo)
     {
-
         // Form validation
-        if (\strlen($title) < 5 || \strlen($content) < 20) {
+        if (\strlen($title) < 5 || \strlen($content) < 20 || \strlen($chapo) < 10) {
             $_SESSION["error"] = [
                 "article" => [
                     "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
                     "content" => \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
+                    "chapo" => \strlen($chapo) < 10 ? "Votre chapo doit faire au minimum 10 caractères" : ""
                 ]
             ];
 
             $_SESSION["tmp_article"] = [
                 "title" => $title,
-                "content" => $content
+                "content" => $content,
+                "chapo" => $chapo
             ];
 
             return false;
@@ -32,23 +33,26 @@ class ArticleService
         return true;
     }
 
-    public function checkEditArticle(string $title, string $content, int $id)
+    public function checkEditArticle(string $title, string $content, string $chapo, int $id)
     {
         $title = \htmlspecialchars($title);
         $content = \htmlspecialchars($content);
+        $chapo = \htmlspecialchars($chapo);
 
         // Form validation
-        if (\strlen($title) < 5 || \strlen($content) < 20) {
+        if (\strlen($title) < 5 || \strlen($content) < 20 || \strlen($chapo) < 10) {
             $_SESSION["error"] = [
                 "article" => [
                     "title" => \strlen($title) < 5 ? "Votre titre doit faire au minimum 5 caractères" : "",
                     "content" => \strlen($content) < 20 ? "Votre contenu doit faire au minimum 20 caractères" : "",
+                    "chapo" => \strlen($chapo) < 10 ? "Votre chapo doit faire au minimum 10 caractères" : ""
                 ]
             ];
 
             $_SESSION["tmp_article"] = [
                 "title" => $title,
-                "content" => $content
+                "content" => $content,
+                "chapo" => $chapo
             ];
 
             \header("location: /article/edition/$id");
@@ -83,6 +87,24 @@ class ArticleService
             ->startDiv(attributs: [
                 "class" => !empty($_SESSION["error"]["article"]["title"]) ? "error mt-10" : ""
             ], content: !empty($_SESSION["error"]["article"]["title"]) ? $_SESSION["error"]["article"]["title"] : "")
+            ->endDiv()
+            ->endDiv()->startDiv([
+                "class" => "form-group"
+            ])
+            ->setLabel(!empty($subject) ? "Chapo" : "", !empty($subject) ? "Chapo" : "")
+            ->setTextarea(
+                "chapo",
+                (!empty($_SESSION["tmp_article"]["chapo"])) ?
+                    ($_SESSION["tmp_article"]["chapo"])
+                    : (!empty($subject) ? $subject->getChapo() : ""),
+                [
+                    "rows" => 3,
+                    "placeholder" => !empty($subject) ? "" : "Chapo"
+                ]
+            )
+            ->startDiv(attributs: [
+                "class" => !empty($_SESSION["error"]["article"]["chapo"]) ? "error mt-10" : ""
+            ], content: !empty($_SESSION["error"]["article"]["chapo"]) ? $_SESSION["error"]["article"]["chapo"] : "")
             ->endDiv()
             ->endDiv()
             ->startDiv([

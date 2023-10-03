@@ -5,8 +5,9 @@ namespace App\Models;
 class Article
 {
     private ?int $id = null;
-    private string $title;
-    private string $content;
+    private ?string $title = null;
+    private ?string $content = null;
+    private ?string $chapo = null;
     private ?string $author = null;
     private string|\DateTimeImmutable $createdAt;
     private string|\DateTimeImmutable $updatedAt;
@@ -176,5 +177,15 @@ class Article
 
         $this->comment = $comment;
         return $this;
+    }
+
+    public function getChapo(): ?string
+    {
+        return $this->chapo;
+    }
+
+    public function setChapo(?string $chapo): void
+    {
+        $this->chapo = $chapo;
     }
 }

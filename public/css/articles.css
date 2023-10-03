@@ -223,6 +223,12 @@
    justify-content: space-between;
 }
 
+.chapo{
+   margin-bottom: 1rem;
+   font-weight: 500;
+   font-size: 1rem
+}
+
 .date {
    display: flex;
    flex-direction: column;

@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
         $articleRepository = new ArticleRepository();
         $articlesObj = $articleRepository->findAll();
 
-        [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articleRepository->findAll(), redirect: "/articles", limit: 3);
+        [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articleRepository->findAll(), redirect: "/articles", limit: 5);
         $userRepository = new UserRepository();
 
         foreach ($articlesObj as $article) {
@@ -138,10 +138,13 @@ class ArticleController extends AbstractController
                 return;
             }
 
+
+
             $content = htmlspecialchars($_POST["content"]);
             $title = htmlspecialchars($_POST["title"]);
+            $chapo = htmlspecialchars($_POST["chapo"]);
 
-            if (!ArticleService::checkCreateArticle($title, $content)) {
+            if (!ArticleService::checkCreateArticle($title, $content, $chapo)) {
                 header("location: /article/nouveau");
                 return;
             }
@@ -188,7 +191,7 @@ class ArticleController extends AbstractController
             $article = $articleRepository->findOne($id);
 
             $articleService = new ArticleService();
-            if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $article->getId())) {
+            if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"],$_POST["chapo"], $article->getId())) {
                 header("location: /article/edition/{$article->getId()}");
                 return;
             }

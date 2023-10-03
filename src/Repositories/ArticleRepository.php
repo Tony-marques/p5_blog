@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\App\Db;
 use App\Models\Article;
+use App\Services\UtilService;
 
 class ArticleRepository
 {
@@ -55,20 +56,24 @@ class ArticleRepository
     {
         $title = htmlspecialchars($post["title"]);
         $content = htmlspecialchars($post["content"]);
+        $chapo = htmlspecialchars($post["chapo"]);
 
-        $sql = "INSERT INTO articles(`title`, `content`, `userId`) VALUES(?, ?, ?)";
+//        UtilService::beautifulArray($post);
+
+        $sql = "INSERT INTO articles(`title`, `content`, `chapo`, `userId`) VALUES(?, ?, ?, ?)";
         $statement = $this->db->prepare($sql);
-        $statement->execute([$title, $content, $_SESSION["user"]["id"]]);
+        $statement->execute([$title, $content, $chapo, $_SESSION["user"]["id"]]);
     }
 
     public function update($post, $article): void
     {
         $content = htmlspecialchars($post["content"]);
         $title = htmlspecialchars($post["title"]);
+        $chapo = htmlspecialchars($post["chapo"]);
 
-        $sql = "UPDATE articles SET content = ?, title = ? WHERE id = ?";
+        $sql = "UPDATE articles SET content = ?, title = ?, chapo = ? WHERE id = ?";
         $statement = $this->db->prepare($sql);
-        $statement->execute([$content, $title, $article->getId()]);
+        $statement->execute([$content, $title, $chapo, $article->getId()]);
 
         header("location: /article/{$article->getId()}");
         return;

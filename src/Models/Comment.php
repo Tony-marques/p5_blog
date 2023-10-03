@@ -5,10 +5,10 @@ namespace App\Models;
 class Comment
 {
     private $id;
-    private string $content;
-    private string $published;
-    private int $articleId;
-    private int $userId;
+    private ?string $content = null;
+    private ?string $published = null;
+    private ?int $articleId = null;
+    private ?int $userId = null;
     private $createdAt;
     private User $user;
     private Article $article;
@@ -170,7 +170,6 @@ class Comment
         $this->id = $id;
         return $this;
     }
-
 
 
 }
