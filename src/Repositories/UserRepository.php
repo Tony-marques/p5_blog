@@ -14,7 +14,7 @@ class UserRepository
         $this->db = Db::getInstance();
     }
 
-    private function hydrate($comment, $data) // OK
+    private function hydrate($comment, $data = []) // OK
     {
         foreach ($data as $cle => $valeur) {
             $methode = 'set' . ucfirst($cle);
@@ -52,7 +52,7 @@ class UserRepository
     }
 
 
-    public function findOne(int $id) // OK
+    public function findOne(int $id = null) // OK
     {
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->db->prepare($sql);

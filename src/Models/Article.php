@@ -4,13 +4,13 @@ namespace App\Models;
 
 class Article
 {
-    private int $id;
+    private ?int $id = null;
     private string $title;
     private string $content;
     private ?string $author = null;
     private string|\DateTimeImmutable $createdAt;
     private string|\DateTimeImmutable $updatedAt;
-    private int $userId;
+    private ?int $userId = null;
     private $user;
     private Comment $comment;
 
@@ -156,7 +156,7 @@ class Article
         $this->user = $user;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

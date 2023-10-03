@@ -54,6 +54,12 @@ class ArticleController extends AbstractController
         $article = $articleRepository->findOne($id);
 
 
+        if (!$article->getId()) {
+            header("Location: /articles");
+            return;
+        }
+
+
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($article->getUserId());
         $article->setUser($user);
