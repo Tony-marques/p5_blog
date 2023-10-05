@@ -12,8 +12,11 @@ use App\Services\UtilService;
 
 class ProfileController extends AbstractController
 {
+
     /**
      * Edit profile page
+     * @param $id
+     * @return void|null
      */
     public function edit($id)
     {
@@ -101,8 +104,11 @@ class ProfileController extends AbstractController
         ]);
     }
 
+
     /**
      * Delete profile
+     * @param $id
+     * @return void
      */
     public function delete($id)
     {
