@@ -18,11 +18,11 @@
                     </p>
                 </div>
                 <div class="date">
-                    <?php if (date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) == date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt()))) : ?>
+                    <?php if (strtotime($article->getCreatedAt()) === strtotime($article->getUpdatedAt())) : ?>
                         <p>Ecrit le <?= date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) ?></p>
                     <?php endif; ?>
 
-                    <?php if (date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) < date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt()))) : ?>
+                    <?php if (strtotime($article->getCreatedAt()) < strtotime($article->getUpdatedAt())) : ?>
                         <p>Modifié le <?= date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt())) ?></p>
                     <?php endif; ?>
                 </div>

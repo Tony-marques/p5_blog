@@ -9,17 +9,16 @@
       <div class="separator"></div>
       <div class="informations">
         <div class="article-author">
-<!--          <img class="article-author-picture" src="/uploads/profile/--><?php //= $article->getUser()->getAvatar() ?><!--" alt="profile picture">-->
           <p>Ecrit par <span class="name-author"><?= htmlspecialchars(ucfirst($article->getUser()->getFirstname())) ?> <?= htmlspecialchars(substr(strtoupper($article->getUser()->getLastname()), 0, 1)) . "." ?></span> </p>
         </div>
         <div class="date">
-          <?php if (date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) == date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt()))) : ?>
-            <p>Ecrit le <?= date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) ?></p>
-          <?php endif; ?>
+            <?php if (strtotime($article->getCreatedAt()) === strtotime($article->getUpdatedAt())) : ?>
+                <p>Ecrit le <?= date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) ?></p>
+            <?php endif; ?>
 
-          <?php if (date('d/m/Y à H:i:s', strtotime($article->getCreatedAt())) < date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt()))) : ?>
-            <p>Modifié le <?= date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt())) ?></p>
-          <?php endif; ?>
+            <?php if (strtotime($article->getCreatedAt()) < strtotime($article->getUpdatedAt())) : ?>
+                <p>Modifié le <?= date('d/m/Y à H:i:s', strtotime($article->getUpdatedAt())) ?></p>
+            <?php endif; ?>
         </div>
 
       </div>
