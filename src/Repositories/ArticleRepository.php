@@ -15,17 +15,28 @@ class ArticleRepository
         $this->db = Db::getInstance();
     }
 
+    /**
+     * Hydrate article model
+     * @param $article
+     * @param $data
+     * @return Article
+     */
     private function hydrate($article, $data): Article
     {
-        foreach ($data as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($article, $methode)) {
-                $article->$methode($valeur);
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($article, $method)) {
+                $article->$method($value);
             }
         }
         return $article;
     }
 
+    /**
+     * Find one article in database
+     * @param int|null $id
+     * @return Article
+     */
     public function findOne(int $id = null): Article
     {
         $sql = "SELECT * FROM articles WHERE id = ?";
@@ -37,6 +48,10 @@ class ArticleRepository
         return $articleModel;
     }
 
+    /**
+     * Find all articles in database
+     * @return array
+     */
     public function findAll(): array
     {
         $sql = "SELECT * FROM articles ORDER BY createdAt DESC";
@@ -52,19 +67,28 @@ class ArticleRepository
         return $articlesObj;
     }
 
+    /**
+     * Crate new article in database
+     * @param $post
+     * @return void
+     */
     public function create($post): void
     {
         $title = htmlspecialchars($post["title"]);
         $content = htmlspecialchars($post["content"]);
         $chapo = htmlspecialchars($post["chapo"]);
 
-//        UtilService::beautifulArray($post);
-
         $sql = "INSERT INTO articles(`title`, `content`, `chapo`, `userId`) VALUES(?, ?, ?, ?)";
         $statement = $this->db->prepare($sql);
         $statement->execute([$title, $content, $chapo, $_SESSION["user"]["id"]]);
     }
 
+    /**
+     * Update article in database
+     * @param $post
+     * @param $article
+     * @return void
+     */
     public function update($post, $article): void
     {
         $content = htmlspecialchars($post["content"]);
@@ -79,6 +103,11 @@ class ArticleRepository
         return;
     }
 
+    /**
+     * Delete article in database
+     * @param $id
+     * @return void
+     */
     public function deleteArticle($id): void
     {
         $sql = "DELETE FROM articles WHERE id = ?";
