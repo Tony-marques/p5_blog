@@ -29,12 +29,12 @@ class Article
         return $this->content;
     }
 
+
     /**
-     * Set the value of content
-     *
-     * @return  self
+     * @param string $content
+     * @return $this
      */
-    public function setContent($content) : self
+    public function setContent(string $content) : self
     {
         $this->content = $content;
 
@@ -52,9 +52,10 @@ class Article
     /**
      * Set the value of title
      *
+     * @param string $title
      * @return  self
      */
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -72,9 +73,10 @@ class Article
     /**
      * Set the value of updated_at
      *
+     * @param string $updatedAt
      * @return  self
      */
-    public function setUpdatedAt($updatedAt): self
+    public function setUpdatedAt(string $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -92,9 +94,10 @@ class Article
     /**
      * Set the value of created_at
      *
+     * @param string $createdAt
      * @return  self
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(string $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -112,9 +115,10 @@ class Article
     /**
      * Set the value of author
      *
+     * @param string $author
      * @return  self
      */
-    public function setAuthor($author): self
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -132,9 +136,10 @@ class Article
     /**
      * Set the value of user_id
      *
+     * @param int $userId
      * @return  self
      */
-    public function setUserId($userId): self
+    public function setUserId(int $userId): self
     {
         $this->userId = $userId;
 
@@ -149,10 +154,12 @@ class Article
         return $this->user;
     }
 
+
     /**
-     * @param mixed $user
+     * @param User $user
+     * @return $this
      */
-    public function setUser($user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
         return $this;
@@ -174,7 +181,7 @@ class Article
         return $this->comment;
     }
 
-    public function setComment($comment): self
+    public function setComment(Comment $comment): self
     {
 
         $this->comment = $comment;

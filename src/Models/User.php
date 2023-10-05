@@ -31,12 +31,12 @@ class User
         return $this->updatedAt;
     }
 
+
     /**
-     * Set the value of updated_at
-     *
-     * @return  self
+     * @param string $updatedAt
+     * @return $this
      */
-    public function setUpdatedAt($updatedAt): self
+    public function setUpdatedAt(string $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -51,12 +51,12 @@ class User
         return $this->createdAt;
     }
 
+
     /**
-     * Set the value of created_at
-     *
-     * @return  self
+     * @param string $createdAt
+     * @return $this
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(string $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -71,12 +71,12 @@ class User
         return $this->password;
     }
 
+
     /**
-     * Set the value of password
-     *
-     * @return  self
+     * @param string $password
+     * @return $this
      */
-    public function setPassword($password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -91,12 +91,12 @@ class User
         return $this->role;
     }
 
+
     /**
-     * Set the value of role
-     *
-     * @return  self
+     * @param string $role
+     * @return $this
      */
-    public function setRole($role): self
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
@@ -112,11 +112,10 @@ class User
     }
 
     /**
-     * Set the value of email
-     *
-     * @return  self
+     * @param string $email
+     * @return $this
      */
-    public function setEmail($email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -131,10 +130,10 @@ class User
         return $this->avatar;
     }
 
+
     /**
-     * Set the value of avatar
-     *
-     * @return  self
+     * @param string|null $avatar
+     * @return $this
      */
     public function setAvatar(?string $avatar): self
     {
@@ -151,12 +150,12 @@ class User
         return $this->age;
     }
 
+
     /**
-     * Set the value of age
-     *
-     * @return  self
+     * @param string $age
+     * @return $this
      */
-    public function setAge($age): self
+    public function setAge(string $age): self
     {
         $this->age = $age;
 
@@ -171,12 +170,12 @@ class User
         return $this->lastname;
     }
 
+
     /**
-     * Set the value of lastname
-     *
-     * @return  self
+     * @param string $lastname
+     * @return $this
      */
-    public function setLastname($lastname): self
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -191,12 +190,12 @@ class User
         return $this->firstname;
     }
 
+
     /**
-     * Set the value of firstname
-     *
-     * @return  self
+     * @param string $firstname
+     * @return $this
      */
-    public function setFirstname($firstname): self
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -219,7 +218,7 @@ class User
         return $this->comments;
     }
 
-    public function setComments($comments): self
+    public function setComments(Comment $comments): self
     {
         $this->comments = $comments;
         return $this;
@@ -230,7 +229,7 @@ class User
         return $this->articles;
     }
 
-    public function setArticles($articles): self
+    public function setArticles(Article $articles): self
     {
         $this->articles = $articles;
         return $this;

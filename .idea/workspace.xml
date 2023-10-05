@@ -4,25 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add phpDoc for UserService.php">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add typehint function symfonyInsight">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/AbstractController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/AbstractController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Comment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/AuthService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/ImageService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/ImageService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UserService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/UtilService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UtilService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +119,7 @@
       <workItem from="1695291406291" duration="75124000" />
       <workItem from="1695988485255" duration="33241000" />
       <workItem from="1696496586312" duration="4985000" />
-      <workItem from="1696501764673" duration="10123000" />
+      <workItem from="1696501764673" duration="11347000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -422,14 +409,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696508046893</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="add typehint function symfonyInsight">
+      <option name="closed" value="true" />
+      <created>1696546532570</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1696546532570</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor SecurityController" />
     <MESSAGE value="refactor UserService" />
     <MESSAGE value="type functions article" />
     <MESSAGE value="add redirection if article not exist" />
@@ -454,6 +448,7 @@
     <MESSAGE value="add phpDoc form CommentService.php" />
     <MESSAGE value="add phpDoc form ImageService.php" />
     <MESSAGE value="add phpDoc for UserService.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="add phpDoc for UserService.php" />
+    <MESSAGE value="add typehint function symfonyInsight" />
+    <option name="LAST_COMMIT_MESSAGE" value="add typehint function symfonyInsight" />
   </component>
 </project>

@@ -19,7 +19,7 @@ class ArticleController extends AbstractController
      * @param string|null $page
      * @return null
      */
-    public function index(?string $page = null)
+    public function index(?string $page = null):null
     {
         $articleRepository = new ArticleRepository();
         $articlesObj = $articleRepository->findAll();

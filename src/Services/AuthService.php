@@ -46,8 +46,6 @@ class AuthService
         }
         $userRepository = new UserRepository();
         $currentUser = $userRepository->findOne($_SESSION["user"]["id"]) ?? "";
-//        $userRepository = new UserRepository();
-//        $userRepository->hydrate($currentUser);
 
         $userRole = json_decode($currentUser->getRole());
 

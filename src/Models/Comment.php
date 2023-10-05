@@ -29,9 +29,10 @@ class Comment
     /**
      * Set the value of user_id
      *
+     * @param int $userId
      * @return  self
      */
-    public function setUserId($userId): self
+    public function setUserId(int $userId): self
     {
         $this->userId = $userId;
 
@@ -49,9 +50,10 @@ class Comment
     /**
      * Set the value of article_id
      *
+     * @param int $articleId
      * @return  self
      */
-    public function setArticleId($articleId): self
+    public function setArticleId(int $articleId): self
     {
         $this->articleId = $articleId;
 
@@ -69,9 +71,10 @@ class Comment
     /**
      * Set the value of content
      *
+     * @param string $content
      * @return  self
      */
-    public function setContent($content): self
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -89,9 +92,10 @@ class Comment
     /**
      * Set the value of published
      *
+     * @param string $published
      * @return  self
      */
-    public function setPublished($published): self
+    public function setPublished(string $published): self
     {
         $this->published = $published;
 
@@ -106,10 +110,12 @@ class Comment
         return $this->user;
     }
 
+
     /**
-     * @param mixed $user
+     * @param User $user
+     * @return $this
      */
-    public function setUser($user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
@@ -121,7 +127,11 @@ class Comment
         return $this->article;
     }
 
-    public function setArticle($article): self
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function setArticle(Article $article): self
     {
         $this->article = $article;
         return $this;
@@ -135,10 +145,12 @@ class Comment
         return $this->createdAt;
     }
 
+
     /**
-     * @param mixed $createdAt
+     * @param string $createdAt
+     * @return $this
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(string $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -152,10 +164,12 @@ class Comment
         return $this->id;
     }
 
+
     /**
-     * @param mixed $id
+     * @param int $id
+     * @return $this
      */
-    public function setId($id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;
