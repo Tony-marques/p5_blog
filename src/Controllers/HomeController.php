@@ -8,10 +8,12 @@ use App\Controllers\AbstractController;
 
 class HomeController extends AbstractController
 {
-  /**
-   * Home page
-   */
-  public function index()
+
+    /**
+     * Home page
+     * @return void|null
+     */
+    public function index()
   {
     if (isset($_POST["submit"])) {
       if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
