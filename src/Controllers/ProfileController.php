@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use App\Services\AuthService;
 use App\Services\ImageService;
 use App\Services\UserService;
+use App\Services\UtilService;
 
 class ProfileController extends AbstractController
 {
@@ -20,7 +21,7 @@ class ProfileController extends AbstractController
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($id);
 
-        if (!$user) {
+        if (!$user->getId()) {
             \header("location: /utilisateurs");
             return;
         }
@@ -112,12 +113,14 @@ class ProfileController extends AbstractController
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($id);
 
+//        UtilService::beautifulArray($user);
+
         if (!$user) {
             \header("location: /utilisateurs");
             return;
         }
 
-        $userModel->delete($id);
+        $userRepository->delete($id);
 
         \header("location: /utilisateurs");
         return;

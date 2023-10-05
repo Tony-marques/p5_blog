@@ -4,12 +4,12 @@ namespace App\Models;
 
 class User
 {
-    private int $id;
-    private string $firstname;
-    private string $lastname;
-    private ?int $age;
+    private ?int $id = null;
+    private ?string $firstname = null;
+    private ?string $lastname = null;
+    private ?int $age = null;
     private ?string $avatar;
-    private string $email;
+    private ?string $email = null;
     private string $role;
     private string $password;
     private string $createdAt;
@@ -214,7 +214,7 @@ class User
         return $this;
     }
 
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }

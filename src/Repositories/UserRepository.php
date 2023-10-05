@@ -59,13 +59,12 @@ class UserRepository
         $stmt->execute([$id]);
 
         $userModel = new User();
-        $this->hydrate($userModel, $stmt->fetch());
+        $this->hydrate($userModel, (array)$stmt->fetch());
         return $userModel;
     }
 
     public function update($post, $files, $user)
     {
-//        UtilService::beautifulArray($user);
         $firstname = htmlspecialchars($post["firstname"]);
         $lastname = htmlspecialchars($post["lastname"]);
         $age = htmlspecialchars($post["age"]);
@@ -74,5 +73,11 @@ class UserRepository
         $sql = "UPDATE users SET firstname = ?, lastname = ?, age = ?, avatar = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$firstname, $lastname, $age, $user->getAvatar(), $user->getId()]);
+    }
+
+    public function delete(int $id): void{
+        $sql = "DELETE FROM users WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$id]);
     }
 }
