@@ -7,7 +7,12 @@ use App\App\FormBuilder;
 
 class UserService
 {
-  public static function checkFields($post)
+    /**
+     * check field for profile form
+     * @param $post
+     * @return bool
+     */
+    public static function checkFields($post)
   {
     if (
       \strlen($post["firstname"]) < 3
@@ -20,7 +25,12 @@ class UserService
     }
   }
 
-  public static function createErrorSessionFields($post)
+    /**
+     * If checkFields function return false, add error on PHP session
+     * @param $post
+     * @return void
+     */
+    public static function createErrorSessionFields($post)
   {
     $_SESSION["error"] = [
       "profile" => [
@@ -31,7 +41,12 @@ class UserService
     ];
   }
 
-  public static function createTmpProfileSession($post)
+    /**
+     * Create temporary profile variables
+     * @param $post
+     * @return void
+     */
+    public static function createTmpProfileSession($post)
   {
     $_SESSION["tmp_profile"] = [
       "firstname" => \htmlspecialchars($post["firstname"]),
@@ -40,7 +55,13 @@ class UserService
     ];
   }
 
-  public static function createForm($session, $user)
+    /**
+     * Create form for profile page
+     * @param $session
+     * @param $user
+     * @return FormBuilder
+     */
+    public static function createForm($session, $user)
   {
     $CSRFToken = bin2hex(random_bytes(32));
     $_SESSION["csrf_token"] = $CSRFToken;
