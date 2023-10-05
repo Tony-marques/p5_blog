@@ -4,15 +4,16 @@ namespace App\Services;
 
 use App\App\Db;
 use App\App\FormBuilder;
+use App\Models\User;
 
 class UserService
 {
     /**
      * check field for profile form
-     * @param $post
+     * @param array $post
      * @return bool
      */
-    public static function checkFields($post)
+    public static function checkFields(array $post)
   {
     if (
       \strlen($post["firstname"]) < 3
@@ -27,10 +28,10 @@ class UserService
 
     /**
      * If checkFields function return false, add error on PHP session
-     * @param $post
+     * @param array $post
      * @return void
      */
-    public static function createErrorSessionFields($post)
+    public static function createErrorSessionFields(array $post)
   {
     $_SESSION["error"] = [
       "profile" => [
@@ -43,10 +44,10 @@ class UserService
 
     /**
      * Create temporary profile variables
-     * @param $post
+     * @param array $post
      * @return void
      */
-    public static function createTmpProfileSession($post)
+    public static function createTmpProfileSession(array $post)
   {
     $_SESSION["tmp_profile"] = [
       "firstname" => \htmlspecialchars($post["firstname"]),
@@ -57,11 +58,11 @@ class UserService
 
     /**
      * Create form for profile page
-     * @param $session
-     * @param $user
+     * @param array $session
+     * @param User $user
      * @return FormBuilder
      */
-    public static function createForm($session, $user)
+    public static function createForm(array $session, User $user)
   {
     $CSRFToken = bin2hex(random_bytes(32));
     $_SESSION["csrf_token"] = $CSRFToken;

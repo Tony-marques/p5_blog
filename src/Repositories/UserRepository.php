@@ -16,11 +16,11 @@ class UserRepository
 
     /**
      * Hydrate user model
-     * @param $user
-     * @param $data
+     * @param User $user
+     * @param array|object $data
      * @return User
      */
-    private function hydrate($user, $data = []): User
+    private function hydrate(User $user, array|object $data = []): User
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -82,12 +82,12 @@ class UserRepository
 
     /**
      * Update user in database
-     * @param $post
-     * @param $files
-     * @param $user
+     * @param array $post
+     * @param array $files
+     * @param User $user
      * @return void
      */
-    public function update($post, $files, $user):void
+    public function update(array $post, array $files, User $user):void
     {
         $firstname = htmlspecialchars($post["firstname"]);
         $lastname = htmlspecialchars($post["lastname"]);

@@ -16,10 +16,10 @@ class ArticleController extends AbstractController
 
     /**
      * Show all articles
-     * @param $page
+     * @param string|null $page
      * @return null
      */
-    public function index($page = null)
+    public function index(?string $page = null)
     {
         $articleRepository = new ArticleRepository();
         $articlesObj = $articleRepository->findAll();
@@ -166,10 +166,10 @@ class ArticleController extends AbstractController
 
     /**
      * Edit one article
-     * @param $id
+     * @param string $id
      * @return void|null
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
@@ -219,10 +219,10 @@ class ArticleController extends AbstractController
 
     /**
      * Delete one article
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function delete($id): void
+    public function delete(string $id): void
     {
         // Find one article with $id params
         $articleRepository = new ArticleRepository();

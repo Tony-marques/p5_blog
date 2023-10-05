@@ -7,11 +7,9 @@ namespace App\Services;
 class UtilService
 {
 
-  public static function beautifulArray( $arr)
+  public static function beautifulArray( array $arr):void
   {
     echo "<pre>";
-    var_dump($arr);
     echo "</pre>";
-    exit;
   }
 }

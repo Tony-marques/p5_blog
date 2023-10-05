@@ -23,21 +23,10 @@ class User
         $this->table = "users";
     }
 
-    // Hydratation de l'objet à partir d'un tableau associatif
-    public function hydrate($donnees)
-    {
-        foreach ($donnees as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($this, $methode)) {
-                $this->$methode($valeur);
-            }
-        }
-    }
-
     /**
      * Get the value of updated_at
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->updatedAt;
     }
@@ -47,7 +36,7 @@ class User
      *
      * @return  self
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -57,7 +46,7 @@ class User
     /**
      * Get the value of created_at
      */
-    public function getCreatedAt()
+    public function getCreatedAt():string
     {
         return $this->createdAt;
     }
@@ -67,7 +56,7 @@ class User
      *
      * @return  self
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -77,7 +66,7 @@ class User
     /**
      * Get the value of password
      */
-    public function getPassword()
+    public function getPassword():string
     {
         return $this->password;
     }
@@ -87,7 +76,7 @@ class User
      *
      * @return  self
      */
-    public function setPassword($password)
+    public function setPassword($password): self
     {
         $this->password = $password;
 
@@ -97,7 +86,7 @@ class User
     /**
      * Get the value of role
      */
-    public function getRole()
+    public function getRole():string
     {
         return $this->role;
     }
@@ -107,7 +96,7 @@ class User
      *
      * @return  self
      */
-    public function setRole($role)
+    public function setRole($role): self
     {
         $this->role = $role;
 
@@ -117,7 +106,7 @@ class User
     /**
      * Get the value of email
      */
-    public function getEmail()
+    public function getEmail():string
     {
         return $this->email;
     }
@@ -127,7 +116,7 @@ class User
      *
      * @return  self
      */
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         $this->email = $email;
 
@@ -137,7 +126,7 @@ class User
     /**
      * Get the value of avatar
      */
-    public function getAvatar()
+    public function getAvatar():string
     {
         return $this->avatar;
     }
@@ -147,7 +136,7 @@ class User
      *
      * @return  self
      */
-    public function setAvatar(?string $avatar)
+    public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
 
@@ -157,7 +146,7 @@ class User
     /**
      * Get the value of age
      */
-    public function getAge()
+    public function getAge():int
     {
         return $this->age;
     }
@@ -167,7 +156,7 @@ class User
      *
      * @return  self
      */
-    public function setAge($age)
+    public function setAge($age): self
     {
         $this->age = $age;
 
@@ -177,7 +166,7 @@ class User
     /**
      * Get the value of lastname
      */
-    public function getLastname()
+    public function getLastname():string
     {
         return $this->lastname;
     }
@@ -187,7 +176,7 @@ class User
      *
      * @return  self
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname): self
     {
         $this->lastname = $lastname;
 
@@ -197,7 +186,7 @@ class User
     /**
      * Get the value of firstname
      */
-    public function getFirstname()
+    public function getFirstname():string
     {
         return $this->firstname;
     }
@@ -207,7 +196,7 @@ class User
      *
      * @return  self
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): self
     {
         $this->firstname = $firstname;
 
@@ -219,28 +208,29 @@ class User
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function getComments(): array
+    public function getComments(): Comment
     {
         return $this->comments;
     }
 
-    public function setComments($comments)
+    public function setComments($comments): self
     {
         $this->comments = $comments;
         return $this;
     }
 
-    public function getArticles(): array
+    public function getArticles(): Article
     {
         return $this->articles;
     }
 
-    public function setArticles($articles)
+    public function setArticles($articles): self
     {
         $this->articles = $articles;
         return $this;

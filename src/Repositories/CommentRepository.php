@@ -16,11 +16,11 @@ class CommentRepository
 
     /**
      * Hydrate comment model
-     * @param $comment
-     * @param $data
+     * @param Comment $comment
+     * @param array|object $data
      * @return Comment
      */
-    private function hydrate($comment, $data): Comment
+    private function hydrate(Comment $comment, array|object $data): Comment
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -49,12 +49,12 @@ class CommentRepository
 
     /**
      * Create comment in database
-     * @param $post
-     * @param $articleId
-     * @param $isAdmin
+     * @param array $post
+     * @param string $articleId
+     * @param bool $isAdmin
      * @return void
      */
-    public function createComment($post, $articleId, $isAdmin): void
+    public function createComment(array $post, string $articleId, bool $isAdmin): void
     {
         $sql = "INSERT INTO comments(`content`, `articleId`, `userId`, `published`) VALUES(?, ?, ?, ?)";
 
@@ -109,10 +109,10 @@ class CommentRepository
 
     /**
      * Update comment in database
-     * @param $commentModel
+     * @param Comment $commentModel
      * @return void
      */
-    public function save($commentModel): void
+    public function save(Comment $commentModel): void
     {
         $sql = "UPDATE comments SET content = ?, published = ?, articleId = ?, userId = ? WHERE id = ?";
         $statement = $this->db->prepare($sql);
@@ -121,10 +121,10 @@ class CommentRepository
 
     /**
      * Delete comment in database
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function deleteComment($id): void
+    public function deleteComment(string $id): void
     {
         $sql = "DELETE FROM comments WHERE id = ?";
 

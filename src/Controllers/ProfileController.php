@@ -15,10 +15,10 @@ class ProfileController extends AbstractController
 
     /**
      * Edit profile page
-     * @param $id
+     * @param string $id
      * @return void|null
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         $id = (int)$id;
         $userRepository = new UserRepository();
@@ -107,10 +107,10 @@ class ProfileController extends AbstractController
 
     /**
      * Delete profile
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function delete($id)
+    public function delete(string $id)
     {
 
         $id = (int)$id;

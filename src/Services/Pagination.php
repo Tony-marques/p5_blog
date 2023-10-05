@@ -4,7 +4,7 @@ namespace App\Services;
 
 class Pagination
 {
-    public static function paginate($page,$service, $redirect, $limit)
+    public static function paginate(?string $page,array|object $service, string $redirect, int $limit): null|array
     {
         $limit = $limit;
         $allItems = $service;
@@ -17,7 +17,7 @@ class Pagination
 
         if ($currentPage > $totalPages || $currentPage <= 0) {
             \header("location: $redirect");
-            return;
+            return null;
         }
 
         $itemsPerPage = \array_slice($allItems, $offset, $limit);

@@ -65,12 +65,8 @@ class SecurityController extends AbstractController
                 "password" => \FILTER_SANITIZE_FULL_SPECIAL_CHARS
             ]);
 
-            $userService = new UserService();
             $userRepository = new UserRepository();
             $user = $userRepository->findBy(["email" => $_POST["email"]]);
-            $userModel = new User();
-
-            $userModel->hydrate($user[0]);
 
             if (!$user) {
                 $_SESSION["error"] = [
@@ -81,15 +77,15 @@ class SecurityController extends AbstractController
                 return;
             }
 
-            if (\password_verify($_POST["password"], $userModel->getPassword())) {
+            if (\password_verify($_POST["password"], $user[0]->getPassword())) {
                 $_SESSION = [
                     "user" => [
-                        "id" => $userModel->getId(),
-                        "firstname" => $userModel->getFirstname() !== null ? $userModel->getFirstname() : "",
-                        "lastname" => $userModel->getLastname() !== null ? $userModel->getLastname() : "",
-                        "age" => $userModel->getAge() !== null ? $userModel->getAge() : "",
-                        "avatar" => $userModel->getAvatar() !== null ? $userModel->getAvatar() : "",
-                        "role" => $userModel->getRole() !== null ? $userModel->getRole() : "",
+                        "id" => $user[0]->getId(),
+                        "firstname" => $user[0]->getFirstname() !== null ? $user[0]->getFirstname() : "",
+                        "lastname" => $user[0]->getLastname() !== null ? $user[0]->getLastname() : "",
+                        "age" => $user[0]->getAge() !== null ? $user[0]->getAge() : "",
+                        "avatar" => $user[0]->getAvatar() !== null ? $user[0]->getAvatar() : "",
+                        "role" => $user[0]->getRole() !== null ? $user[0]->getRole() : "",
                     ]
                 ];
                 \header("location: /");

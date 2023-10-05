@@ -11,7 +11,7 @@ use App\Services\AuthService;
  */
 class AbstractController
 {
-    public function render($path, $title, $data = [], $template = "default")
+    public function render(string $path, string $title, array $data = [], string $template = "default"): void
     {
         \extract($data);
 
@@ -23,9 +23,6 @@ class AbstractController
         require_once ROOT . "/templates/$path.php";
 
         $content = \ob_get_clean();
-
-
-//      UtilService::beautifulArray($isAdmin);
 
         require_once ROOT . "/templates/$template.php";
 

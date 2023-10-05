@@ -4,11 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="changing verif isAdmin">
-      <change beforePath="$PROJECT_DIR$/.idea/p5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/p5.iml" afterDir="false" />
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add phpDoc for UserService.php">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/AbstractController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/AbstractController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/AuthService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/ImageService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/ImageService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/Pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/Pagination.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UserService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/UtilService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UtilService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,27 +94,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main-copy",
-    "last_opened_file_path": "C:/laragon/www/p5",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main-copy&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/p5&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\p5\src" />
@@ -118,6 +132,7 @@
       <workItem from="1695291406291" duration="75124000" />
       <workItem from="1695988485255" duration="33241000" />
       <workItem from="1696496586312" duration="4985000" />
+      <workItem from="1696501764673" duration="10123000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -263,23 +278,157 @@
       <option name="project" value="LOCAL" />
       <updated>1696501261299</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="changing verif isAdmin on commentController">
+      <option name="closed" value="true" />
+      <created>1696504028026</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504028026</updated>
+    </task>
+    <task id="LOCAL-00020" summary="changing phpDoc for HomeController">
+      <option name="closed" value="true" />
+      <created>1696504138892</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504138892</updated>
+    </task>
+    <task id="LOCAL-00021" summary="changing phpDoc for ProfileController">
+      <option name="closed" value="true" />
+      <created>1696504234625</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504234625</updated>
+    </task>
+    <task id="LOCAL-00022" summary="changing isAdmin for ProfileController">
+      <option name="closed" value="true" />
+      <created>1696504480766</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504480766</updated>
+    </task>
+    <task id="LOCAL-00023" summary="changing phpDoc for SecurityController">
+      <option name="closed" value="true" />
+      <created>1696504625173</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504625173</updated>
+    </task>
+    <task id="LOCAL-00024" summary="add phpDoc in ArticleRepo">
+      <option name="closed" value="true" />
+      <created>1696504916311</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1696504916311</updated>
+    </task>
+    <task id="LOCAL-00025" summary="add phpDoc in CommentRepo">
+      <option name="closed" value="true" />
+      <created>1696505175897</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1696505175897</updated>
+    </task>
+    <task id="LOCAL-00026" summary="add phpDoc in CommentRepo">
+      <option name="closed" value="true" />
+      <created>1696505407679</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1696505407680</updated>
+    </task>
+    <task id="LOCAL-00027" summary="add phpDoc in UserRepo">
+      <option name="closed" value="true" />
+      <created>1696505474601</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1696505474601</updated>
+    </task>
+    <task id="LOCAL-00028" summary="add function type return in CommentRepo">
+      <option name="closed" value="true" />
+      <created>1696505641987</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1696505641987</updated>
+    </task>
+    <task id="LOCAL-00029" summary="add function type return in UserRepo">
+      <option name="closed" value="true" />
+      <created>1696505855847</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1696505855847</updated>
+    </task>
+    <task id="LOCAL-00030" summary="delete abstract service">
+      <option name="closed" value="true" />
+      <created>1696506056209</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1696506056209</updated>
+    </task>
+    <task id="LOCAL-00031" summary="add phpDoc for ArticleService.php">
+      <option name="closed" value="true" />
+      <created>1696506111728</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1696506111728</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add phpDoc for AuthService.php">
+      <option name="closed" value="true" />
+      <created>1696506550388</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1696506550388</updated>
+    </task>
+    <task id="LOCAL-00033" summary="change logic for render date on all articles page and one article page">
+      <option name="closed" value="true" />
+      <created>1696507233404</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1696507233404</updated>
+    </task>
+    <task id="LOCAL-00034" summary="add phpDoc form CommentService.php">
+      <option name="closed" value="true" />
+      <created>1696507522230</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1696507522230</updated>
+    </task>
+    <task id="LOCAL-00035" summary="add phpDoc form ImageService.php">
+      <option name="closed" value="true" />
+      <created>1696507833558</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1696507833558</updated>
+    </task>
+    <task id="LOCAL-00036" summary="add phpDoc for UserService.php">
+      <option name="closed" value="true" />
+      <created>1696508046893</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1696508046893</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add readme file and update footer" />
-    <MESSAGE value="update readme" />
-    <MESSAGE value="update gitignore" />
-    <MESSAGE value="add .env, .env.dev and uploads" />
-    <MESSAGE value="transfert logic models to repository" />
-    <MESSAGE value="change project structure to add src folder" />
-    <MESSAGE value="rename folders and files for psr-4" />
-    <MESSAGE value="refactor articleController" />
-    <MESSAGE value="refactor commentController" />
-    <MESSAGE value="refactor profileController" />
     <MESSAGE value="refactor SecurityController" />
     <MESSAGE value="refactor UserService" />
     <MESSAGE value="type functions article" />
@@ -288,6 +437,23 @@
     <MESSAGE value="changing conditionnal rendering on show_one" />
     <MESSAGE value="changing usermodel default value" />
     <MESSAGE value="changing verif isAdmin" />
-    <option name="LAST_COMMIT_MESSAGE" value="changing verif isAdmin" />
+    <MESSAGE value="changing verif isAdmin on commentController" />
+    <MESSAGE value="changing phpDoc for HomeController" />
+    <MESSAGE value="changing phpDoc for ProfileController" />
+    <MESSAGE value="changing isAdmin for ProfileController" />
+    <MESSAGE value="changing phpDoc for SecurityController" />
+    <MESSAGE value="add phpDoc in ArticleRepo" />
+    <MESSAGE value="add phpDoc in CommentRepo" />
+    <MESSAGE value="add phpDoc in UserRepo" />
+    <MESSAGE value="add function type return in CommentRepo" />
+    <MESSAGE value="add function type return in UserRepo" />
+    <MESSAGE value="delete abstract service" />
+    <MESSAGE value="add phpDoc for ArticleService.php" />
+    <MESSAGE value="add phpDoc for AuthService.php" />
+    <MESSAGE value="change logic for render date on all articles page and one article page" />
+    <MESSAGE value="add phpDoc form CommentService.php" />
+    <MESSAGE value="add phpDoc form ImageService.php" />
+    <MESSAGE value="add phpDoc for UserService.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="add phpDoc for UserService.php" />
   </component>
 </project>

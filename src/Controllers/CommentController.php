@@ -13,10 +13,10 @@ class CommentController extends AbstractController
 
     /**
      * Validate the comment from article page
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function validate($id)
+    public function validate(string $id)
     {
     AuthService::checkAdmin(pathToRedirect: "/articles");
 
@@ -43,10 +43,10 @@ class CommentController extends AbstractController
 
     /**
      * Validate the comment from comments page
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function validateFromComments($id)
+    public function validateFromComments(string $id)
     {
         $commentRepository = new CommentRepository();
         $comment = $commentRepository->findOne($id);
@@ -71,10 +71,10 @@ class CommentController extends AbstractController
 
     /**
      * Delete comment from the article page
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function delete($id)
+    public function delete(string $id)
     {
         $commentRepository = new CommentRepository();
         $comment = $commentRepository->findOne($id);
@@ -98,10 +98,10 @@ class CommentController extends AbstractController
 
     /**
      * Delete comment from comments page
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function deleteFromComments($id) // OK
+    public function deleteFromComments(string $id)
     {
         $commentRepository = new CommentRepository();
         $comment = $commentRepository->findOne($id);

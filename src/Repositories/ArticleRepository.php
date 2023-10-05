@@ -17,11 +17,11 @@ class ArticleRepository
 
     /**
      * Hydrate article model
-     * @param $article
-     * @param $data
+     * @param Article $article
+     * @param array|object $data
      * @return Article
      */
-    private function hydrate($article, $data): Article
+    private function hydrate(Article $article, array|object $data): Article
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -69,10 +69,10 @@ class ArticleRepository
 
     /**
      * Crate new article in database
-     * @param $post
+     * @param array $post
      * @return void
      */
-    public function create($post): void
+    public function create(array $post): void
     {
         $title = htmlspecialchars($post["title"]);
         $content = htmlspecialchars($post["content"]);
@@ -85,11 +85,11 @@ class ArticleRepository
 
     /**
      * Update article in database
-     * @param $post
-     * @param $article
+     * @param array $post
+     * @param Article $article
      * @return void
      */
-    public function update($post, $article): void
+    public function update(array $post, Article $article): void
     {
         $content = htmlspecialchars($post["content"]);
         $title = htmlspecialchars($post["title"]);
@@ -105,10 +105,10 @@ class ArticleRepository
 
     /**
      * Delete article in database
-     * @param $id
+     * @param string $id
      * @return void
      */
-    public function deleteArticle($id): void
+    public function deleteArticle(string $id): void
     {
         $sql = "DELETE FROM articles WHERE id = ?";
 

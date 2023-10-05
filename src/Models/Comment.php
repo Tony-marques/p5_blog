@@ -13,17 +13,6 @@ class Comment
     private User $user;
     private Article $article;
 
-
-    public function hydrate($donnees)
-    {
-        foreach ($donnees as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($this, $methode)) {
-                $this->$methode($valeur);
-            }
-        }
-    }
-
     public function __construct()
     {
 //        $this->table = "comments";
@@ -32,7 +21,7 @@ class Comment
     /**
      * Get the value of user_id
      */
-    public function getUserId()
+    public function getUserId():string
     {
         return $this->userId;
     }
@@ -42,7 +31,7 @@ class Comment
      *
      * @return  self
      */
-    public function setUserId($userId)
+    public function setUserId($userId): self
     {
         $this->userId = $userId;
 
@@ -52,7 +41,7 @@ class Comment
     /**
      * Get the value of article_id
      */
-    public function getArticleId()
+    public function getArticleId():string
     {
         return $this->articleId;
     }
@@ -62,7 +51,7 @@ class Comment
      *
      * @return  self
      */
-    public function setArticleId($articleId)
+    public function setArticleId($articleId): self
     {
         $this->articleId = $articleId;
 
@@ -72,7 +61,7 @@ class Comment
     /**
      * Get the value of content
      */
-    public function getContent()
+    public function getContent():string
     {
         return $this->content;
     }
@@ -82,7 +71,7 @@ class Comment
      *
      * @return  self
      */
-    public function setContent($content)
+    public function setContent($content): self
     {
         $this->content = $content;
 
@@ -92,7 +81,7 @@ class Comment
     /**
      * Get the value of published
      */
-    public function getPublished()
+    public function getPublished():string
     {
         return $this->published;
     }
@@ -102,7 +91,7 @@ class Comment
      *
      * @return  self
      */
-    public function setPublished($published)
+    public function setPublished($published): self
     {
         $this->published = $published;
 
@@ -112,7 +101,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUser():User
     {
         return $this->user;
     }
@@ -120,19 +109,19 @@ class Comment
     /**
      * @param mixed $user
      */
-    public function setUser($user)
+    public function setUser($user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getArticle()
+    public function getArticle(): Article
     {
         return $this->article;
     }
 
-    public function setArticle($article)
+    public function setArticle($article): self
     {
         $this->article = $article;
         return $this;
@@ -141,7 +130,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getCreatedAt()
+    public function getCreatedAt():string
     {
         return $this->createdAt;
     }
@@ -149,15 +138,16 @@ class Comment
     /**
      * @param mixed $createdAt
      */
-    public function setCreatedAt($createdAt): void
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId():string
     {
         return $this->id;
     }
@@ -165,7 +155,7 @@ class Comment
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($id): self
     {
         $this->id = $id;
         return $this;

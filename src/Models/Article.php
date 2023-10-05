@@ -24,7 +24,7 @@ class Article
     /**
      * Get the value of content
      */
-    public function getContent()
+    public function getContent():string
     {
         return $this->content;
     }
@@ -34,7 +34,7 @@ class Article
      *
      * @return  self
      */
-    public function setContent($content)
+    public function setContent($content) : self
     {
         $this->content = $content;
 
@@ -44,7 +44,7 @@ class Article
     /**
      * Get the value of title
      */
-    public function getTitle()
+    public function getTitle():string
     {
         return $this->title;
     }
@@ -54,7 +54,7 @@ class Article
      *
      * @return  self
      */
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
 
@@ -64,7 +64,7 @@ class Article
     /**
      * Get the value of updated_at
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt():string
     {
         return $this->updatedAt;
     }
@@ -74,7 +74,7 @@ class Article
      *
      * @return  self
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -84,7 +84,7 @@ class Article
     /**
      * Get the value of created_at
      */
-    public function getCreatedAt()
+    public function getCreatedAt():string
     {
         return $this->createdAt;
     }
@@ -94,7 +94,7 @@ class Article
      *
      * @return  self
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -104,7 +104,7 @@ class Article
     /**
      * Get the value of author
      */
-    public function getAuthor()
+    public function getAuthor():string
     {
         return $this->author;
     }
@@ -114,7 +114,7 @@ class Article
      *
      * @return  self
      */
-    public function setAuthor($author)
+    public function setAuthor($author): self
     {
         $this->author = $author;
 
@@ -124,7 +124,7 @@ class Article
     /**
      * Get the value of user_id
      */
-    public function getUserId()
+    public function getUserId():string
     {
         return $this->userId;
     }
@@ -134,7 +134,7 @@ class Article
      *
      * @return  self
      */
-    public function setUserId($userId)
+    public function setUserId($userId): self
     {
         $this->userId = $userId;
 
@@ -144,7 +144,7 @@ class Article
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUser():User
     {
         return $this->user;
     }
@@ -152,27 +152,29 @@ class Article
     /**
      * @param mixed $user
      */
-    public function setUser($user): void
+    public function setUser($user): self
     {
         $this->user = $user;
+        return $this;
     }
 
-    public function getId()
+    public function getId():string
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
-    public function getComment()
+    public function getComment(): Comment
     {
         return $this->comment;
     }
 
-    public function setComment($comment)
+    public function setComment($comment): self
     {
 
         $this->comment = $comment;
@@ -184,8 +186,9 @@ class Article
         return $this->chapo;
     }
 
-    public function setChapo(?string $chapo): void
+    public function setChapo(?string $chapo): self
     {
         $this->chapo = $chapo;
+        return $this;
     }
 }

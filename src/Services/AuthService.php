@@ -14,7 +14,7 @@ class AuthService
      * @param $pathToRedirect
      * @return void
      */
-    public static function checkUserLogOut($pathToRedirect = "/"): void
+    public static function checkUserLogOut(string $pathToRedirect = "/"): void
     {
         if (!isset($_SESSION["user"])) {
             \header("location: $pathToRedirect");
@@ -46,10 +46,10 @@ class AuthService
         }
         $userRepository = new UserRepository();
         $currentUser = $userRepository->findOne($_SESSION["user"]["id"]) ?? "";
-        $userModel = new User();
-        $userModel->hydrate($currentUser);
+//        $userRepository = new UserRepository();
+//        $userRepository->hydrate($currentUser);
 
-        $userRole = json_decode($userModel->getRole());
+        $userRole = json_decode($currentUser->getRole());
 
         if (\in_array("ROLE_ADMIN", $userRole)) {
             return true;
