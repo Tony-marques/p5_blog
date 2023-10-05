@@ -8,65 +8,67 @@ use App\Repositories\UserRepository;
 class AuthService
 {
 
-  /**
-   * checkuserauthenticated
-   */
-  public static function checkUserLogOut($pathToRedirect = "/")
-  {
-    if (!isset($_SESSION["user"])) {
-      \header("location: $pathToRedirect");
-      return;
+
+    /**
+     * If no logged, redirect
+     * @param $pathToRedirect
+     * @return void
+     */
+    public static function checkUserLogOut($pathToRedirect = "/"): void
+    {
+        if (!isset($_SESSION["user"])) {
+            \header("location: $pathToRedirect");
+            return;
+        }
     }
-  }
 
-  public static function checkUserLogged($pathToRedirect = "/")
-  {
-    if (isset($_SESSION["user"])) {
-      \header("location: $pathToRedirect");
-      return;
+    /**
+     * If logged, redirect
+     * @param string $pathToRedirect
+     * @return void
+     */
+    public static function checkUserLogged(string $pathToRedirect = "/"): void
+    {
+        if (isset($_SESSION["user"])) {
+            \header("location: $pathToRedirect");
+            return;
+        }
     }
-  }
 
-  public static function isAdmin()
-  {
-    if (empty($_SESSION["user"]["id"])) {
-      return false;
+    /**
+     * Return true or false if admin or not
+     * @return bool
+     */
+    public static function isAdmin():bool
+    {
+        if (empty($_SESSION["user"]["id"])) {
+            return false;
+        }
+        $userRepository = new UserRepository();
+        $currentUser = $userRepository->findOne($_SESSION["user"]["id"]) ?? "";
+        $userModel = new User();
+        $userModel->hydrate($currentUser);
+
+        $userRole = json_decode($userModel->getRole());
+
+        if (\in_array("ROLE_ADMIN", $userRole)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    $userRepository = new UserRepository();
-    $currentUser = $userRepository->findOne($_SESSION["user"]["id"]) ?? "";
-    $userModel = new User();
-    $userModel->hydrate($currentUser);
 
-    $userRole = json_decode($userModel->getRole());
-
-    if (\in_array("ROLE_ADMIN", $userRole)) {
-      return true;
-    } else {
-      return false;
+    /**
+     * If not admin, redirect
+     * @param string $pathToRedirect
+     * @return void
+     */
+    public static function checkAdmin(string $pathToRedirect = "/"):void
+    {
+        $admin = self::isAdmin();
+        if ($admin === false) {
+            \header("location: $pathToRedirect");
+            return;
+        }
     }
-  }
-
-  public static function checkAdmin($pathToRedirect = "/")
-  {
-    $admin = self::isAdmin();
-    if ($admin === false) {
-      \header("location: $pathToRedirect");
-      return;
-    }
-  }
-
-  public static function createCSRFToken()
-  {
-    $CSRFToken = bin2hex(random_bytes(32));
-
-    $_SESSION["csrf_token"] = $CSRFToken;
-  }
-
-  public static function checkCSRFToken($postToken)
-  {
-    if ($postToken == $_SESSION["csrf_token"]) {
-      return true;
-    }
-    return false;
-  }
 }
