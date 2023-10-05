@@ -13,8 +13,10 @@ use App\Services\UserService;
 
 class SecurityController extends AbstractController
 {
+
     /**
      * Logout
+     * @return void
      */
     public function logout()
     {
@@ -28,8 +30,11 @@ class SecurityController extends AbstractController
         return;
     }
 
+
     /**
-     * login view
+     * Login form page
+     * @return void|null
+     * @throws \Exception
      */
     public function login()
     {
@@ -153,8 +158,11 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
     /**
-     * Register page
+     * Register form page
+     * @return void|null
+     * @throws \Exception
      */
     public function register()
     {
@@ -319,8 +327,10 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
     /**
      * Manage users page
+     * @return null
      */
     public function allUsers()
     {
