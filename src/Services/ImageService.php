@@ -4,7 +4,13 @@ namespace App\Services;
 
 class ImageService
 {
-  public static function verifyImage($image, $pathToRedirect = null)
+    /**
+     * image processing
+     * @param $image
+     * @param $pathToRedirect
+     * @return string|void
+     */
+    public static function verifyImage($image, $pathToRedirect = null)
   {
     $ext_allowed = ["jpg", "jpeg", "png", "webp"];
 
