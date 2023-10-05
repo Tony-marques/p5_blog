@@ -7,6 +7,13 @@ use App\App\FormBuilder;
 class ArticleService
 {
 
+    /**
+     * Check input value for create article
+     * @param string $title
+     * @param string $content
+     * @param string $chapo
+     * @return bool
+     */
     public static function checkCreateArticle(string $title, string $content, string $chapo)
     {
         // Form validation
@@ -33,6 +40,14 @@ class ArticleService
         return true;
     }
 
+    /**
+     * Check input value for edit article
+     * @param string $title
+     * @param string $content
+     * @param string $chapo
+     * @param int $id
+     * @return bool
+     */
     public function checkEditArticle(string $title, string $content, string $chapo, int $id)
     {
         $title = \htmlspecialchars($title);
@@ -61,9 +76,14 @@ class ArticleService
         return true;
     }
 
+    /**
+     * Create form for create/edit article
+     * @param mixed|null $subject
+     * @return FormBuilder
+     * @throws \Exception
+     */
     public static function createForm(mixed $subject = null)
     {
-//        UtilService::beautifulArray($subject);
         $CSRFToken = bin2hex(random_bytes(32));
         $_SESSION["csrf_token"] = $CSRFToken;
 
@@ -141,14 +161,4 @@ class ArticleService
 
         return $form;
     }
-
-    public static function sortArticlesAsc(array $articles)
-    {
-        // sort article by created_at (asc)
-        usort($articles, function ($a, $b) {
-            return strtotime($b['created_at']) - strtotime($a['created_at']);
-        });
-        return $articles;
-    }
-
 }
