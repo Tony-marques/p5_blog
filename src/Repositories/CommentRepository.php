@@ -20,7 +20,7 @@ class CommentRepository
      * @param $data
      * @return mixed
      */
-    private function hydrate($comment, $data) // OK
+    private function hydrate($comment, $data)
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
