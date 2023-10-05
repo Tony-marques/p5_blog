@@ -18,9 +18,9 @@ class CommentRepository
      * Hydrate comment model
      * @param $comment
      * @param $data
-     * @return mixed
+     * @return Comment
      */
-    private function hydrate($comment, $data)
+    private function hydrate($comment, $data): Comment
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -36,7 +36,7 @@ class CommentRepository
      * @param int $id
      * @return Comment
      */
-    public function findOne(int $id)
+    public function findOne(int $id): Comment
     {
         $sql = "SELECT * FROM comments WHERE id = ?";
         $stmt = $this->db->prepare($sql);
@@ -54,7 +54,7 @@ class CommentRepository
      * @param $isAdmin
      * @return void
      */
-    public function createComment($post, $articleId, $isAdmin)
+    public function createComment($post, $articleId, $isAdmin): void
     {
         $sql = "INSERT INTO comments(`content`, `articleId`, `userId`, `published`) VALUES(?, ?, ?, ?)";
 
@@ -80,7 +80,7 @@ class CommentRepository
      * @param array $arr
      * @return array
      */
-    public function findBy(array $arr)
+    public function findBy(array $arr): array
     {
         $keys = [];
         $values = [];
@@ -101,7 +101,7 @@ class CommentRepository
         foreach ($stmt->fetchall() as $comment) {
             $commentModel = new Comment();
             $this->hydrate($commentModel, $comment);
-            $result[] =  $commentModel;
+            $result[] = $commentModel;
         }
 
         return $result;
@@ -112,7 +112,7 @@ class CommentRepository
      * @param $commentModel
      * @return void
      */
-    public function save($commentModel)
+    public function save($commentModel): void
     {
         $sql = "UPDATE comments SET content = ?, published = ?, articleId = ?, userId = ? WHERE id = ?";
         $statement = $this->db->prepare($sql);
@@ -124,7 +124,7 @@ class CommentRepository
      * @param $id
      * @return void
      */
-    public function deleteComment($id)
+    public function deleteComment($id): void
     {
         $sql = "DELETE FROM comments WHERE id = ?";
 
