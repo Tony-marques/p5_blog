@@ -14,18 +14,29 @@ class CommentRepository
         $this->db = Db::getInstance();
     }
 
+    /**
+     * Hydrate comment model
+     * @param $comment
+     * @param $data
+     * @return mixed
+     */
     private function hydrate($comment, $data) // OK
     {
-        foreach ($data as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($comment, $methode)) {
-                $comment->$methode($valeur);
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($comment, $method)) {
+                $comment->$method($value);
             }
         }
         return $comment;
     }
 
-    public function findOne(int $id) // OK
+    /**
+     * Find one comment in database
+     * @param int $id
+     * @return Comment
+     */
+    public function findOne(int $id)
     {
         $sql = "SELECT * FROM comments WHERE id = ?";
         $stmt = $this->db->prepare($sql);
@@ -36,7 +47,14 @@ class CommentRepository
         return $commentModel;
     }
 
-    public function createComment($post, $articleId, $isAdmin) // OK
+    /**
+     * Create comment in database
+     * @param $post
+     * @param $articleId
+     * @param $isAdmin
+     * @return void
+     */
+    public function createComment($post, $articleId, $isAdmin)
     {
         $sql = "INSERT INTO comments(`content`, `articleId`, `userId`, `published`) VALUES(?, ?, ?, ?)";
 
@@ -49,7 +67,6 @@ class CommentRepository
             ->setUserId($_SESSION["user"]["id"])
             ->setUser($user)
             ->setPublished($isAdmin ? true : 0);
-//        UtilService::beautifulArray($commentModel);
 
         $statement = $this->db->prepare($sql);
         $statement->execute([$commentModel->getContent(), $commentModel->getArticleId(), $commentModel->getUserId(), $commentModel->getPublished()]);
@@ -58,6 +75,11 @@ class CommentRepository
         return;
     }
 
+    /**
+     * find comments by criteria array
+     * @param array $arr
+     * @return array
+     */
     public function findBy(array $arr)
     {
         $keys = [];
@@ -85,14 +107,24 @@ class CommentRepository
         return $result;
     }
 
-    public function save($commentModel) // OK
+    /**
+     * Update comment in database
+     * @param $commentModel
+     * @return void
+     */
+    public function save($commentModel)
     {
         $sql = "UPDATE comments SET content = ?, published = ?, articleId = ?, userId = ? WHERE id = ?";
         $statement = $this->db->prepare($sql);
         $statement->execute([$commentModel->getContent(), $commentModel->getPublished(), $commentModel->getArticleId(), $commentModel->getUserId(), $commentModel->getId()]);
     }
 
-    public function deleteComment($id) // OK
+    /**
+     * Delete comment in database
+     * @param $id
+     * @return void
+     */
+    public function deleteComment($id)
     {
         $sql = "DELETE FROM comments WHERE id = ?";
 
