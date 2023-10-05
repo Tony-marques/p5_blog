@@ -10,12 +10,14 @@ use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\CommentService;
 use App\Services\Pagination;
-use App\Services\UtilService;
 
 class ArticleController extends AbstractController
 {
+
     /**
-     * all articles show
+     * Show all articles
+     * @param $page
+     * @return null
      */
     public function index($page = null)
     {
@@ -43,8 +45,11 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     /**
-     * one article
+     * Show one article
+     * @param string $id
+     * @return void|null
      */
     public function showOne(string $id)
     {
@@ -52,7 +57,6 @@ class ArticleController extends AbstractController
 
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
-
 
         if (!$article->getId()) {
             header("Location: /articles");
@@ -122,8 +126,10 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     /**
      * Create new article
+     * @return void|null
      */
     public function new()
     {
@@ -137,7 +143,6 @@ class ArticleController extends AbstractController
                 \header("location: /article/nouveau");
                 return;
             }
-
 
 
             $content = htmlspecialchars($_POST["content"]);
@@ -160,17 +165,21 @@ class ArticleController extends AbstractController
 
 
     /**
-     * edit one article
+     * Edit one article
      * @param $id
      * @return void|null
      */
     public function edit($id)
     {
-        AuthService::checkAdmin();
-
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
+
+        //        If article not exist
+        if (!$article->getId()) {
+            \header("location: /articles");
+            return;
+        }
 
         // If not the same user, redirect this
         if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
@@ -191,7 +200,7 @@ class ArticleController extends AbstractController
             $article = $articleRepository->findOne($id);
 
             $articleService = new ArticleService();
-            if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"],$_POST["chapo"], $article->getId())) {
+            if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $_POST["chapo"], $article->getId())) {
                 header("location: /article/edition/{$article->getId()}");
                 return;
             }
@@ -207,18 +216,25 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     /**
-     * Delete this article
+     * Delete one article
+     * @param $id
+     * @return void
      */
     public function delete($id)
     {
-        AuthService::checkAdmin();
-
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
 
-        // If not the same user, redirect this
+//        If article not exist
+        if (!$article->getId()) {
+            \header("location: /articles");
+            return;
+        }
+
+//         If not the same user, redirect this
         if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /articles");
             return;

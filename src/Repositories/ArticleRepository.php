@@ -84,17 +84,17 @@ class ArticleRepository
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
 
-        if ($article->getUserId() != $_SESSION["user"]["id"]) {
-            \header("location: /article/$id");
-            return;
-        }
+//        if ($article->getUserId() != $_SESSION["user"]["id"]) {
+//            \header("location: /article/$id");
+//            return;
+//        }
 
         $sql = "DELETE FROM articles WHERE id = ?";
 
         $statement = $this->db->prepare($sql);
         $statement->execute([$id]);
 
-        \header("location: /articles");
+//        \header("location: /articles");
         return;
     }
 }

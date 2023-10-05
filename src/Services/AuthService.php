@@ -49,7 +49,7 @@ class AuthService
   public static function checkAdmin($pathToRedirect = "/")
   {
     $admin = self::isAdmin();
-    if (!$admin) {
+    if ($admin === false) {
       \header("location: $pathToRedirect");
       return;
     }

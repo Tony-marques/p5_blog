@@ -46,7 +46,9 @@ class CommentController extends AbstractController
      */
     public function delete($id) // OK
     {
-    AuthService::checkAdmin(pathToRedirect: "/articles");
+//        pathToRedirect: "/articles"
+    AuthService::checkAdmin();
+
         $commentRepository = new CommentRepository();
         $comment = $commentRepository->findOne($id);
         $commentRepository->deleteComment($id);
