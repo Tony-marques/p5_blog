@@ -6,7 +6,11 @@ use App\App\FormBuilder;
 
 class CommentService
 {
-    public static function createForm()
+    /**
+     * comment form for create comment
+     * @return FormBuilder
+     */
+    public static function createForm(): FormBuilder
     {
         // Create form for comments
         $form = new FormBuilder();
