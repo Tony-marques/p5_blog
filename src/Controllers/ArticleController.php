@@ -222,7 +222,7 @@ class ArticleController extends AbstractController
      * @param $id
      * @return void
      */
-    public function delete($id)
+    public function delete($id): void
     {
         // Find one article with $id params
         $articleRepository = new ArticleRepository();

@@ -4,32 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add .env, .env.dev and uploads">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="changing verif isAdmin">
+      <change beforePath="$PROJECT_DIR$/.idea/p5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/p5.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ArticleModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/ArticleModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/CommentModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/CommentModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/09611dd44cb6580bf8bd0b5f5c5f829d.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/0b5ae0458f44f558f0c5eacde78195ae.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/1562e4177bd6bc33b9cdb7e6352cfdb8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/49a484a4a426ee156ce8e10935c9c28c.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/5b25d40f9b161249b21c932628f88dd2.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/5bc941e41389136486e29748d013e3cb.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/6d4d8394d3d2811b90bb299368196a95.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/a3daf4d2c60df2811d8936af4b5c13eb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/b491f593d73a7e9d6d6b05bcade6d9e6.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/profile/eef2c23dbd130ff2297055740df103c5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/UserService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/articles/show_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/articles/show_one.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/comments/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comments/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/allUsers.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/allUsers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +33,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="main-copy" />
-                    <option name="lastUsedInstant" value="1695380751" />
+                    <option name="lastUsedInstant" value="1696498156" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="add-chapo" />
+                    <option name="lastUsedInstant" value="1696333054" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
@@ -109,7 +92,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -118,6 +101,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\p5\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -128,7 +116,8 @@
       <updated>1695021494767</updated>
       <workItem from="1695021496013" duration="6233000" />
       <workItem from="1695291406291" duration="75124000" />
-      <workItem from="1695988485255" duration="14797000" />
+      <workItem from="1695988485255" duration="33241000" />
+      <workItem from="1696496586312" duration="4985000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -162,7 +151,119 @@
       <option name="project" value="LOCAL" />
       <updated>1695026746618</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="transfert logic models to repository">
+      <option name="closed" value="true" />
+      <created>1696018903074</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696018903074</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change project structure to add src folder">
+      <option name="closed" value="true" />
+      <created>1696019497935</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696019497935</updated>
+    </task>
+    <task id="LOCAL-00007" summary="rename folders and files for psr-4">
+      <option name="closed" value="true" />
+      <created>1696021047077</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021047077</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor articleController">
+      <option name="closed" value="true" />
+      <created>1696021544657</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021544657</updated>
+    </task>
+    <task id="LOCAL-00009" summary="refactor commentController">
+      <option name="closed" value="true" />
+      <created>1696021623130</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021623130</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor profileController">
+      <option name="closed" value="true" />
+      <created>1696021691719</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021691719</updated>
+    </task>
+    <task id="LOCAL-00011" summary="refactor SecurityController">
+      <option name="closed" value="true" />
+      <created>1696021754887</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021754887</updated>
+    </task>
+    <task id="LOCAL-00012" summary="refactor UserService">
+      <option name="closed" value="true" />
+      <created>1696021911835</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1696021911835</updated>
+    </task>
+    <task id="LOCAL-00013" summary="type functions article">
+      <option name="closed" value="true" />
+      <created>1696023003699</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1696023003699</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add redirection if article not exist">
+      <option name="closed" value="true" />
+      <created>1696325201194</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1696325201195</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add chapo in articles">
+      <option name="closed" value="true" />
+      <created>1696336604028</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1696336604028</updated>
+    </task>
+    <task id="LOCAL-00016" summary="changing conditionnal rendering on show_one">
+      <option name="closed" value="true" />
+      <created>1696497613072</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1696497613072</updated>
+    </task>
+    <task id="LOCAL-00017" summary="changing usermodel default value">
+      <option name="closed" value="true" />
+      <created>1696498133382</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1696498133382</updated>
+    </task>
+    <task id="LOCAL-00018" summary="changing verif isAdmin">
+      <option name="closed" value="true" />
+      <created>1696501261299</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1696501261299</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +274,20 @@
     <MESSAGE value="update readme" />
     <MESSAGE value="update gitignore" />
     <MESSAGE value="add .env, .env.dev and uploads" />
-    <option name="LAST_COMMIT_MESSAGE" value="add .env, .env.dev and uploads" />
+    <MESSAGE value="transfert logic models to repository" />
+    <MESSAGE value="change project structure to add src folder" />
+    <MESSAGE value="rename folders and files for psr-4" />
+    <MESSAGE value="refactor articleController" />
+    <MESSAGE value="refactor commentController" />
+    <MESSAGE value="refactor profileController" />
+    <MESSAGE value="refactor SecurityController" />
+    <MESSAGE value="refactor UserService" />
+    <MESSAGE value="type functions article" />
+    <MESSAGE value="add redirection if article not exist" />
+    <MESSAGE value="add chapo in articles" />
+    <MESSAGE value="changing conditionnal rendering on show_one" />
+    <MESSAGE value="changing usermodel default value" />
+    <MESSAGE value="changing verif isAdmin" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing verif isAdmin" />
   </component>
 </project>
