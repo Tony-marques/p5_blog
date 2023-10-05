@@ -112,16 +112,17 @@ class ProfileController extends AbstractController
      */
     public function delete($id)
     {
-        AuthService::checkAdmin(pathToRedirect: "/");
 
         $id = (int)$id;
-        $userModel = new User();
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($id);
 
-//        UtilService::beautifulArray($user);
+        if (!$user->getId()) {
+            \header("location: /utilisateurs");
+            return;
+        }
 
-        if (!$user) {
+        if ($user->getId() !== $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /utilisateurs");
             return;
         }
