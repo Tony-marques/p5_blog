@@ -14,16 +14,27 @@ class UserRepository
         $this->db = Db::getInstance();
     }
 
-    private function hydrate($comment, $data = []) // OK
+    /**
+     * Hydrate user model
+     * @param $comment
+     * @param $data
+     * @return void
+     */
+    private function hydrate($comment, $data = [])
     {
-        foreach ($data as $cle => $valeur) {
-            $methode = 'set' . ucfirst($cle);
-            if (method_exists($comment, $methode)) {
-                $comment->$methode($valeur);
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($comment, $method)) {
+                $comment->$method($value);
             }
         }
     }
 
+    /**
+     * Find user in database by criteria array
+     * @param array $arr
+     * @return array
+     */
     public function findBy(array $arr)
     {
         $keys = [];
@@ -52,7 +63,12 @@ class UserRepository
     }
 
 
-    public function findOne(int $id = null) // OK
+    /**
+     * Find one user in database
+     * @param int|null $id
+     * @return User
+     */
+    public function findOne(int $id = null)
     {
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->db->prepare($sql);
@@ -63,6 +79,13 @@ class UserRepository
         return $userModel;
     }
 
+    /**
+     * Update user in database
+     * @param $post
+     * @param $files
+     * @param $user
+     * @return void
+     */
     public function update($post, $files, $user)
     {
         $firstname = htmlspecialchars($post["firstname"]);
@@ -75,6 +98,11 @@ class UserRepository
         $stmt->execute([$firstname, $lastname, $age, $user->getAvatar(), $user->getId()]);
     }
 
+    /**
+     * Delete user in database
+     * @param int $id
+     * @return void
+     */
     public function delete(int $id): void{
         $sql = "DELETE FROM users WHERE id = ?";
         $statement = $this->db->prepare($sql);
