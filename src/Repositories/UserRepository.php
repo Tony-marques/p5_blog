@@ -16,18 +16,19 @@ class UserRepository
 
     /**
      * Hydrate user model
-     * @param $comment
+     * @param $user
      * @param $data
-     * @return void
+     * @return User
      */
-    private function hydrate($comment, $data = [])
+    private function hydrate($user, $data = []): User
     {
         foreach ($data as $key => $value) {
             $method = 'set' . ucfirst($key);
-            if (method_exists($comment, $method)) {
-                $comment->$method($value);
+            if (method_exists($user, $method)) {
+                $user->$method($value);
             }
         }
+        return $user;
     }
 
     /**
@@ -35,7 +36,7 @@ class UserRepository
      * @param array $arr
      * @return array
      */
-    public function findBy(array $arr)
+    public function findBy(array $arr): array
     {
         $keys = [];
         $values = [];
@@ -68,7 +69,7 @@ class UserRepository
      * @param int|null $id
      * @return User
      */
-    public function findOne(int $id = null)
+    public function findOne(int $id = null): User
     {
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->db->prepare($sql);
@@ -86,7 +87,7 @@ class UserRepository
      * @param $user
      * @return void
      */
-    public function update($post, $files, $user)
+    public function update($post, $files, $user):void
     {
         $firstname = htmlspecialchars($post["firstname"]);
         $lastname = htmlspecialchars($post["lastname"]);
