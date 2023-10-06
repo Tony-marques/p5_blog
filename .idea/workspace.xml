@@ -7,14 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="add typehint function symfonyInsight 4 and change const ROOT">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/AuthService.php" afterDir="false" />
-    </list>
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="removal major error, typehint functions" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +116,7 @@
       <workItem from="1695291406291" duration="75124000" />
       <workItem from="1695988485255" duration="33241000" />
       <workItem from="1696496586312" duration="4985000" />
-      <workItem from="1696501764673" duration="20194000" />
+      <workItem from="1696501764673" duration="20542000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -445,14 +438,29 @@
       <option name="project" value="LOCAL" />
       <updated>1696593062122</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="removal major error, typehint functions">
+      <option name="closed" value="true" />
+      <created>1696594266347</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1696594266347</updated>
+    </task>
+    <task id="LOCAL-00042" summary="removal major error, typehint functions">
+      <option name="closed" value="true" />
+      <created>1696594535272</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1696594535272</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add chapo in articles" />
     <MESSAGE value="changing conditionnal rendering on show_one" />
     <MESSAGE value="changing usermodel default value" />
     <MESSAGE value="changing verif isAdmin" />
@@ -477,6 +485,7 @@
     <MESSAGE value="add typehint function symfonyInsight 2" />
     <MESSAGE value="add typehint function symfonyInsight 3" />
     <MESSAGE value="add typehint function symfonyInsight 4 and change const ROOT" />
-    <option name="LAST_COMMIT_MESSAGE" value="add typehint function symfonyInsight 4 and change const ROOT" />
+    <MESSAGE value="removal major error, typehint functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="removal major error, typehint functions" />
   </component>
 </project>
