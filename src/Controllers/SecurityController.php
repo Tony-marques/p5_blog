@@ -9,8 +9,6 @@ use App\Repositories\UserRepository;
 use App\Services\AuthService;
 use App\Services\UserService;
 
-//use App\services\AuthService;
-
 class SecurityController extends AbstractController
 {
 

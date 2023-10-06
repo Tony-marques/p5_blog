@@ -13,15 +13,10 @@ class Comment
     private User $user;
     private Article $article;
 
-    public function __construct()
-    {
-//        $this->table = "comments";
-    }
-
     /**
      * Get the value of user_id
      */
-    public function getUserId():string
+    public function getUserId(): ?string
     {
         return $this->userId;
     }
@@ -42,7 +37,7 @@ class Comment
     /**
      * Get the value of article_id
      */
-    public function getArticleId():string
+    public function getArticleId(): ?string
     {
         return $this->articleId;
     }
@@ -63,7 +58,7 @@ class Comment
     /**
      * Get the value of content
      */
-    public function getContent():string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -84,7 +79,7 @@ class Comment
     /**
      * Get the value of published
      */
-    public function getPublished():string
+    public function getPublished(): string
     {
         return $this->published;
     }
@@ -105,7 +100,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getUser():User
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -140,7 +135,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getCreatedAt():string
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
@@ -159,7 +154,7 @@ class Comment
     /**
      * @return mixed
      */
-    public function getId():string
+    public function getId(): string
     {
         return $this->id;
     }

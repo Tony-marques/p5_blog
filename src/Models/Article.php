@@ -15,12 +15,6 @@ class Article
     private $user;
     private Comment $comment;
 
-
-    public function __construct()
-    {
-//        $this->table = "articles";
-    }
-
     /**
      * Get the value of content
      */
@@ -128,7 +122,7 @@ class Article
     /**
      * Get the value of user_id
      */
-    public function getUserId():string
+    public function getUserId():?string
     {
         return $this->userId;
     }
@@ -165,7 +159,7 @@ class Article
         return $this;
     }
 
-    public function getId():string
+    public function getId():?string
     {
         return $this->id;
     }

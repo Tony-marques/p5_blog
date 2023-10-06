@@ -17,12 +17,6 @@ class User
     private Comment $comments;
     private Article $articles;
 
-
-    public function __construct()
-    {
-        $this->table = "users";
-    }
-
     /**
      * Get the value of updated_at
      */
