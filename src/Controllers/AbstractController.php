@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-//use App\services\AuthService;
-
 use App\Services\AuthService;
 
 /**

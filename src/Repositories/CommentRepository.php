@@ -91,19 +91,14 @@ class CommentRepository
             $keys[] = "$key = ?";
             $values[] = $value;
         }
-//        UtilService::beautifulArray($values);
 
         $list_keys = implode(" AND ", $keys);
 
         $sql = "SELECT * FROM comments WHERE $list_keys";
 
-//        UtilService::beautifulArray($value);
-
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute($values);
-
-//        UtilService::beautifulArray($stmt->fetchall());
 
         $result = [];
         foreach ($stmt->fetchall() as $comment) {
@@ -113,13 +108,6 @@ class CommentRepository
             $userRepository = new UserRepository();
             $user = $userRepository->findOne($commentModel->getUserId());
             $commentModel->setUser($user);
-
-//            $articleRepository = new ArticleRepository();
-//            $article = $articleRepository->findOne($commentModel->getArticleId());
-//           UtilService::beautifulArray($article);
-//
-//            $commentModel->setArticle($article);
-
 
             $result[] = $commentModel;
         }

@@ -6,8 +6,6 @@ use App\Repositories\UserRepository;
 
 class AuthService
 {
-
-
     /**
      * If no logged, redirect
      * @param $pathToRedirect

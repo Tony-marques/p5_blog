@@ -5,12 +5,10 @@ namespace App\Controllers;
 use App\App\FormBuilder;
 use App\Repositories\ArticleRepository;
 use App\Repositories\CommentRepository;
-use App\Repositories\UserRepository;
 use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\CommentService;
 use App\Services\Pagination;
-use App\Services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -45,7 +43,6 @@ class ArticleController extends AbstractController
 
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
-//        UtilService::beautifulArray($article->getComment());
 
         if (!$article->getId()) {
             header("Location: /articles");
@@ -67,7 +64,6 @@ class ArticleController extends AbstractController
         if (isset($_POST["submit"])) {
             // If form validation is ok
             if (FormBuilder::validate($_POST, ["comment"])) {
-                echo "test";
                 AuthService::checkUserLogged();
                 $commentRepository = new CommentRepository();
                 $commentRepository->createComment($_POST, $id, $isAdmin);
