@@ -57,30 +57,36 @@
             <p>Veuillez vous connecter pour écrire un commentaire</p>
         <?php endif; ?>
         <div class="comment-container">
-            <!--        remplacer true par !$isAdmin -->
-            <?php if (!$isAdmin) : ?>
-                <!--          --><?php //= print_r($article->getComment()); exit; ?>
 
-                <p> <?= count($validateComments) ?> commentaire<?= count($validateComments) > 1 ? "s" : "" ?></p>
-                <?php foreach ($validateComments as $comment) : ?>
-                    <!--        --><?php //= $comment->getContent(); exit; ?>
-                    <div class="comment">
-                        <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
-                        <div class="separator"></div>
-                        <div class="informations">
-                            <div class="people">
-                                <!--                  --><?php //print_r($comment->getUser()); exit ?>
-                                <span><?= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?></span>
-                                <span><?= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?></span>
-                                <span>le <?= date("d/m/Y", strtotime($comment->getCreatedAt())) ?></span>
+            <?php if (!$isAdmin) : ?>
+
+                <!--                <p> --><?php //= count($validateComments) ?><!-- commentaire--><?php //= count($validateComments) > 1 ? "s" : "" ?><!--</p>-->
+                <!--            --><?php //echo "eeeeee"; exit(); ?>
+                <p> <?= $countValidateComments ?>
+                    commentaire<?= $countValidateComments > 1 ? "s" : "" ?></p>
+                <?php foreach ($article->getComment() as $key => $comment) : ?>
+                    <?php if ($article->getComment()[$key]->getPublished() == true): ?>
+                        <div class="comment">
+                            <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
+                            <div class="separator"></div>
+                            <div class="informations">
+                                <div class="people">
+                                    <!--                  --><?php //print_r($comment->getUser()); exit ?>
+                                    <span><?= htmlspecialchars(ucfirst($comment->getUser()->getFirstname())) ?></span>
+                                    <span><?= htmlspecialchars(substr(strtoupper($comment->getUser()->getLastname()), 0, 1)) . "." ?></span>
+                                    <span>le <?= date("d/m/Y", strtotime($comment->getCreatedAt())) ?></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             <?php else : ?>
-                <p> <?= count($allComments) ?> commentaire<?= count($allComments) > 1 ? "s" : "" ?></p>
+                <!--                          --><?php //= print_r($article->getComment()); exit; ?>
 
-                <?php foreach ($allComments as $comment) : ?>
+                <p> <?= count($article->getComment()) ?>
+                    commentaire<?= count($article->getComment()) > 1 ? "s" : "" ?></p>
+
+                <?php foreach ($article->getComment() as $comment) : ?>
                     <div class="comment">
                         <p><?= nl2br(htmlspecialchars($comment->getContent())) ?></p>
                         <div class="separator"></div>

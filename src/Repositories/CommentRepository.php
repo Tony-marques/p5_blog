@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\App\Db;
 use App\Models\Comment;
+use App\Services\UtilService;
 
 class CommentRepository
 {
@@ -44,6 +45,7 @@ class CommentRepository
 
         $commentModel = new Comment();
         $this->hydrate($commentModel, $stmt->fetch());
+
         return $commentModel;
     }
 
@@ -89,18 +91,36 @@ class CommentRepository
             $keys[] = "$key = ?";
             $values[] = $value;
         }
+//        UtilService::beautifulArray($values);
 
         $list_keys = implode(" AND ", $keys);
 
         $sql = "SELECT * FROM comments WHERE $list_keys";
 
+//        UtilService::beautifulArray($value);
+
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute($values);
+
+//        UtilService::beautifulArray($stmt->fetchall());
 
         $result = [];
         foreach ($stmt->fetchall() as $comment) {
             $commentModel = new Comment();
             $this->hydrate($commentModel, $comment);
+
+            $userRepository = new UserRepository();
+            $user = $userRepository->findOne($commentModel->getUserId());
+            $commentModel->setUser($user);
+
+//            $articleRepository = new ArticleRepository();
+//            $article = $articleRepository->findOne($commentModel->getArticleId());
+//           UtilService::beautifulArray($article);
+//
+//            $commentModel->setArticle($article);
+
+
             $result[] = $commentModel;
         }
 

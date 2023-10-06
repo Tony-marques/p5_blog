@@ -10,6 +10,7 @@ use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\CommentService;
 use App\Services\Pagination;
+use App\Services\UtilService;
 
 class ArticleController extends AbstractController
 {
@@ -24,17 +25,6 @@ class ArticleController extends AbstractController
         $articles = $articleRepository->findAll();
 
         [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articles, redirect: "/articles", limit: 5);
-        $userRepository = new UserRepository();
-
-        foreach ($articles as $article) {
-            $user = $userRepository->findOne($article->getUserId());
-            $article->setUser($user);
-        }
-
-        foreach ($articlesPerPage as $article) {
-            $user = $userRepository->findOne($article->getUserId());
-            $article->setUser($user);
-        }
 
         $this->render("articles/index", "articles", [
             "articlesPerPage" => $articlesPerPage,
@@ -55,44 +45,12 @@ class ArticleController extends AbstractController
 
         $articleRepository = new ArticleRepository();
         $article = $articleRepository->findOne($id);
+//        UtilService::beautifulArray($article->getComment());
 
         if (!$article->getId()) {
             header("Location: /articles");
             return;
         }
-
-
-        $userRepository = new UserRepository();
-        $user = $userRepository->findOne($article->getUserId());
-        $article->setUser($user);
-
-        $commentRepository = new CommentRepository();
-
-        $allComments = $commentRepository->findBy(["articleId" => $article->getId()]);
-        $validateComments = $commentRepository->findBy(["articleId" => $article->getId(), "published" => true]);
-
-        $commentsResults = [];
-        foreach ($allComments as $comment) {
-
-            $userRepository = new UserRepository();
-            $user = $userRepository->findOne($comment->getUserId());
-
-            $comment->setUser($user);
-
-            $commentsResults[] = $comment;
-        }
-
-        $commentsValidateResults = [];
-        foreach ($validateComments as $comment) {
-
-            $userRepository = new UserRepository();
-            $user = $userRepository->findOne($comment->getUserId());
-
-            $comment->setUser($user);
-
-            $commentsValidateResults[] = $comment;
-        }
-
 
         // Check if user is login
         if (isset($_SESSION["user"])) {
@@ -116,11 +74,17 @@ class ArticleController extends AbstractController
             }
         }
 
+        $countValidateComments = 0;
+        foreach ($article->getComment() as $comment) {
+            if ($comment->getPublished() == true) {
+                $countValidateComments++;
+            }
+        }
+
         $this->render("articles/show_one", "article $id", [
             "article" => $article,
             "commentForm" => $commentForm->create(),
-            "validateComments" => $commentsValidateResults,
-            "allComments" => $commentsResults,
+            "countValidateComments" => $countValidateComments
         ]);
     }
 

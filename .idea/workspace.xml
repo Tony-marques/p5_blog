@@ -7,7 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="removal major error, typehint functions" />
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="removal major error, typehint functions symfonyInsight">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App/Db.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/UtilService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UtilService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/articles/show_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/articles/show_one.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comments/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comments/all.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,7 +130,7 @@
       <workItem from="1695291406291" duration="75124000" />
       <workItem from="1695988485255" duration="33241000" />
       <workItem from="1696496586312" duration="4985000" />
-      <workItem from="1696501764673" duration="20542000" />
+      <workItem from="1696501764673" duration="31960000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -454,14 +468,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696594535272</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="removal major error, typehint functions symfonyInsight">
+      <option name="closed" value="true" />
+      <created>1696594803021</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1696594803021</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changing conditionnal rendering on show_one" />
     <MESSAGE value="changing usermodel default value" />
     <MESSAGE value="changing verif isAdmin" />
     <MESSAGE value="changing verif isAdmin on commentController" />
@@ -486,6 +507,7 @@
     <MESSAGE value="add typehint function symfonyInsight 3" />
     <MESSAGE value="add typehint function symfonyInsight 4 and change const ROOT" />
     <MESSAGE value="removal major error, typehint functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="removal major error, typehint functions" />
+    <MESSAGE value="removal major error, typehint functions symfonyInsight" />
+    <option name="LAST_COMMIT_MESSAGE" value="removal major error, typehint functions symfonyInsight" />
   </component>
 </project>

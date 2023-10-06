@@ -13,7 +13,7 @@ class Article
     private string|\DateTimeImmutable $updatedAt;
     private ?int $userId = null;
     private $user;
-    private Comment $comment;
+    private Comment|array $comment;
 
     /**
      * Get the value of content
@@ -170,14 +170,13 @@ class Article
         return $this;
     }
 
-    public function getComment(): Comment
+    public function getComment(): Comment|array
     {
         return $this->comment;
     }
 
-    public function setComment(Comment $comment): self
+    public function setComment(Comment|array $comment): self
     {
-
         $this->comment = $comment;
         return $this;
     }

@@ -10,7 +10,7 @@ class Comment
     private ?int $articleId = null;
     private ?int $userId = null;
     private $createdAt;
-    private User $user;
+    private ?User $user = null;
     private Article $article;
 
     /**
@@ -98,9 +98,9 @@ class Comment
     }
 
     /**
-     * @return mixed
+     * @return User|null
      */
-    public function getUser(): User
+    public function getUser(): User|null
     {
         return $this->user;
     }

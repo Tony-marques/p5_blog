@@ -77,6 +77,7 @@ class UserRepository
 
         $userModel = new User();
         $this->hydrate($userModel, (array)$stmt->fetch());
+
         return $userModel;
     }
 

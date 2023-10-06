@@ -130,27 +130,11 @@ class CommentController extends AbstractController
     public function checkAllComments():void
     {
     AuthService::checkAdmin("/articles");
-
-        $commentRepository = new CommentRepository();
-        $allComments = $commentRepository->findBy(["published" => 0]);
-
-        $result = [];
-        foreach ($allComments as $comment) {
-            $userRepository = new UserRepository();
-            $user = $userRepository->findOne($comment->getUserId());
-
-            $articleRepository = new ArticleRepository();
-            $article = $articleRepository->findOne($comment->getArticleId());
-
-            $comment->setUser($user);
-            $comment->setArticle($article);
-
-            $result[] = $comment;
-        }
-
+        $articleRepository = new ArticleRepository();
+        $articles = $articleRepository->findAll();
 
         $this->render("comments/all", "commentaires", [
-            "comments" => $result
+            "articles" => $articles,
         ]);
     }
 }

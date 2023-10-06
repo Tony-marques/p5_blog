@@ -57,10 +57,6 @@ class ProfileController extends AbstractController
                 return;
             }
 
-            $user->setAge($_POST["age"])
-                ->setFirstname($_POST["firstname"])
-                ->setLastname($_POST["lastname"]);
-
             $_SESSION["user"]["firstname"] = $_POST["firstname"];
             $_SESSION["user"]["lastname"] = $_POST["lastname"];
             $_SESSION["user"]["age"] = $_POST["age"];
@@ -84,7 +80,6 @@ class ProfileController extends AbstractController
 
             // 3. The user don't have image and adds one
             if (empty($user->getAvatar()) && !empty($_FILES["profil_picture"]["name"])) {
-
                 $user->setAvatar($path);
                 $_SESSION["user"]["avatar"] = "$path";
             }

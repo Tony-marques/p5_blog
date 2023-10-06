@@ -45,6 +45,17 @@ class ArticleRepository
 
         $articleModel = new Article();
         $this->hydrate($articleModel, (array)$stmt->fetch());
+
+        $userRepository = new UserRepository();
+        $user = $userRepository->findOne($articleModel->getUserId());
+        $articleModel->setUser($user);
+//
+        $commentRepository = new CommentRepository();
+        $comments = $commentRepository->findBy(["articleId" => $articleModel->getId()]);
+        $articleModel->setComment($comments);
+
+//        UtilService::beautifulArray($articleModel);
+
         return $articleModel;
     }
 
@@ -63,8 +74,19 @@ class ArticleRepository
             $articleModel = new Article();
             $this->hydrate($articleModel, $article);
 
+            $userRepository = new UserRepository();
+            $user = $userRepository->findOne($articleModel->getUserId());
+            $articleModel->setUser($user);
+
+            $commentRepository = new CommentRepository();
+            $comments = $commentRepository->findBy(["articleId" => $articleModel->getId()]);
+
+            $articleModel->setComment($comments);
+
             $articlesObj[] = $articleModel;
         }
+//        UtilService::beautifulArray($articlesObj);
+
         return $articlesObj;
     }
 
@@ -119,4 +141,5 @@ class ArticleRepository
         \header("location: /articles");
         return;
     }
+
 }
