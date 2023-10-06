@@ -122,7 +122,7 @@ class Article
     /**
      * Get the value of user_id
      */
-    public function getUserId():?string
+    public function getUserId():?int
     {
         return $this->userId;
     }
@@ -159,7 +159,7 @@ class Article
         return $this;
     }
 
-    public function getId():?string
+    public function getId():?int
     {
         return $this->id;
     }

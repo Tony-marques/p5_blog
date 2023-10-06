@@ -16,7 +16,7 @@ class Comment
     /**
      * Get the value of user_id
      */
-    public function getUserId(): ?string
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
@@ -37,7 +37,7 @@ class Comment
     /**
      * Get the value of article_id
      */
-    public function getArticleId(): ?string
+    public function getArticleId(): ?int
     {
         return $this->articleId;
     }
