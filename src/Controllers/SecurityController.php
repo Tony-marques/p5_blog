@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
      * Logout
      * @return void
      */
-    public function logout():void
+    public function logout(): void
     {
         if (!isset($_SESSION["user"])) {
             \header("location: /");
@@ -33,10 +33,10 @@ class SecurityController extends AbstractController
 
     /**
      * Login form page
-     * @return void|null
+     * @return void
      * @throws \Exception
      */
-    public function login(): mixed
+    public function login(): void
     {
         AuthService::checkUserLogged();
 
@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
                 \header("location: /connexion");
-                return null;
+                return;
             }
 
             $_SESSION["temporary_user"] = [
@@ -57,7 +57,7 @@ class SecurityController extends AbstractController
                 ];
 
                 \header("location: /connexion");
-                return null;
+                return;
             }
 
             $_POST = \filter_input_array(INPUT_POST, [
@@ -74,7 +74,7 @@ class SecurityController extends AbstractController
                 ];
 
                 \header("location: /connexion");
-                return null;
+                return;
             }
 
             if (\password_verify($_POST["password"], $user[0]->getPassword())) {
@@ -89,14 +89,14 @@ class SecurityController extends AbstractController
                     ]
                 ];
                 \header("location: /");
-                return null;
+                return;
             } else {
                 $_SESSION["error"] = [
                     "login" => "Adresse e-mail ou mot de passe incorrect !"
                 ];
 
                 \header("location: /connexion");
-                return null;
+                return;
             }
         }
 
@@ -149,7 +149,7 @@ class SecurityController extends AbstractController
             ->endForm();
 
 
-        return $this->render(path: "security/login", title: "connexion", data: [
+        $this->render(path: "security/login", title: "connexion", data: [
             "form" => $form->create()
         ]);
     }
@@ -157,10 +157,10 @@ class SecurityController extends AbstractController
 
     /**
      * Register form page
-     * @return void|null
+     * @return void
      * @throws \Exception
      */
-    public function register():mixed
+    public function register(): void
     {
         AuthService::checkUserLogged();
 
@@ -168,7 +168,7 @@ class SecurityController extends AbstractController
             if ($_SESSION["csrf_token"] != $_POST["csrf_token"]) {
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token !";
                 \header("location: /inscription");
-                return null;
+                return;
             }
             $passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,})$";
 
@@ -205,7 +205,7 @@ class SecurityController extends AbstractController
                 ];
 
                 \header("location: /inscription");
-                return null;
+                return;
             }
 
             $_POST = \filter_input_array(INPUT_POST, [
@@ -231,7 +231,7 @@ class SecurityController extends AbstractController
             ];
 
             \header("location: /connexion");
-            return null;
+            return;
         }
 
         $CSRFToken = bin2hex(random_bytes(32));
@@ -318,7 +318,7 @@ class SecurityController extends AbstractController
             ->endForm();
 
 
-        return $this->render(path: "security/register", title: "inscription", data: [
+        $this->render(path: "security/register", title: "inscription", data: [
             "form" => $form->create()
         ]);
     }
@@ -326,9 +326,9 @@ class SecurityController extends AbstractController
 
     /**
      * Manage users page
-     * @return null
+     * @return void
      */
-    public function allUsers(): mixed
+    public function allUsers(): void
     {
         AuthService::checkAdmin(pathToRedirect: "/");
 
@@ -336,7 +336,7 @@ class SecurityController extends AbstractController
 
         $users = $userRepository->findBy(["role" => "[\"ROLE_USER\"]"]);
 
-        return $this->render(path: "security/allUsers", title: "gestion utilisateurs", data: [
+        $this->render(path: "security/allUsers", title: "gestion utilisateurs", data: [
             "users" => $users
         ]);
     }

@@ -13,6 +13,7 @@ class AbstractController
 {
     public function render(string $path, string $title, array $data = [], string $template = "default"): void
     {
+
         \extract($data);
 
         ob_start();
@@ -20,12 +21,11 @@ class AbstractController
         // Render true or false for navbar
         $isAdmin = AuthService::isAdmin();
 
-        require_once ROOT . "/templates/$path.php";
+        require_once __DIR__ . "/../.." . "/templates/$path.php";
 
         $content = \ob_get_clean();
 
-        require_once ROOT . "/templates/$template.php";
-
+        require_once __DIR__ . "/../.." . "/templates/$template.php";
 
         unset($_SESSION["error"]);
         unset($_SESSION["temporary_user"]);

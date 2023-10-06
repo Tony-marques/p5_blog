@@ -13,8 +13,6 @@ if (file_exists(dirname(__DIR__) . "/.env.$env")) {
   $dotenv->load();
 };
 
-define("ROOT", dirname(__DIR__));
-
 \session_start();
 
 $router = new Router($_GET["p"]);

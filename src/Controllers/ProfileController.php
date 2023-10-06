@@ -16,9 +16,9 @@ class ProfileController extends AbstractController
     /**
      * Edit profile page
      * @param string $id
-     * @return void|null
+     * @return void
      */
-    public function edit(string $id):mixed
+    public function edit(string $id): void
     {
         $id = (int)$id;
         $userRepository = new UserRepository();
@@ -26,12 +26,12 @@ class ProfileController extends AbstractController
 
         if (!$user->getId()) {
             \header("location: /utilisateurs");
-            return null;
+            return;
         }
 
         if ($user->getId() !== $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /utilisateurs");
-            return null;
+            return;
         }
 
         AuthService::checkUserLogOut();
@@ -47,14 +47,14 @@ class ProfileController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /profil/edition/$id");
-                return null;
+                return;
             }
 
             if (!UserService::checkFields($_POST)) {
                 UserService::createErrorSessionFields($_POST);
                 UserService::createTmpProfileSession($_POST);
                 \header("location: /profil/edition/$id");
-                return null;
+                return;
             }
 
             $user->setAge($_POST["age"])
@@ -93,12 +93,12 @@ class ProfileController extends AbstractController
 
             $userRepository->update($_POST, $_FILES, $user);
             \header("location: /profil/edition/{$_SESSION['user']['id']}");
-            return null;
+            return;
         }
 
         $form = UserService::createForm($_SESSION, $user);
 
-        return $this->render("profile/edit", "mon profil", [
+        $this->render("profile/edit", "mon profil", [
             "form" => $form->create(),
             "user" => $user
         ]);
@@ -110,7 +110,7 @@ class ProfileController extends AbstractController
      * @param string $id
      * @return void
      */
-    public function delete(string $id):void
+    public function delete(string $id): void
     {
 
         $id = (int)$id;

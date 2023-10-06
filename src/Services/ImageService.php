@@ -33,7 +33,8 @@ class ImageService
             }
 
             $newName = md5(\uniqid());
-            $newPathFile = ROOT . "/public/uploads/profile/$newName.$ext";
+
+            $newPathFile = __DIR__ . "/../.." . "/public/uploads/profile/$newName.$ext";
             if (!\move_uploaded_file($_FILES["profil_picture"]["tmp_name"], $newPathFile)) {
             }
             return "$newName.$ext";

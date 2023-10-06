@@ -13,21 +13,20 @@ use App\Services\Pagination;
 
 class ArticleController extends AbstractController
 {
-
     /**
      * Show all articles
      * @param string|null $page
-     * @return null
+     * @return void
      */
-    public function index(?string $page = null): mixed
+    public function index(?string $page = null): void
     {
         $articleRepository = new ArticleRepository();
-        $articlesObj = $articleRepository->findAll();
+        $articles = $articleRepository->findAll();
 
-        [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articleRepository->findAll(), redirect: "/articles", limit: 5);
+        [$articlesPerPage, $currentPage, $totalPages] = Pagination::paginate(page: $page, service: $articles, redirect: "/articles", limit: 5);
         $userRepository = new UserRepository();
 
-        foreach ($articlesObj as $article) {
+        foreach ($articles as $article) {
             $user = $userRepository->findOne($article->getUserId());
             $article->setUser($user);
         }
@@ -37,10 +36,9 @@ class ArticleController extends AbstractController
             $article->setUser($user);
         }
 
-
-        return $this->render("articles/index", "articles", [
+        $this->render("articles/index", "articles", [
             "articlesPerPage" => $articlesPerPage,
-            "allArticles" => $articlesObj,
+            "allArticles" => $articles,
             "totalPages" => $totalPages
         ]);
     }
@@ -49,9 +47,9 @@ class ArticleController extends AbstractController
     /**
      * Show one article
      * @param string $id
-     * @return mixed
+     * @return void
      */
-    public function showOne(string $id):mixed
+    public function showOne(string $id): void
     {
         $id = (int)$id;
 
@@ -60,7 +58,7 @@ class ArticleController extends AbstractController
 
         if (!$article->getId()) {
             header("Location: /articles");
-            return null;
+            return;
         }
 
 
@@ -118,7 +116,7 @@ class ArticleController extends AbstractController
             }
         }
 
-        return $this->render("articles/show_one", "article $id", [
+        $this->render("articles/show_one", "article $id", [
             "article" => $article,
             "commentForm" => $commentForm->create(),
             "validateComments" => $commentsValidateResults,
@@ -129,9 +127,9 @@ class ArticleController extends AbstractController
 
     /**
      * Create new article
-     * @return void|null
+     * @return void
      */
-    public function new(): mixed
+    public function new(): void
     {
         AuthService::checkUserLogOut();
         AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -141,7 +139,7 @@ class ArticleController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /article/nouveau");
-                return null;
+                return;
             }
 
 
@@ -151,7 +149,7 @@ class ArticleController extends AbstractController
 
             if (!ArticleService::checkCreateArticle($title, $content, $chapo)) {
                 header("location: /article/nouveau");
-                return null;
+                return;
             }
             $articleRepository = new ArticleRepository();
             $articleRepository->create($_POST);
@@ -160,16 +158,16 @@ class ArticleController extends AbstractController
 
         $form = ArticleService::createForm();
 
-        return $this->render("articles/new", "création article", ["form" => $form->create()]);
+        $this->render("articles/new", "création article", ["form" => $form->create()]);
     }
 
 
     /**
      * Edit one article
      * @param string $id
-     * @return void|null
+     * @return void
      */
-    public function edit(string $id): mixed
+    public function edit(string $id): void
     {
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
@@ -178,13 +176,13 @@ class ArticleController extends AbstractController
         //        If article not exist
         if (!$article->getId()) {
             \header("location: /articles");
-            return null;
+            return;
         }
 
         // If not the same user, redirect this
         if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /articles");
-            return null;
+            return;
         }
 
         // If form is submitted
@@ -194,7 +192,7 @@ class ArticleController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /article/edition/$id");
-                return null;
+                return;
             }
             $articleRepository = new ArticleRepository();
             $article = $articleRepository->findOne($id);
@@ -202,7 +200,7 @@ class ArticleController extends AbstractController
             $articleService = new ArticleService();
             if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $_POST["chapo"], $article->getId())) {
                 header("location: /article/edition/{$article->getId()}");
-                return null;
+                return;
             }
             $articleRepository->update($_POST, $article);
         }
@@ -210,7 +208,7 @@ class ArticleController extends AbstractController
         // Create form
         $form = ArticleService::createForm($article);
 
-        return $this->render("articles/edition", "édition article $id", [
+        $this->render("articles/edition", "édition article $id", [
             "article" => $article,
             "form" => $form->create()
         ]);

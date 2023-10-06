@@ -125,9 +125,9 @@ class CommentController extends AbstractController
 
     /**
      * Display comments
-     * @return null
+     * @return void
      */
-    public function checkAllComments():mixed
+    public function checkAllComments():void
     {
     AuthService::checkAdmin("/articles");
 
@@ -149,7 +149,7 @@ class CommentController extends AbstractController
         }
 
 
-        return $this->render("comments/all", "commentaires", [
+        $this->render("comments/all", "commentaires", [
             "comments" => $result
         ]);
     }

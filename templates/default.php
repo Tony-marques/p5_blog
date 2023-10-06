@@ -25,11 +25,11 @@
 </head>
 
 <body>
-  <?php include_once ROOT . "/templates/_partials/_navbar.php" ?>
+  <?php include_once __DIR__ . "/_partials/_navbar.php" ?>
   <div class="container">
     <?= $content ?>
   </div>
-  <?php include_once ROOT . "/templates/_partials/_footer.php" ?>
+  <?php include_once  __DIR__ . "/_partials/_footer.php" ?>
   
 </body>
 

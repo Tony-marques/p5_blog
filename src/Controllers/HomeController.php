@@ -10,16 +10,16 @@ class HomeController extends AbstractController
 {
     /**
      * Home page
-     * @return void|null
+     * @return void
      */
-    public function index(): mixed
+    public function index(): void
     {
         if (isset($_POST["submit"])) {
             if ($_SESSION["csrf_token"] !== $_POST["csrf_token"]) {
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /");
-                return null;
+                return;
             }
 
             $email = \htmlspecialchars($_POST["email"]);
@@ -44,7 +44,7 @@ class HomeController extends AbstractController
                 ];
 
                 \header("location: /");
-                return null;
+                return;
             }
 
             $headers = [
@@ -136,7 +136,7 @@ class HomeController extends AbstractController
             ->endDiv()
             ->endForm();
 
-        return $this->render("home/index", "accueil", [
+        $this->render("home/index", "accueil", [
             "form" => $form->create()
         ]);
     }

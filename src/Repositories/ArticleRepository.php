@@ -62,6 +62,7 @@ class ArticleRepository
         foreach ($articles as $article) {
             $articleModel = new Article();
             $this->hydrate($articleModel, $article);
+
             $articlesObj[] = $articleModel;
         }
         return $articlesObj;
