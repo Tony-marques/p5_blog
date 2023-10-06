@@ -46,7 +46,7 @@ class User
     /**
      * Get the value of created_at
      */
-    public function getCreatedAt():string
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
@@ -66,7 +66,7 @@ class User
     /**
      * Get the value of password
      */
-    public function getPassword():string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -86,7 +86,7 @@ class User
     /**
      * Get the value of role
      */
-    public function getRole():string
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -106,7 +106,7 @@ class User
     /**
      * Get the value of email
      */
-    public function getEmail():string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -125,7 +125,7 @@ class User
     /**
      * Get the value of avatar
      */
-    public function getAvatar():string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
@@ -145,17 +145,17 @@ class User
     /**
      * Get the value of age
      */
-    public function getAge():int
+    public function getAge(): int
     {
         return $this->age;
     }
 
 
     /**
-     * @param string $age
+     * @param ?string $age
      * @return $this
      */
-    public function setAge(string $age): self
+    public function setAge(?string $age): self
     {
         $this->age = $age;
 
@@ -165,7 +165,7 @@ class User
     /**
      * Get the value of lastname
      */
-    public function getLastname():string
+    public function getLastname(): string
     {
         return $this->lastname;
     }
@@ -185,7 +185,7 @@ class User
     /**
      * Get the value of firstname
      */
-    public function getFirstname():string
+    public function getFirstname(): string
     {
         return $this->firstname;
     }

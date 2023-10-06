@@ -19,7 +19,7 @@ class ArticleController extends AbstractController
      * @param string|null $page
      * @return null
      */
-    public function index(?string $page = null):null
+    public function index(?string $page = null): mixed
     {
         $articleRepository = new ArticleRepository();
         $articlesObj = $articleRepository->findAll();
@@ -49,9 +49,9 @@ class ArticleController extends AbstractController
     /**
      * Show one article
      * @param string $id
-     * @return void|null
+     * @return mixed
      */
-    public function showOne(string $id)
+    public function showOne(string $id):mixed
     {
         $id = (int)$id;
 
@@ -60,7 +60,7 @@ class ArticleController extends AbstractController
 
         if (!$article->getId()) {
             header("Location: /articles");
-            return;
+            return null;
         }
 
 
@@ -131,7 +131,7 @@ class ArticleController extends AbstractController
      * Create new article
      * @return void|null
      */
-    public function new()
+    public function new(): mixed
     {
         AuthService::checkUserLogOut();
         AuthService::checkAdmin(pathToRedirect: "/articles");
@@ -141,7 +141,7 @@ class ArticleController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /article/nouveau");
-                return;
+                return null;
             }
 
 
@@ -151,7 +151,7 @@ class ArticleController extends AbstractController
 
             if (!ArticleService::checkCreateArticle($title, $content, $chapo)) {
                 header("location: /article/nouveau");
-                return;
+                return null;
             }
             $articleRepository = new ArticleRepository();
             $articleRepository->create($_POST);
@@ -169,7 +169,7 @@ class ArticleController extends AbstractController
      * @param string $id
      * @return void|null
      */
-    public function edit(string $id)
+    public function edit(string $id): mixed
     {
         // Find one article with $id params
         $articleRepository = new ArticleRepository();
@@ -178,13 +178,13 @@ class ArticleController extends AbstractController
         //        If article not exist
         if (!$article->getId()) {
             \header("location: /articles");
-            return;
+            return null;
         }
 
         // If not the same user, redirect this
         if ($article->getUserId() != $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /articles");
-            return;
+            return null;
         }
 
         // If form is submitted
@@ -194,7 +194,7 @@ class ArticleController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /article/edition/$id");
-                return;
+                return null;
             }
             $articleRepository = new ArticleRepository();
             $article = $articleRepository->findOne($id);
@@ -202,7 +202,7 @@ class ArticleController extends AbstractController
             $articleService = new ArticleService();
             if (!$articleService->checkEditArticle($_POST["title"], $_POST["content"], $_POST["chapo"], $article->getId())) {
                 header("location: /article/edition/{$article->getId()}");
-                return;
+                return null;
             }
             $articleRepository->update($_POST, $article);
         }

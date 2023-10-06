@@ -18,7 +18,7 @@ class ProfileController extends AbstractController
      * @param string $id
      * @return void|null
      */
-    public function edit(string $id)
+    public function edit(string $id):mixed
     {
         $id = (int)$id;
         $userRepository = new UserRepository();
@@ -26,12 +26,12 @@ class ProfileController extends AbstractController
 
         if (!$user->getId()) {
             \header("location: /utilisateurs");
-            return;
+            return null;
         }
 
         if ($user->getId() !== $_SESSION["user"]["id"] && !AuthService::isAdmin()) {
             \header("location: /utilisateurs");
-            return;
+            return null;
         }
 
         AuthService::checkUserLogOut();
@@ -47,14 +47,14 @@ class ProfileController extends AbstractController
                 $_SESSION["error"]["csrf_token"] = "Il y a un problème avec votre token";
 
                 \header("location: /profil/edition/$id");
-                return;
+                return null;
             }
 
             if (!UserService::checkFields($_POST)) {
                 UserService::createErrorSessionFields($_POST);
                 UserService::createTmpProfileSession($_POST);
                 \header("location: /profil/edition/$id");
-                return;
+                return null;
             }
 
             $user->setAge($_POST["age"])
@@ -93,7 +93,7 @@ class ProfileController extends AbstractController
 
             $userRepository->update($_POST, $_FILES, $user);
             \header("location: /profil/edition/{$_SESSION['user']['id']}");
-            return;
+            return null;
         }
 
         $form = UserService::createForm($_SESSION, $user);
@@ -110,7 +110,7 @@ class ProfileController extends AbstractController
      * @param string $id
      * @return void
      */
-    public function delete(string $id)
+    public function delete(string $id):void
     {
 
         $id = (int)$id;
