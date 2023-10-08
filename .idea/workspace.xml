@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="desactivate UtilService.php">
+    <list default="true" id="4859a8d3-09aa-4546-840a-be4f047ef48b" name="Changes" comment="typehint function symfonyInsights">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/AbstractController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/AbstractController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/CommentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/AuthService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/AuthService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/UtilService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/UtilService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repositories/ArticleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/articles/show_one.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/articles/show_one.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,27 +82,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main-copy&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/p5&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main-copy",
+    "last_opened_file_path": "C:/laragon/www/p5",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\p5\src" />
@@ -123,7 +120,7 @@
       <workItem from="1695291406291" duration="75124000" />
       <workItem from="1695988485255" duration="33241000" />
       <workItem from="1696496586312" duration="4985000" />
-      <workItem from="1696501764673" duration="35059000" />
+      <workItem from="1696501764673" duration="36159000" />
     </task>
     <task id="LOCAL-00001" summary="add readme file and update footer">
       <option name="closed" value="true" />
@@ -485,14 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696606343900</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="typehint function symfonyInsights">
+      <option name="closed" value="true" />
+      <created>1696609190859</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1696609190859</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changing verif isAdmin on commentController" />
     <MESSAGE value="changing phpDoc for HomeController" />
     <MESSAGE value="changing phpDoc for ProfileController" />
     <MESSAGE value="changing isAdmin for ProfileController" />
@@ -517,6 +521,7 @@
     <MESSAGE value="removal major error, typehint functions symfonyInsight" />
     <MESSAGE value="transfert logic from controller to repository" />
     <MESSAGE value="desactivate UtilService.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="desactivate UtilService.php" />
+    <MESSAGE value="typehint function symfonyInsights" />
+    <option name="LAST_COMMIT_MESSAGE" value="typehint function symfonyInsights" />
   </component>
 </project>

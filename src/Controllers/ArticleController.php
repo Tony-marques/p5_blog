@@ -102,10 +102,9 @@ class ArticleController extends AbstractController
                 return;
             }
 
-
-            $content = htmlspecialchars($_POST["content"]);
-            $title = htmlspecialchars($_POST["title"]);
-            $chapo = htmlspecialchars($_POST["chapo"]);
+            $content = filter_var($_POST["content"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $title = filter_var($_POST["title"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $chapo = filter_var($_POST["chapo"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (!ArticleService::checkCreateArticle($title, $content, $chapo)) {
                 header("location: /article/nouveau");

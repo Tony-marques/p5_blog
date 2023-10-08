@@ -50,9 +50,9 @@ class ArticleService
      */
     public function checkEditArticle(string $title, string $content, string $chapo, int $id)
     {
-        $title = \htmlspecialchars($title);
-        $content = \htmlspecialchars($content);
-        $chapo = \htmlspecialchars($chapo);
+        $title = filter_var($title, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $content = filter_var($content, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $chapo = filter_var($chapo, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Form validation
         if (\strlen($title) < 5 || \strlen($content) < 20 || \strlen($chapo) < 10) {

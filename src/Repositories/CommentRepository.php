@@ -60,7 +60,7 @@ class CommentRepository
     {
         $sql = "INSERT INTO comments(`content`, `articleId`, `userId`, `published`) VALUES(?, ?, ?, ?)";
 
-        $comment = htmlspecialchars($post["comment"]);
+        $comment = filter_var($post["comment"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($_SESSION["user"]["id"]);
         $commentModel = new Comment();

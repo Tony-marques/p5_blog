@@ -23,8 +23,8 @@ class HomeController extends AbstractController
             }
 
             $email = \htmlspecialchars($_POST["email"]);
-            $name = \htmlspecialchars($_POST["name"]);
-            $message = \htmlspecialchars($_POST["message"]);
+            $name = filter_var($_POST["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $message = filter_var($_POST["message"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if (
                 !\filter_var($email, \FILTER_VALIDATE_EMAIL)
                 || \strlen($name) <= 3

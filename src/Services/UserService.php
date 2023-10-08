@@ -50,9 +50,9 @@ class UserService
     public static function createTmpProfileSession(array $post)
   {
     $_SESSION["tmp_profile"] = [
-      "firstname" => \htmlspecialchars($post["firstname"]),
-      "lastname" => \htmlspecialchars($post["lastname"]),
-      "age" => \htmlspecialchars($post["age"]),
+        "firstname" => filter_var($post["firstname"], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+        "lastname" => filter_var($post["lastname"], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+        "age" => filter_var($post["age"], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
     ];
   }
 

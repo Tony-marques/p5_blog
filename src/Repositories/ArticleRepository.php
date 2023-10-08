@@ -49,12 +49,11 @@ class ArticleRepository
         $userRepository = new UserRepository();
         $user = $userRepository->findOne($articleModel->getUserId());
         $articleModel->setUser($user);
-//
+
         $commentRepository = new CommentRepository();
         $comments = $commentRepository->findBy(["articleId" => $articleModel->getId()]);
         $articleModel->setComment($comments);
 
-//        UtilService::beautifulArray($articleModel);
 
         return $articleModel;
     }
@@ -85,21 +84,20 @@ class ArticleRepository
 
             $articlesObj[] = $articleModel;
         }
-//        UtilService::beautifulArray($articlesObj);
 
         return $articlesObj;
     }
 
     /**
-     * Crate new article in database
+     * Create new article in database
      * @param array $post
      * @return void
      */
     public function create(array $post): void
     {
-        $title = htmlspecialchars($post["title"]);
-        $content = htmlspecialchars($post["content"]);
-        $chapo = htmlspecialchars($post["chapo"]);
+        $title = filter_var($post["title"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $content = filter_var($post["content"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $chapo = filter_var($post["chapo"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $sql = "INSERT INTO articles(`title`, `content`, `chapo`, `userId`) VALUES(?, ?, ?, ?)";
         $statement = $this->db->prepare($sql);
@@ -114,9 +112,9 @@ class ArticleRepository
      */
     public function update(array $post, Article $article): void
     {
-        $content = htmlspecialchars($post["content"]);
-        $title = htmlspecialchars($post["title"]);
-        $chapo = htmlspecialchars($post["chapo"]);
+        $content = filter_var($post["content"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $title = filter_var($post["title"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $chapo = filter_var($post["chapo"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $sql = "UPDATE articles SET content = ?, title = ?, chapo = ? WHERE id = ?";
         $statement = $this->db->prepare($sql);
